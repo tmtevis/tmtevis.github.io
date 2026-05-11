@@ -1,6 +1,6 @@
-# Tevis Sentinel Solutions
+# Sentinel Solutions
 
-**Veteran-Owned IT Support for Small Businesses & Homes in Cleveland**
+**Veteran-Owned, Professional Engineering and IT Support for Small Businesses & Homes in Cleveland**
 
 Precision technology solutions delivered with military discipline and integrity.
 
