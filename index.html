@@ -86,6 +86,7 @@
       padding-right: 1.5rem;
     }
     .logo-img {
+      /* Final logo image target size: 60px x 60px */
       width: 60px;
       height: 60px;
       border-radius: 12px;
@@ -602,6 +603,8 @@
   <header>
     <nav>
       <a href="#" class="brand" aria-label="Tevis Engineering Solutions home">
+        <!-- Logo slot kept white for now. Replace with an <img> at 60px x 60px (desktop), 52px x 52px (mobile). -->
+        <!-- Example: <img src="assets/logo.png" alt="Tevis Engineering Solutions logo" class="logo-img"> -->
         <span class="logo-img logo-placeholder" aria-hidden="true"></span>
         <span class="logo-lockup">
           <span class="logo-primary">Tevis Engineering</span>
@@ -615,7 +618,7 @@
       </button>
       <div class="nav-menu" id="mainMenu">
         <a href="#services">Services</a>
-        <a href="how-support-works.html">How Support Works</a>
+        <a href="how_support_works.html">How Support Works</a>
         <a href="pricing_sheet.html">Pricing Sheet</a>
         <a href="#pricing">Pricing Options</a>
         <a href="#about">About</a>
@@ -730,7 +733,7 @@
 
   <section id="pricing">
     <div class="support-works-cta-wrap">
-      <a href="how-support-works.html" class="support-works-cta">How Support Works</a>
+      <a href="how_support_works.html" class="support-works-cta">How Support Works</a>
     </div>
     <h2>Pricing Options</h2>
     <p class="pricing-intro">Simple, transparent pricing built for small businesses that need reliable support without enterprise pricing. Every tier has clear boundaries so you know exactly what is included.</p>
