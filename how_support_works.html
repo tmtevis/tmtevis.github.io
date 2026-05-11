@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Support Works | Tevis Engineering Solutions</title>
+  <meta name="description" content="How Tevis Engineering Solutions support works: intake, triage, scope, delivery, billing, and service boundaries.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b111a;
+      --card: #121b27;
+      --text: #e6eefb;
+      --muted: #afbed6;
+      --line: #27364f;
+      --blue: #5ea5ff;
+      --blue-deep: #1d4f94;
+      --accent: #ff5c7f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(circle at top, #13253f 0%, var(--bg) 45%, #080d15 100%);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .container {
+      width: min(1100px, 92%);
+      margin: 0 auto;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+      background: rgba(7, 11, 18, 0.78);
+      border-bottom: 1px solid rgba(94, 165, 255, 0.2);
+    }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.05rem 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.95rem;
+      color: var(--text);
+      text-decoration: none;
+      min-height: 62px;
+      padding-right: 1rem;
+    }
+    .logo-slot {
+      /* Final logo image target size: 56px x 56px */
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: inset 0 0 0 1px rgba(8, 17, 34, 0.12);
+      display: inline-block;
+    }
+    .logo-lockup {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+      font-family: "Montserrat", sans-serif;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      white-space: nowrap;
+    }
+    .logo-primary {
+      font-size: 1.26rem;
+      font-weight: 800;
+      color: #ffffff;
+    }
+    .logo-secondary {
+      font-size: 0.94rem;
+      font-weight: 500;
+      color: #d8e6ff;
+    }
+    .link-row {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      flex-wrap: wrap;
+    }
+    .link-row a {
+      color: #d4e5ff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.94rem;
+      border: 1px solid rgba(94, 165, 255, 0.26);
+      border-radius: 999px;
+      padding: 0.45rem 0.8rem;
+      background: rgba(94, 165, 255, 0.08);
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .link-row a:hover {
+      background: rgba(94, 165, 255, 0.18);
+      transform: translateY(-1px);
+    }
+    .hero {
+      padding: 3.6rem 0 2.2rem;
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      padding: 0.32rem 0.75rem;
+      border: 1px solid rgba(255, 92, 127, 0.4);
+      border-radius: 999px;
+      color: #ffd6df;
+      font-size: 0.85rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: rgba(255, 92, 127, 0.1);
+    }
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      max-width: 850px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+    .btn-row {
+      display: flex;
+      justify-content: center;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-top: 1.6rem;
+    }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.8rem 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #84c2ff);
+      color: #06101f;
+    }
+    .btn-secondary {
+      border-color: rgba(94, 165, 255, 0.35);
+      background: rgba(94, 165, 255, 0.12);
+      color: #d4e5ff;
+    }
+    .section {
+      margin-top: 2.2rem;
+      background: rgba(11, 18, 30, 0.66);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.4rem;
+    }
+    .section h2 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 1.45rem;
+      margin-bottom: 0.85rem;
+      color: #f1f6ff;
+    }
+    .section p {
+      color: var(--muted);
+    }
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.1rem;
+    }
+    .step {
+      background: var(--card);
+      border: 1px solid #2a3d5d;
+      border-radius: 14px;
+      padding: 1rem;
+    }
+    .step strong {
+      display: inline-block;
+      color: #bbd8ff;
+      margin-bottom: 0.45rem;
+    }
+    .step p {
+      font-size: 0.95rem;
+    }
+    ul {
+      list-style: none;
+      margin-top: 0.7rem;
+    }
+    li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.55rem;
+      color: #c3d5f0;
+    }
+    li::before {
+      content: "•";
+      color: var(--blue);
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .grid-two {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 0.95rem;
+      margin-top: 0.9rem;
+    }
+    .panel {
+      background: var(--card);
+      border: 1px solid #2a3d5d;
+      border-radius: 14px;
+      padding: 1rem;
+    }
+    .panel h3 {
+      font-family: "Montserrat", sans-serif;
+      color: #c9dfff;
+      margin-bottom: 0.55rem;
+      font-size: 1.02rem;
+    }
+    .note {
+      margin-top: 1rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 92, 127, 0.3);
+      background: rgba(255, 92, 127, 0.1);
+      color: #ffd9e3;
+      font-size: 0.96rem;
+    }
+    footer {
+      margin: 2.5rem 0 2rem;
+      text-align: center;
+      color: #8ea3c4;
+      font-size: 0.93rem;
+    }
+    @media (max-width: 640px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .brand {
+        min-height: 52px;
+      }
+      .logo-slot {
+        width: 48px;
+        height: 48px;
+      }
+      .logo-primary {
+        font-size: 1.05rem;
+      }
+      .logo-secondary {
+        font-size: 0.8rem;
+      }
+      .hero {
+        padding-top: 2.8rem;
+      }
+      .section {
+        padding: 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="container topbar-inner">
+      <a href="index.html" class="brand" aria-label="Back to Tevis Engineering Solutions home">
+        <!-- White logo placeholder. Replace with <img> sized 56px x 56px (desktop), 48px x 48px (mobile). -->
+        <!-- Example: <img src="assets/logo.png" alt="Tevis Engineering Solutions logo" class="logo-slot"> -->
+        <span class="logo-slot" aria-hidden="true"></span>
+        <span class="logo-lockup">
+          <span class="logo-primary">Tevis Engineering</span>
+          <span class="logo-secondary">Solutions</span>
+        </span>
+      </a>
+      <div class="link-row">
+        <a href="index.html#contact">Get Started</a>
+        <a href="index.html#pricing">View Pricing Options</a>
+        <a href="Tevis_Engineering_Solutions_Service_Pricing_Sheet.html">Full Pricing Sheet</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Draft Page</span>
+      <h1>How Support Works</h1>
+      <p>
+        Tevis Engineering Solutions uses a structured process so every request has clear scope, expected response, and documented next steps.
+        This keeps support fast, transparent, and predictable for both one-off and ongoing clients.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="index.html#contact">Start With a Free 15 Minute Intro Call</a>
+        <a class="btn btn-secondary" href="index.html#pricing">Compare Support Plans</a>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>1) Intake and Triage</h2>
+      <p>Every request begins with a simple intake so support can be routed correctly and prioritized quickly.</p>
+      <div class="steps">
+        <div class="step">
+          <strong>Step A - Submit Request</strong>
+          <p>Use the website contact form with issue details, urgency, and best contact method.</p>
+        </div>
+        <div class="step">
+          <strong>Step B - Initial Review</strong>
+          <p>The request is reviewed and classified as support, consultation, or engineering scope.</p>
+        </div>
+        <div class="step">
+          <strong>Step C - Response Plan</strong>
+          <p>You receive recommended next actions, expected timeline, and billing method before work begins.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>2) Scope and Service Boundaries</h2>
+      <div class="grid-two">
+        <div class="panel">
+          <h3>Included in Support Plans</h3>
+          <ul>
+            <li>Troubleshooting, maintenance, optimization, and IT administration</li>
+            <li>Device and account setup, security hygiene, and recurring support tasks</li>
+            <li>Remote and local support within agreed service terms</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Moved to Engineering Scope</h3>
+          <ul>
+            <li>Custom design and build efforts with formal deliverables</li>
+            <li>Novel hardware/software development and prototype projects</li>
+            <li>Milestone-based work requiring SOW and change-control process</li>
+          </ul>
+        </div>
+      </div>
+      <p class="note">If scope changes midstream, work is paused and transitioned through a documented change order before continuing.</p>
+    </section>
+
+    <section class="section">
+      <h2>3) During Active Support</h2>
+      <ul>
+        <li>Status updates are provided as work progresses, especially for blocked items.</li>
+        <li>Approvals are requested before major changes or overage hours are used.</li>
+        <li>Completed work is summarized with outcomes and any follow-up recommendations.</li>
+      </ul>
+    </section>
+
+    <section class="section">
+      <h2>4) Billing and Follow-Through</h2>
+      <ul>
+        <li>Billing follows the selected plan terms (hourly, weekly, monthly, or milestone-based).</li>
+        <li>Invoices include a clear description of work performed and service period.</li>
+        <li>Recurring clients get periodic reviews to reduce repeat issues and improve reliability over time.</li>
+      </ul>
+      <div class="btn-row" style="margin-top:1.25rem;">
+        <a class="btn btn-secondary" href="index.html#contact">Request Support</a>
+        <a class="btn btn-secondary" href="Tevis_Engineering_Solutions_Service_Pricing_Sheet.html">Read Full Pricing and Terms</a>
+      </div>
+    </section>
+
+    <footer>
+      Draft v1 - Last updated 2026-05-11
+    </footer>
+  </main>
+</body>
+</html>
