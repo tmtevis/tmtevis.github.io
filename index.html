@@ -3,108 +3,214 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sentinel Solutions | Cleveland IT Support</title>
+  <title>Tevis Sentinel Solutions | Cleveland IT Support</title>
   <meta name="description" content="Veteran-owned IT support, consulting, and 3D printing services for small businesses and homes in Cleveland.">
+  
   <style>
     :root {
-      --blue: #003087;
-      --silver: #A8B2B9;
-      --accent: #C8102E;
+      --bg: #0a0a0a;
+      --card: #161616;
+      --text: #e0e0e0;
+      --text-light: #aaaaaa;
+      --blue: #0077ff;
+      --accent: #ff2d55;
+      --border: #333;
     }
-    body {
+
+    * {
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
+      padding: 0;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
     header {
-      background: linear-gradient(rgba(0,48,135,0.95), rgba(0,48,135,0.95)), url('https://picsum.photos/id/1015/2000/1200') center/cover;
+      background: linear-gradient(rgba(0, 20, 50, 0.95), rgba(0, 20, 50, 0.95)), 
+                  url('https://picsum.photos/id/1015/2000/1200') center/cover;
       color: white;
-      padding: 1rem 0;
       text-align: center;
+      padding: 2rem 1rem 6rem;
     }
+
     nav {
       max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 2rem;
+      padding: 0 2rem 2rem;
     }
+
     .logo {
-      font-size: 1.8rem;
-      font-weight: bold;
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -1px;
     }
+
     .hero {
-      padding: 100px 20px 80px;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
+      padding: 2rem 1rem;
     }
+
     .hero h1 {
-      font-size: 2.8rem;
-      margin: 0.5rem 0;
+      font-size: 3.2rem;
+      margin-bottom: 0.5rem;
+      font-weight: 700;
     }
+
     .tagline {
-      font-size: 1.4rem;
-      margin-bottom: 1.5rem;
+      font-size: 1.35rem;
+      color: #a0c4ff;
+      margin-bottom: 2rem;
     }
+
     .btn {
       display: inline-block;
       background: var(--accent);
       color: white;
-      padding: 14px 32px;
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      font-weight: 600;
       text-decoration: none;
-      border-radius: 4px;
-      font-weight: bold;
-      margin-top: 1rem;
+      border-radius: 50px;
+      transition: all 0.3s ease;
     }
+
+    .btn:hover {
+      background: #ff4d6b;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(255, 45, 85, 0.3);
+    }
+
     section {
-      padding: 60px 20px;
-      max-width: 1100px;
+      padding: 80px 20px;
+      max-width: 1200px;
       margin: 0 auto;
     }
+
     h2 {
-      color: var(--blue);
+      font-size: 2.4rem;
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 3rem;
+      color: white;
     }
-    .services-grid {
+
+    .services-grid, .pricing-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
     }
+
     .card {
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    .veteran-badge {
-      background: #C8102E;
-      color: white;
-      padding: 8px 16px;
-      border-radius: 20px;
-      display: inline-block;
-      font-weight: bold;
-      margin: 1rem 0;
-    }
-    footer {
-      background: #111;
-      color: #ccc;
-      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
       padding: 2rem;
+      transition: all 0.3s ease;
     }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: var(--blue);
+      box-shadow: 0 20px 30px rgba(0, 119, 255, 0.15);
+    }
+
+    .card h3 {
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+      font-size: 1.4rem;
+    }
+
+    ul {
+      list-style: none;
+    }
+
+    li {
+      padding: 6px 0;
+      color: var(--text-light);
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    li:before {
+      content: "→";
+      color: var(--accent);
+      position: absolute;
+      left: 0;
+    }
+
+    .veteran-badge {
+      background: linear-gradient(135deg, #C8102E, #ff4d6b);
+      color: white;
+      padding: 10px 24px;
+      border-radius: 50px;
+      display: inline-block;
+      font-weight: 600;
+      margin: 1.5rem 0;
+      font-size: 1.1rem;
+    }
+
+    .pricing-grid .card {
+      text-align: center;
+    }
+
+    .pricing-grid strong {
+      font-size: 1.8rem;
+      color: var(--blue);
+    }
+
+    footer {
+      background: #050505;
+      color: #777;
+      text-align: center;
+      padding: 3rem 1rem;
+      border-top: 1px solid #222;
+    }
+
     .contact-form {
-      max-width: 600px;
+      max-width: 700px;
       margin: 0 auto;
     }
+
     input, textarea {
       width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
+      background: #1f1f1f;
+      border: 1px solid #444;
+      color: white;
+      padding: 14px 16px;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(0, 119, 255, 0.2);
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 16px;
+      font-size: 1.1rem;
+      background: var(--blue);
+      border: none;
+      border-radius: 50px;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button[type="submit"]:hover {
+      background: #3399ff;
     }
   </style>
 </head>
@@ -112,31 +218,32 @@
 
   <header>
     <nav>
-      <div class="logo">Sentinel Solutions</div>
-      <div><strong>Sentinel Solutions</strong></div>
+      <div class="logo">Tevis Sentinel</div>
+      <div style="font-weight:600; font-size:1.3rem;">SOLUTIONS</div>
     </nav>
     <div class="hero">
-      <p style="font-size:1.1rem; margin:0;">Cleveland • Veteran-Owned</p>
+      <p style="font-size:1.2rem; margin-bottom:0.5rem; opacity:0.9;">Cleveland • Air Force Veteran Owned</p>
       <h1>Precision IT Support</h1>
-      <p class="tagline">Veteran-Built Reliability for Small Businesses & Homes</p>
+      <p class="tagline">Military-grade reliability for small businesses and homes</p>
       <a href="#contact" class="btn">Get Help Today</a>
     </div>
   </header>
 
   <section id="about">
-    <h2>About Sentinel Solutions</h2>
-    <p style="max-width:700px; margin:0 auto 2rem; text-align:center; font-size:1.1rem;">
-      Founded by Tyler Tevis, an Air Force Veteran and degreed computer engineer with a career in research and 7 years of experience in computer science, engineering(electrical, mechanical, biomedical) prototype design and IT support.
-      Now providing reliable, local IT support across Cleveland to serve the community with scaled-to-fit solutions that don't break the bank.
-      I strive to serve military-grade precision along with practical consulting and 3D printing solutions.
+    <h2>About Tevis Sentinel Solutions</h2>
+    <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
+      Founded by Tyler Tevis, an Air Force Veteran and degreed computer engineer with a career in research and 7 years of experience in computer science, engineering (electrical, mechanical, biomedical), prototype design, and IT support.
+    </p>
+    <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
+      Now providing reliable, local IT support across Cleveland with scaled-to-fit solutions that don't break the bank. 
+      I deliver military-grade precision along with practical consulting and 3D printing solutions.
     </p>
     <div style="text-align:center;">
       <span class="veteran-badge">🇺🇸 Air Force Veteran Owned &amp; Operated</span>
     </div>
   </section>
 
-  <!-- Expanded Services -->
-  <section style="background:#f8f9fa;" id="services">
+  <section id="services" style="background:#111;">
     <h2>Services</h2>
     <div class="services-grid">
 
@@ -205,54 +312,58 @@
           <li>Ongoing Monthly Support Plans</li>
         </ul>
       </div>
-
     </div>
   </section>
 
   <section id="pricing">
     <h2>Pricing Options</h2>
-    <div class="services-grid">
+    <div class="pricing-grid">
+
       <div class="card">
         <h3>Hourly</h3>
         <p><strong>$85/hour</strong></p>
         <small>1-hour minimum • Flexible</small>
       </div>
+
       <div class="card">
         <h3>Weekly Retainer</h3>
         <p><strong>From $750/week</strong></p>
         <small>Priority support</small>
       </div>
+
       <div class="card">
         <h3>Monthly Support</h3>
         <p><strong>From $450/month</strong></p>
         <small>Predictable coverage</small>
       </div>
+
       <div class="card">
         <h3>Project Based</h3>
-        <p><strong>Time & Materials</strong></p>
+        <p><strong>Time &amp; Materials</strong></p>
         <small>Scope of Work Required</small>
       </div>
+
       <div class="card">
         <h3>Consulting</h3>
         <p><strong>$50/hour</strong></p>
-        <small>Findings Billable - Fees Applicable Towards Project/Hourly Support</small>
+        <small>Findings billable — fees applicable toward projects</small>
       </div>
     </div>
-    <p style="text-align:center; margin-top:2rem;">
+    <p style="text-align:center; margin-top:3rem; font-size:1.1rem;">
       <strong>Flexible cancellation • Discounts for extended bookings</strong><br>
       Local Cleveland service — On-site or remote
     </p>
   </section>
 
-  <section style="background:#003087; color:white; text-align:center;">
-    <h2 style="color:white;">Why Choose Tevis Sentinel?</h2>
-    <p style="max-width:700px; margin:0 auto; font-size:1.15rem;">
+  <section style="background:#111; text-align:center;">
+    <h2>Why Choose Tevis Sentinel?</h2>
+    <p style="max-width:800px; margin:0 auto; font-size:1.2rem; color:#ccc;">
       Dependable, honest service from a Cleveland Air Force veteran who brings precision, integrity, 
       and a wide range of technical skills — from traditional IT to modern 3D printing and strategic consulting.
     </p>
   </section>
 
-  <section id="contact">
+  <section id="contact" style="background:#0a0a0a;">
     <h2>Contact Tyler Tevis</h2>
     <div class="contact-form">
       <form action="https://formspree.io/f/maqvanal" method="POST">
@@ -264,12 +375,10 @@
         
         <input type="text" name="_honeypot" style="display:none;" tabindex="-1" autocomplete="off">
         
-        <button type="submit" class="btn" style="width:100%; background:#003087; padding:16px; font-size:1.1rem;">
-          Send Message
-        </button>
+        <button type="submit">Send Message</button>
       </form>
       
-      <p style="text-align:center; margin-top:1.5rem;">
+      <p style="text-align:center; margin-top:2rem; color:#aaa;">
         📍 Cleveland, Ohio<br>
         📞 (814) 384-5117 • 📧 tyler.m.tevis@gmail.com
       </p>
@@ -277,7 +386,7 @@
   </section>
 
   <footer>
-    <p>&copy; 2026 Sentinel Solutions • Cleveland, OH • Air Force Veteran Owned</p>
+    <p>&copy; 2026 Tevis Sentinel Solutions • Cleveland, OH • Air Force Veteran Owned</p>
   </footer>
 
 </body>
