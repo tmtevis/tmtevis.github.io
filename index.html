@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sentinel Solutions | Cleveland IT Support</title>
-  <meta name="description" content="Veteran-Owned IT Support, Consulting, and 3D Printing Services for Small Businesses and Individuals in the Cleveland Area and Beyond.">
+  <meta name="description" content="Veteran-Owned IT Support, Consulting, and 3D Printing Services for Small Businesses and Individuals in Cleveland.">
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
@@ -61,6 +61,17 @@
       font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -1px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: var(--blue);
     }
 
     .hero {
@@ -122,7 +133,7 @@
       border-radius: 2px;
     }
 
-    .services-grid, .pricing-grid {
+    .services-grid, .pricing-grid, .testimonials-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
       gap: 2rem;
@@ -176,6 +187,19 @@
       box-shadow: 0 8px 20px rgba(200, 16, 46, 0.4);
     }
 
+    .trust-bar {
+      background: #111;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .trust-bar div {
+      display: inline-block;
+      margin: 0 20px;
+      font-weight: 600;
+      color: var(--text-light);
+    }
+
     .pricing-grid .card {
       text-align: center;
     }
@@ -193,10 +217,6 @@
       text-align: center;
       padding: 3rem 1rem 2rem;
       border-top: 1px solid #222;
-    }
-
-    .social-links {
-      margin: 1.8rem 0;
     }
 
     .social-links a {
@@ -254,6 +274,23 @@
       transform: translateY(-4px);
       box-shadow: 0 15px 30px rgba(0, 119, 255, 0.4);
     }
+
+    .floating-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--accent);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 50px;
+      text-decoration: none;
+      box-shadow: 0 10px 25px rgba(255,45,85,0.4);
+      z-index: 1000;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
   </style>
 </head>
 <body>
@@ -261,22 +298,28 @@
   <header>
     <nav>
       <div class="logo">Sentinel</div>
-      <div style="font-weight:650; font-size:1.3rem;">SOLUTIONS</div>
+      <div style="display:flex; gap:2rem; font-weight:500;">
+        <a href="#services">Services</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#about">About</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </div>
     </nav>
     <div class="hero">
       <p style="font-size:1.2rem; margin-bottom:0.5rem; opacity:0.9;">Cleveland-Based • Air Force Veteran Owned</p>
       <h1>Precision IT Support</h1>
-      <p class="tagline">Military-Grade Reliability for Small Businesses and Individual Needs</p>
-      <a href="#contact" class="btn">How Can We Help You Today?</a>
+      <p class="tagline">Military-Grade Reliability for Small Businesses and Individuals</p>
+      <a href="#contact" class="btn">Get Help Today</a>
     </div>
   </header>
 
   <section id="about">
     <h2>About Sentinel Solutions</h2>
     <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
-      Founded by Tyler Tevis, a computer engineer with a career in research and 7 years of experience in computer science,
-      engineering (electrical, mechanical, biomedical) prototype design and IT support. Backed with a BIG 10 education and an honorable
-      work ethic, Sentinel aims to help bridge the gap between technology and its users by finding and alleviating pain points.
+      Founded by Tyler Tevis, an Air Force Veteran and degreed computer engineer with a career in research and 7 years of experience in computer science,
+      with a focus in prototype design (electrical, mechanical, biomedical, software) and IT support. He has co-authored numerous publications relating
+      to his engineering contributions to work in healthcare solutions and continues to let that drive his passion for technology.
     </p>
     <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
       Providing reliable, local and remote IT support and solutions across Cleveland with scaled-to-fit solutions that don't break the bank.
@@ -291,10 +334,19 @@
     </div>
   </section>
 
+  <!-- Trust Bar -->
+  <div class="trust-bar">
+    <div>Degreed Computer Engineer</div>
+    <div>BIG 10 Education</div>
+    <div>7+ Years Professional Experience</div>
+    <div>Automation • System Administration • Hardware Support</div>
+    <div>3D Design • Prototyping • 3D Printing</div>
+    <div>Cleveland-Based • Veteran-Owned and Operated</div>
+  </div>
+
   <section id="services" style="background:#111;">
     <h2>Services</h2>
     <div class="services-grid">
-
       <div class="card animate-on-scroll">
         <h3>Setup &amp; Deployment</h3>
         <ul>
@@ -306,7 +358,6 @@
           <li>Smart Home Device Integration &amp; Demo</li>
         </ul>
       </div>
-
       <div class="card animate-on-scroll">
         <h3>Troubleshooting &amp; Repair</h3>
         <ul>
@@ -318,7 +369,6 @@
           <li>Email &amp; Spam Resolution</li>
         </ul>
       </div>
-
       <div class="card animate-on-scroll">
         <h3>Automation &amp; Efficiency</h3>
         <ul>
@@ -328,7 +378,6 @@
           <li>Excel Macros &amp; Data Tools</li>
         </ul>
       </div>
-
       <div class="card animate-on-scroll">
         <h3>IT Consulting</h3>
         <ul>
@@ -339,7 +388,6 @@
           <li>Small Business Tech Budget Planning</li>
         </ul>
       </div>
-
       <div class="card animate-on-scroll">
         <h3>3D Printing Services</h3>
         <ul>
@@ -350,7 +398,6 @@
           <li>Small Batch Production</li>
         </ul>
       </div>
-
       <div class="card animate-on-scroll">
         <h3>Cybersecurity &amp; Home Support</h3>
         <ul>
@@ -361,7 +408,6 @@
           <li>Ongoing Monthly Support Plans</li>
         </ul>
       </div>
-
     </div>
   </section>
 
@@ -405,6 +451,32 @@
     </p>
   </section>
 
+  <section id="testimonials" style="background:#111;">
+    <h2>What Clients Are Saying</h2>
+    <div class="testimonials-grid">
+      <div class="card animate-on-scroll">
+        <p style="font-style:italic; margin-bottom:1.5rem;">"Tyler helped us set up our RingCentral phone system in one day, sending our calls to the right deparments. Extremely professional and patient. Highly recommend!"</p>
+        <p><strong>— Sarah M., Small Business Owner</strong></p>
+      </div>
+      <div class="card animate-on-scroll">
+        <p style="font-style:italic; margin-bottom:1.5rem;">"Helped my elderly parents with their tech setup while I lived abroad. Very respectful and explained everything clearly. Worth every penny."</p>
+        <p><strong>— Michael R., Cleveland</strong></p>
+      </div>
+      <div class="card animate-on-scroll">
+        <p style="font-style:italic; margin-bottom:1.5rem;">"I've been putting off making back-ups of my hard drive... and then disaster struck. Luckily, Tyler was able to help me restore and educate me on better practices."</p>
+        <p><strong>— David K., Local Contractor</strong></p>
+      </div>
+      <div class="card animate-on-scroll">
+        <p style="font-style:italic; margin-bottom:1.5rem;">"Thanks for making everything so easy in getting our second conference room setup!"</p>
+        <p><strong>— Greg P., CEO - Local Business</strong></p>
+      </div>
+      <div class="card animate-on-scroll">
+        <p style="font-style:italic; margin-bottom:1.5rem;">"I was sort of upset with myself over how much time I had apparently been wasting manually fiddling around with spreadsheets for timekeeping when Tyler quickly whipped up some magic to do the work for me, but then I remembered how much free time I have now! Thanks Tyler!"</p>
+        <p><strong>— Barbara I., Small Business Owner</strong></p>
+      </div>
+    </div>
+  </section>
+
   <section style="background:#111; text-align:center; padding:90px 20px;">
     <h2>Why Choose Sentinel Solutions?</h2>
     <p style="max-width:820px; margin:0 auto; font-size:1.25rem; color:#ccc; line-height:1.8;">
@@ -436,7 +508,7 @@
         <button type="submit">Send Message</button>
       </form>
       <p style="text-align:center; margin-top:2rem; color:#aaa;">
-        📍 Cleveland Hts, Ohio — local and/or remote support provided<br>
+        📍 Cleveland, Ohio — local and remote support provided<br>
         📞 (814) 384-5117 • 📧 tyler.m.tevis@gmail.com
       </p>
     </div>
@@ -444,7 +516,6 @@
 
   <footer>
     <p>&copy; 2026 Sentinel Solutions • Cleveland, OH • Air Force Veteran Owned</p>
-   
     <div class="social-links">
       <a href="https://linkedin.com/in/tylertevis/" target="_blank">
         <i class="fab fa-linkedin"></i> LinkedIn
@@ -454,6 +525,11 @@
       </a>
     </div>
   </footer>
+
+  <!-- Floating Button -->
+  <a href="#contact" class="floating-btn">
+    💬 Get a Free Quote
+  </a>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
