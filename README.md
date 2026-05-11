@@ -1,43 +1,80 @@
 # Tevis Sentinel Solutions
 
-**Veteran-Owned IT Support for Small Cleveland Businesses**
+**Veteran-Owned IT Support for Small Businesses & Homes in Cleveland**
 
-Precision IT services built with military discipline. Founded by Tyler Tevis — Air Force veteran and experienced computer engineer.
+Precision technology solutions delivered with military discipline and integrity.
 
 ---
 
 ### Services
-- Desktop / Windows Deployments
-- Printer & Network Setup
-- Azure & Microsoft 365 Configuration
-- Process Automation & Scripting
-- Troubleshooting & Ongoing Support
-- Basic Cybersecurity & Backups
 
-### Pricing
-- **Hourly**: $85/hr  
-- **Weekly Retainer**: From $750/week  
-- **Monthly Support**: From $450/month  
+**Setup & Deployment**
+- Desktop, Laptop & Windows 10/11 Deployments
+- Printer, Scanner & Network Setup
+- Azure Cloud & Microsoft 365 Configuration
+- RingCentral Phone Systems & Auto-Attendants (phone trees, call routing)
+- Smart Home Device Integration
 
-Flexible cancellation • Discounts for longer bookings
+**Troubleshooting & Repair**
+- Slow PC optimization and cleanup
+- Hardware/software issue resolution
+- Wi-Fi and connectivity fixes
+- Virus/malware removal
+
+**Automation & Efficiency**
+- Custom scripting and PowerShell automation
+- Business process automation
+- Excel macros and workflow tools
+- RingCentral call automation
+
+**Design Workshop**
+- Full design pipeline from idea to 3D printed prototype
+- Variety of materials and colors available
+- Custom, niche applications designed to fit
+- Bulk print orders
+
+**Cybersecurity & Protection**
+- Antivirus, firewall & security updates
+- Secure backups and data recovery
+- Scam/phishing protection training
+- Password manager & VPN setup
+
+**Home & Senior Support**
+- Patient one-on-one tech tutoring
+- Video calling & family connection setup
+- Streaming services configuration
+- Photo digitization and cloud backup
+- Smart home simplification
+
+**Ongoing Support**
+- Hourly, Weekly, and Monthly Retainer Plans
+- Proactive maintenance for small offices
+- Peace-of-Mind support for families & seniors
 
 ---
 
-### Live Website
-→ Visit the site here: [https://yourusername.github.io/tevissentinel](https://yourusername.github.io/tevissentinel) (update after enabling GitHub Pages)
+### Pricing
+- **Hourly**: $75/hr (1-hour minimum)
+- **Weekly Retainer**: From $750/week
+- **Monthly Support**: From $450/month
+- **Project Based**: Time and Materials - Scope of Work Required
+- **30-minute FREE virtual consultation**
+- **Consulting**: $50/hr (presentation of findings billable - fees applicable toward scoped project or hourly support)
+
+Flexible cancellation • Discounts for longer bookings • Speedy service
 
 ---
 
 ### About Tyler Tevis
-Air Force veteran with sysadmin experience deploying Azure environments and managing 80+ Windows PCs. Now helping local Cleveland small businesses run smoother.
+Air Force veteran currently working in research with 7 years' experience in computer science, computer engineering and IT support. Now providing reliable, local IT support across Cleveland to serve the community with scaled-to-fit solutions that don't break the bank.
 
 **Veteran Owned & Operated**
 
 ---
 
 ### Contact
-- Email: tyler@tevissentinel.com
-- Phone: (216) XXX-XXXX
+- Email: tyler.m.tevis@gmail.com
+- Phone: (814) 384 - 5117
 - Location: Cleveland, Ohio
 
 ---
