@@ -499,6 +499,62 @@
       max-width: 700px;
       margin: 0 auto;
     }
+    .payment-methods {
+      margin: 1.2rem auto 0;
+      max-width: 860px;
+      padding: 1.1rem 1.1rem 1rem;
+      border: 1px solid rgba(0, 119, 255, 0.22);
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(255, 45, 85, 0.06));
+    }
+    .payment-methods h3 {
+      margin: 0 0 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      color: #e7f0ff;
+      font-size: 1.04rem;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.6rem;
+    }
+    .payment-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(8, 20, 38, 0.72);
+      border: 1px solid rgba(144, 186, 255, 0.25);
+      color: #d9e8ff;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .payment-chip i {
+      color: #84c2ff;
+      font-size: 1rem;
+    }
+    .payment-chip.paypal i {
+      color: #7ac3ff;
+    }
+    .payment-chip.venmo i {
+      color: #56b8ff;
+    }
+    .payment-chip.cash i,
+    .payment-chip.check i {
+      color: #8fdba7;
+    }
+    .payment-note {
+      margin-top: 0.8rem;
+      text-align: center;
+      color: #b8cce8;
+      font-size: 0.9rem;
+      line-height: 1.55;
+    }
     input, textarea {
       width: 100%;
       background: #1f1f1f;
