@@ -4,10 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sentinel Solutions | Cleveland IT Support</title>
-  <meta name="description" content="Veteran-owned IT support, consulting, and 3D printing services for small businesses and homes in Cleveland.">
+  <meta name="description" content="Veteran-Owned IT Support, Consulting, and 3D Printing Services for Small Businesses and Individuals in the Cleveland Area and Beyond.">
   
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
   <style>
     :root {
@@ -19,30 +18,25 @@
       --accent: #ff2d55;
       --border: #333;
     }
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Segoe UI', system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
-      overflow-x: hidden;
     }
 
-    /* Smooth Scroll & Animations */
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(40px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    .animate {
+    .animate-on-scroll {
+      opacity: 0;
       animation: fadeInUp 0.8s forwards;
     }
 
@@ -51,8 +45,7 @@
                   url('https://picsum.photos/id/1015/2000/1200') center/cover;
       color: white;
       text-align: center;
-      padding: 2rem 1rem 6rem;
-      position: relative;
+      padding: 2rem 1rem 7rem;
     }
 
     nav {
@@ -61,16 +54,11 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      background: rgba(10,10,10,0.95);
-      backdrop-filter: blur(10px);
-      z-index: 100;
+      padding: 0 2rem 2rem;
     }
 
     .logo {
-      font-size: 2rem;
+      font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: -1px;
     }
@@ -78,11 +66,11 @@
     .hero {
       max-width: 900px;
       margin: 0 auto;
-      padding: 3rem 1rem 2rem;
+      padding: 2rem 1rem;
     }
 
     .hero h1 {
-      font-size: 3.5rem;
+      font-size: 3.4rem;
       margin-bottom: 0.5rem;
       font-weight: 700;
     }
@@ -109,28 +97,29 @@
     .btn:hover {
       background: #ff4d6b;
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 15px 35px rgba(255, 45, 85, 0.4);
     }
 
     section {
       padding: 80px 20px;
       max-width: 1200px;
       margin: 0 auto;
-      opacity: 0;
-      transform: translateY(30px);
-      transition: all 0.8s ease;
-    }
-
-    section.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     h2 {
-      font-size: 2.6rem;
+      font-size: 2.5rem;
       text-align: center;
-      margin-bottom: 3rem;
+      margin-bottom: 3.5rem;
       color: white;
+    }
+
+    h2:after {
+      content: '';
+      width: 80px;
+      height: 3px;
+      background: var(--blue);
+      display: block;
+      margin: 12px auto;
+      border-radius: 2px;
     }
 
     .services-grid, .pricing-grid {
@@ -142,26 +131,24 @@
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 2rem;
+      border-radius: 20px;
+      padding: 2.2rem;
       transition: all 0.4s ease;
     }
 
     .card:hover {
-      transform: translateY(-12px) scale(1.03);
+      transform: translateY(-12px);
       border-color: var(--blue);
       box-shadow: 0 25px 40px rgba(0, 119, 255, 0.2);
     }
 
     .card h3 {
       color: var(--blue);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1.3rem;
       font-size: 1.45rem;
     }
 
-    ul {
-      list-style: none;
-    }
+    ul { list-style: none; }
 
     li {
       padding: 8px 0;
@@ -184,9 +171,9 @@
       border-radius: 50px;
       display: inline-block;
       font-weight: 600;
-      margin: 1.5rem 0;
+      margin: 2rem 0;
       font-size: 1.1rem;
-      box-shadow: 0 5px 15px rgba(200, 16, 46, 0.4);
+      box-shadow: 0 8px 20px rgba(200, 16, 46, 0.4);
     }
 
     .pricing-grid .card {
@@ -194,8 +181,10 @@
     }
 
     .pricing-grid strong {
-      font-size: 1.9rem;
+      font-size: 2.1rem;
       color: var(--blue);
+      display: block;
+      margin: 1rem 0;
     }
 
     footer {
@@ -207,18 +196,18 @@
     }
 
     .social-links {
-      margin: 1.5rem 0 1rem;
+      margin: 1.8rem 0;
     }
 
     .social-links a {
       color: #aaa;
       text-decoration: none;
       margin: 0 20px;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
+      transition: all 0.3s;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
     }
 
     .social-links a:hover {
@@ -236,11 +225,10 @@
       background: #1f1f1f;
       border: 1px solid #444;
       color: white;
-      padding: 14px 16px;
-      border-radius: 8px;
-      margin-bottom: 1rem;
+      padding: 15px 18px;
+      border-radius: 12px;
+      margin-bottom: 1.2rem;
       font-size: 1rem;
-      transition: all 0.3s ease;
     }
 
     input:focus, textarea:focus {
@@ -251,20 +239,20 @@
 
     button[type="submit"] {
       width: 100%;
-      padding: 16px;
-      font-size: 1.15rem;
-      background: var(--blue);
+      padding: 18px;
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, var(--blue), #3399ff);
       border: none;
       border-radius: 50px;
       color: white;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.4s ease;
+      transition: all 0.4s;
     }
 
     button[type="submit"]:hover {
-      background: #3399ff;
-      transform: translateY(-3px);
+      transform: translateY(-4px);
+      box-shadow: 0 15px 30px rgba(0, 119, 255, 0.4);
     }
   </style>
 </head>
@@ -273,37 +261,41 @@
   <header>
     <nav>
       <div class="logo">Sentinel</div>
-      <div style="font-weight:600; font-size:1.3rem;">SOLUTIONS</div>
+      <div style="font-weight:650; font-size:1.3rem;">SOLUTIONS</div>
     </nav>
     <div class="hero">
       <p style="font-size:1.2rem; margin-bottom:0.5rem; opacity:0.9;">Cleveland-Based • Air Force Veteran Owned</p>
       <h1>Precision IT Support</h1>
-      <p class="tagline">Military-grade reliability for small businesses and homes</p>
-      <a href="#contact" class="btn">Get Help Today</a>
+      <p class="tagline">Military-Grade Reliability for Small Businesses and Individual Needs</p>
+      <a href="#contact" class="btn">How Can We Help You Today?</a>
     </div>
   </header>
 
   <section id="about">
     <h2>About Sentinel Solutions</h2>
     <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
-      Founded by Tyler Tevis, an Air Force Veteran and degreed computer engineer with a career in research and 7 years of experience in computer science, 
-      engineering (electrical, mechanical, biomedical), prototype design, and IT support.
+      Founded by Tyler Tevis, a computer engineer with a career in research and 7 years of experience in computer science,
+      engineering (electrical, mechanical, biomedical) prototype design and IT support. Backed with a BIG 10 education and an honorable
+      work ethic, Sentinel aims to help bridge the gap between technology and its users by finding and alleviating pain points.
     </p>
     <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
-      Now providing reliable, local IT support across Cleveland with scaled-to-fit solutions that don't break the bank.
-      I deliver military-grade precision along with practical consulting and 3D printing solutions.
+      Providing reliable, local and remote IT support and solutions across Cleveland with scaled-to-fit solutions that don't break the bank.
+      We deliver military-grade precision along with practical consulting and 3D printing solutions. Truly a one-stop-shop for your technology needs at an affordable rate.
+    </p>
+    <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
+      Contact us to see how we can improve antiquated processes, expand your network, deploy those workstations and harness the technology that's
+      out there to take your productivity to the next level - or restore it to its former glory!
     </p>
     <div style="text-align:center;">
-      <span class="veteran-badge">🇺🇸 U.S. Air Force Veteran Owned &amp; Operated</span>
+      <span class="veteran-badge">U.S. Air Force Veteran Owned &amp; Operated</span>
     </div>
   </section>
 
-  <!-- Services, Pricing, Why Choose, and Contact sections remain the same as your final version -->
   <section id="services" style="background:#111;">
     <h2>Services</h2>
     <div class="services-grid">
-      <!-- Your service cards here (unchanged) -->
-      <div class="card">
+
+      <div class="card animate-on-scroll">
         <h3>Setup &amp; Deployment</h3>
         <ul>
           <li>Desktop, Laptop &amp; Windows 10/11 Deployments</li>
@@ -314,11 +306,131 @@
           <li>Smart Home Device Integration &amp; Demo</li>
         </ul>
       </div>
-      <!-- ... (include all other cards from your provided code) ... -->
+
+      <div class="card animate-on-scroll">
+        <h3>Troubleshooting &amp; Repair</h3>
+        <ul>
+          <li>Slow PC Optimization &amp; Cleanup</li>
+          <li>Data Backup &amp; Restore</li>
+          <li>Hardware/Software Issue Diagnosis</li>
+          <li>Wi-Fi &amp; Connectivity Problems</li>
+          <li>Virus/Malware Removal</li>
+          <li>Email &amp; Spam Resolution</li>
+        </ul>
+      </div>
+
+      <div class="card animate-on-scroll">
+        <h3>Automation &amp; Efficiency</h3>
+        <ul>
+          <li>Custom Scripting &amp; PowerShell Automation</li>
+          <li>Business Process Workflows</li>
+          <li>RingCentral Call Trees &amp; Routing</li>
+          <li>Excel Macros &amp; Data Tools</li>
+        </ul>
+      </div>
+
+      <div class="card animate-on-scroll">
+        <h3>IT Consulting</h3>
+        <ul>
+          <li>Technology Strategy &amp; Roadmap Planning</li>
+          <li>Cloud Migration Consulting</li>
+          <li>Workflow Efficiency Audits</li>
+          <li>Software &amp; Tool Recommendations</li>
+          <li>Small Business Tech Budget Planning</li>
+        </ul>
+      </div>
+
+      <div class="card animate-on-scroll">
+        <h3>3D Printing Services</h3>
+        <ul>
+          <li>Custom 3D Design &amp; Prototyping</li>
+          <li>Functional Parts &amp; Replacement Components</li>
+          <li>3D Printer Setup, Calibration &amp; Troubleshooting</li>
+          <li>Material Selection Guidance</li>
+          <li>Small Batch Production</li>
+        </ul>
+      </div>
+
+      <div class="card animate-on-scroll">
+        <h3>Cybersecurity &amp; Home Support</h3>
+        <ul>
+          <li>Antivirus, Backups &amp; Scam Protection</li>
+          <li>Patient Tech Tutoring for Seniors</li>
+          <li>Video Calling &amp; Streaming Setup</li>
+          <li>Smart Home Setup &amp; Demo</li>
+          <li>Ongoing Monthly Support Plans</li>
+        </ul>
+      </div>
+
     </div>
   </section>
 
-  <!-- Pricing, Why Choose, Contact sections go here (copy from your last version) -->
+  <section id="pricing">
+    <h2>Pricing Options</h2>
+    <div class="pricing-grid">
+      <div class="card animate-on-scroll">
+        <h3>Hourly</h3>
+        <p><strong>$75/hour</strong></p>
+        <small>1-hour Minimum • Perfect for Small Jobs</small>
+      </div>
+      <div class="card animate-on-scroll">
+        <h3>Weekly Enhanced Retainer</h3>
+        <p><strong>From $700/week</strong></p>
+        <small>Priority Support</small>
+      </div>
+      <div class="card animate-on-scroll">
+        <h3>Monthly Support Agreements</h3>
+        <p><strong>Starting at $450/month</strong></p>
+        <small>Predictable Coverage, Peace of Mind</small>
+      </div>
+      <div class="card animate-on-scroll">
+        <h3>Project Based</h3>
+        <p><strong>Time &amp; Materials</strong></p>
+        <small>Scope of Work Required</small>
+      </div>
+      <div class="card animate-on-scroll">
+        <h3>Consulting</h3>
+        <p><strong>$50/hour</strong></p>
+        <small>Findings Billable — Fees Applicable Toward Project/Hourly</small>
+      </div>
+      <div class="card animate-on-scroll">
+        <h3>Senior Discounts</h3>
+        <p><strong>Let's Talk About It</strong></p>
+        <small>Because We All Need A Hand At Times</small>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:3rem; font-size:1.1rem;">
+      <strong>Flexible cancellation • Discounts for extended bookings</strong><br>
+      Local Cleveland service — On-site or remote
+    </p>
+  </section>
+
+  <section style="background:#111; text-align:center;">
+    <h2>Why Choose Sentinel Solutions?</h2>
+    <p style="max-width:800px; margin:0 auto; font-size:1.2rem; color:#ccc;">
+      Dependable, honest service from a Cleveland Air Force Veteran who brings precision, integrity,
+      and a wide range of technical skills — from traditional IT to modern 3D printing and strategic consulting.
+    </p>
+  </section>
+
+  <section id="contact" style="background:#0a0a0a;">
+    <h2>Contact Tyler Tevis @ Sentinel Solutions</h2>
+    <div class="contact-form">
+      <form action="https://formspree.io/f/maqvanal" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <input type="text" name="company" placeholder="Company / Home (optional)">
+        <textarea name="message" rows="6" placeholder="How Can I Help You Today? (IT Support, Consulting, 3D Printing, etc.)" required></textarea>
+        <input type="text" name="_honeypot" style="display:none;" tabindex="-1" autocomplete="off">
+        <button type="submit">Send Message</button>
+      </form>
+      <p style="text-align:center; margin-top:2rem; color:#aaa;">
+        📍 Cleveland Hts, Ohio — local and/or remote support provided<br>
+        📞 (814) 384-5117 • 📧 tyler.m.tevis@gmail.com
+      </p>
+    </div>
+  </section>
 
   <footer>
     <p>&copy; 2026 Sentinel Solutions • Cleveland, OH • Air Force Veteran Owned</p>
@@ -334,40 +446,16 @@
   </footer>
 
   <script>
-    // Scroll animations
-    const sections = document.querySelectorAll('section');
-    
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
+          entry.target.style.animationDelay = (Math.random() * 0.3) + 's';
+          entry.target.classList.add('animate-on-scroll');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.15 });
 
-    sections.forEach(section => {
-      observer.observe(section);
-    });
-
-    // Back to top button (optional extra dazzle)
-    const backToTop = document.createElement('button');
-    backToTop.innerHTML = '↑';
-    backToTop.style.cssText = `
-      position: fixed; bottom: 30px; right: 30px; 
-      width: 50px; height: 50px; border-radius: 50%; 
-      background: var(--blue); color: white; 
-      border: none; font-size: 1.5rem; cursor: pointer;
-      display: none; z-index: 1000; box-shadow: 0 5px 15px rgba(0,119,255,0.4);
-    `;
-    document.body.appendChild(backToTop);
-
-    window.addEventListener('scroll', () => {
-      backToTop.style.display = window.scrollY > 500 ? 'block' : 'none';
-    });
-
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    document.querySelectorAll('.card, section').forEach(el => observer.observe(el));
   </script>
 </body>
 </html>
