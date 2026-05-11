@@ -436,6 +436,12 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    .floating-btn.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
     }
   </style>
 </head>
@@ -772,6 +778,22 @@
       });
     }, { threshold: 0.15 });
     document.querySelectorAll('.card, section').forEach(el => observer.observe(el));
+
+    const contactSection = document.querySelector('#contact');
+    const floatingCta = document.querySelector('.floating-btn');
+
+    if (contactSection && floatingCta) {
+      const ctaVisibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          floatingCta.classList.toggle('is-hidden', entry.isIntersecting);
+        });
+      }, {
+        threshold: 0,
+        rootMargin: "0px 0px 140px 0px"
+      });
+
+      ctaVisibilityObserver.observe(contactSection);
+    }
   </script>
 </body>
 </html>
