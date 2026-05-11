@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sentinel Solutions | Service and Pricing Sheet</title>
+  <title>Tevis Engineering Solutions | Service and Pricing Sheet</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --navy-900: #0b1f3a;
@@ -28,7 +28,7 @@
 
     body {
       margin: 0;
-      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      font-family: "Inter", "Segoe UI", sans-serif;
       color: var(--ink);
       background:
         radial-gradient(circle at 12% 8%, rgba(198, 29, 45, 0.14), transparent 44%),
@@ -76,12 +76,26 @@
 
     h1 {
       margin: 0;
-      font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
-      letter-spacing: 0.6px;
+      font-family: "Montserrat", "Arial Narrow", sans-serif;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      font-size: 2.15rem;
+      font-size: 2rem;
       line-height: 1;
       font-weight: 700;
+      display: inline-flex;
+      gap: 0.38rem;
+      align-items: baseline;
+      white-space: nowrap;
+    }
+
+    .brand-primary {
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .brand-secondary {
+      font-weight: 500;
+      color: #dbe9ff;
     }
 
     .tag {
@@ -133,7 +147,7 @@
 
     .card h2 {
       margin: 0 0 7px;
-      font-family: "Barlow Condensed", "Arial Narrow", sans-serif;
+      font-family: "Montserrat", "Arial Narrow", sans-serif;
       letter-spacing: 0.4px;
       text-transform: uppercase;
       color: var(--navy-700);
@@ -294,7 +308,10 @@
     <section class="hero">
       <div class="topline">
         <div>
-          <h1>Sentinel Solutions</h1>
+          <h1>
+            <span class="brand-primary">Tevis Engineering</span>
+            <span class="brand-secondary">Solutions</span>
+          </h1>
           <span class="tag">One-Page Service and Pricing Sheet</span>
         </div>
         <div class="contact">
@@ -332,7 +349,7 @@
         </article>
       </div>
 
-      <table aria-label="Sentinel Solutions pricing plans">
+      <table aria-label="Tevis Engineering Solutions pricing plans">
         <thead>
           <tr>
             <th>Plan</th>
