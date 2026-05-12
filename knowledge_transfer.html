@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Transfer Services | Tevis Engineering Solutions</title>
+  <meta name="description" content="Preserve organizational knowledge and intellectual property through documented processes, training materials, and integrated knowledge bases tailored for business continuity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a111c;
+      --panel: #121d2e;
+      --panel-soft: #0f1826;
+      --text: #e7effd;
+      --muted: #aebfdc;
+      --line: #2a3f62;
+      --blue: #63afff;
+      --blue-dark: #2f75c2;
+      --accent: #7fd4b8;
+      --ok: #63d1a4;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 12% 4%, rgba(127, 212, 184, 0.18), transparent 30%),
+        radial-gradient(circle at 88% 10%, rgba(99, 175, 255, 0.16), transparent 34%),
+        linear-gradient(180deg, #0d1523 0%, #080d16 100%);
+      line-height: 1.65;
+    }
+    .container {
+      width: min(1120px, 92%);
+      margin: 0 auto;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(8px);
+      background: rgba(8, 13, 22, 0.82);
+      border-bottom: 1px solid rgba(99, 175, 255, 0.25);
+    }
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo-slot {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(8, 17, 34, 0.1);
+      display: inline-block;
+    }
+    .logo-lockup {
+      display: flex;
+      gap: 0.4rem;
+      align-items: baseline;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: "Montserrat", sans-serif;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .logo-primary { font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+    .logo-secondary { font-size: 0.92rem; font-weight: 500; color: #d5e7ff; }
+
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #d6e8ff;
+      border: 1px solid rgba(99, 175, 255, 0.28);
+      border-radius: 999px;
+      padding: 0.42rem 0.78rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      background: rgba(99, 175, 255, 0.08);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .nav-links a:hover {
+      transform: translateY(-1px);
+      background: rgba(99, 175, 255, 0.18);
+    }
+
+    .hero {
+      padding: 3.5rem 0 2rem;
+      text-align: left;
+    }
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(127, 212, 184, 0.45);
+      border-radius: 999px;
+      padding: 0.32rem 0.72rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #d4fce8;
+      background: rgba(127, 212, 184, 0.12);
+      margin-bottom: 0.9rem;
+    }
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-size: clamp(2rem, 6vw, 3.15rem);
+      line-height: 1.12;
+      margin-bottom: 0.9rem;
+    }
+    .hero p {
+      max-width: 900px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .cta-row {
+      margin-top: 1.4rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.78rem 1.05rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--blue), #8bc8ff);
+      color: #08111f;
+    }
+    .btn-secondary {
+      border-color: rgba(99, 175, 255, 0.35);
+      background: rgba(99, 175, 255, 0.12);
+      color: #d9eaff;
+    }
+
+    .section {
+      margin-top: 1.25rem;
+      background: rgba(11, 18, 30, 0.74);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.3rem;
+    }
+    .section h2 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+      color: #f1f7ff;
+    }
+    .section p {
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 0.85rem;
+      margin-top: 0.75rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid #2f4468;
+      border-radius: 12px;
+      padding: 0.9rem;
+    }
+    .card h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #cde2ff;
+    }
+    .card p,
+    .card li {
+      font-size: 0.95rem;
+      color: #bdd0eb;
+    }
+    ul {
+      list-style: none;
+      margin-top: 0.35rem;
+    }
+    li {
+      position: relative;
+      padding-left: 1.15rem;
+      margin-bottom: 0.45rem;
+    }
+    li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent);
+    }
+    .flow {
+      counter-reset: steps;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.8rem;
+      margin-top: 0.7rem;
+    }
+    .flow-step {
+      background: var(--panel-soft);
+      border: 1px solid #2b3f60;
+      border-radius: 12px;
+      padding: 0.9rem;
+      position: relative;
+    }
+    .flow-step::before {
+      counter-increment: steps;
+      content: counter(steps);
+      position: absolute;
+      top: -10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-size: 0.78rem;
+      font-weight: 800;
+      color: #061223;
+      background: linear-gradient(135deg, #b8e6d8, #7fd4b8);
+    }
+    .flow-step strong {
+      display: inline-block;
+      margin-bottom: 0.45rem;
+      color: #d6e7ff;
+    }
+
+    .callout {
+      margin-top: 0.95rem;
+      border-radius: 12px;
+      border: 1px solid rgba(127, 212, 184, 0.34);
+      background: rgba(127, 212, 184, 0.1);
+      padding: 0.85rem 0.95rem;
+      color: #d4fce8;
+      font-size: 0.94rem;
+    }
+
+    .mini-note {
+      margin-top: 0.75rem;
+      font-size: 0.9rem;
+      color: #98adcb;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2rem 0 1.7rem;
+      color: #8ca2c2;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 700px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .logo-slot {
+        width: 48px;
+        height: 48px;
+      }
+      .logo-primary { font-size: 1.02rem; }
+      .logo-secondary { font-size: 0.8rem; }
+      .hero { padding-top: 2.8rem; }
+      .section { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html" aria-label="Back to Tevis Engineering Solutions home">
+        <span class="logo-slot" aria-hidden="true"></span>
+        <span class="logo-lockup">
+          <span class="logo-primary">Tevis Engineering</span>
+          <span class="logo-secondary">Solutions</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Quick links">
+        <a href="index.html">Home</a>
+        <a href="how_support_works.html">How Support Works</a>
+        <a href="pricing_sheet.html">Pricing Sheet</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Organizational Knowledge Preservation</span>
+      <h1>Knowledge Transfer and Documentation Services</h1>
+      <p>
+        Tevis Engineering Solutions helps business and organizational leaders capture, organize, and preserve their intellectual property, processes, and expertise. We work with your team to transform tribal knowledge into durable, actionable documentation that strengthens your organization's longevity and reduces single-person dependencies.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="index.html#contact">Schedule a Discovery Call</a>
+        <a class="btn btn-secondary" href="#approach">Learn Our Approach</a>
+      </div>
+    </section>
+
+    <section class="section" id="tangible">
+      <h2>What We Document and Deliver</h2>
+      <p>
+        Every engagement is scoped to your specific needs. Deliverables are integrated into a cohesive knowledge environment your team can navigate, learn from, and maintain.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Process Documentation</h3>
+          <ul>
+            <li>Step-by-step procedures for recurring tasks</li>
+            <li>Decision trees and exception workflows</li>
+            <li>Dependency and handoff definitions</li>
+            <li>Quality checkpoints and acceptance criteria</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Training Materials</h3>
+          <ul>
+            <li>Quick-start guides for role onboarding</li>
+            <li>Video walkthroughs or recorded sessions</li>
+            <li>Interactive exercises and scenario training</li>
+            <li>Certification or competency tracking documents</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Tribal Knowledge Preservation</h3>
+          <ul>
+            <li>Capture of expert practitioner insights</li>
+            <li>Best practices and decision rationale</li>
+            <li>Common pitfalls and lessons learned</li>
+            <li>Shortcuts and efficiency hacks specific to your environment</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Onboarding Materials</h3>
+          <ul>
+            <li>New hire orientation checklists</li>
+            <li>Role-specific setup and permissions docs</li>
+            <li>First-week and first-month milestone guides</li>
+            <li>Mentor/buddy role descriptions</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Client-Facing Knowledge Assets</h3>
+          <ul>
+            <li>Interactive dashboards and self-service tools</li>
+            <li>FAQ and troubleshooting portals</li>
+            <li>How-to guides for clients and users</li>
+            <li>Health check templates and status reporting pages</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Organization-Level Knowledge Base</h3>
+          <ul>
+            <li>Integrated wiki or searchable knowledge repository</li>
+            <li>Cross-referenced process catalog</li>
+            <li>Organizational structure and role definitions</li>
+            <li>Compliance, policy, and governance reference library</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="approach">
+      <h2>Our Engagement Approach</h2>
+      <p>
+        Every knowledge transfer project is scoped, planned, and delivered as a formal statement of work. We work from your source materials and expertise to deliver a finished knowledge asset.
+      </p>
+      <div class="flow">
+        <div class="flow-step">
+          <strong>Discovery and Scoping</strong>
+          <p>We identify knowledge gaps, target audience, and format preferences. You point us to the people and systems that hold the knowledge.</p>
+        </div>
+        <div class="flow-step">
+          <strong>Knowledge Capture</strong>
+          <p>We conduct interviews, observe workflows, review existing materials, and extract institutional knowledge in a structured way.</p>
+        </div>
+        <div class="flow-step">
+          <strong>Organization and Structure</strong>
+          <p>We organize captured information into a logical, searchable structure appropriate to your business model and user roles.</p>
+        </div>
+        <div class="flow-step">
+          <strong>Format and Hosting Decision</strong>
+          <p>We recommend hosting options (wiki, intranet, knowledge base platform, dashboard, etc.) and implement your preferred solution.</p>
+        </div>
+        <div class="flow-step">
+          <strong>Documentation Creation</strong>
+          <p>We create, format, and link all documentation into a cohesive whole. Internal review and feedback cycles keep quality high.</p>
+        </div>
+        <div class="flow-step">
+          <strong>Delivery and Training</strong>
+          <p>We deliver the complete knowledge asset, train your team on maintenance, and provide handoff documentation.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benefits">
+      <h2>Intangible Benefits</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Reduced Single-Person Risk</h3>
+          <p>When key knowledge is documented and accessible, your organization is no longer dependent on any one person's availability or memory.</p>
+        </article>
+        <article class="card">
+          <h3>Faster Onboarding</h3>
+          <p>New team members ramp up faster when they have a clear, searchable reference instead of learning through trial and error or repeated interruptions.</p>
+        </article>
+        <article class="card">
+          <h3>Consistent Quality</h3>
+          <p>Documented processes reduce variation and ensure work is delivered to standard regardless of who performs it.</p>
+        </article>
+        <article class="card">
+          <h3>Easier Change Management</h3>
+          <p>When you update a process, you have a single source of truth to update instead of trying to track down all the different places knowledge lives.</p>
+        </article>
+        <article class="card">
+          <h3>Client and Stakeholder Confidence</h3>
+          <p>Organizations that can show a mature, documented approach to their work gain trust from clients, regulators, and investors.</p>
+        </article>
+        <article class="card">
+          <h3>Longevity and Succession Planning</h3>
+          <p>Your intellectual property becomes a transferable asset. Leadership transitions and staff changes become less disruptive.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="scope">
+      <h2>Scope and Pricing</h2>
+      <p>
+        Every knowledge transfer engagement is unique. Pricing depends on scope: breadth of knowledge, complexity of format, hosting platform choice, and depth of training.
+      </p>
+      <p>
+        Typical projects range from focused documentation of a single critical workflow to a comprehensive organizational knowledge base. We scope and price via statement of work once we understand your goals and constraints.
+      </p>
+      <div class="callout">
+        <strong>Ready to get started?</strong> Schedule a discovery call and we'll discuss your knowledge preservation goals, timeline, and investment.
+      </div>
+      <p class="mini-note">
+        Knowledge transfer projects require active participation from your team and access to source materials and subject matter experts. We'll define role expectations and time commitments during scoping.
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    Tevis Engineering Solutions | Cleveland, Ohio | Veteran-Owned IT Services
+  </footer>
+</body>
+</html>
