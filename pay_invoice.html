@@ -370,8 +370,8 @@
     <input type="hidden" name="amount" id="paypalAmount" value="">
     <input type="hidden" name="currency_code" value="USD">
     <input type="hidden" name="invoice" id="paypalInvoice" value="">
-    <input type="hidden" name="return" value="">
-    <input type="hidden" name="cancel_return" value="">
+    <input type="hidden" name="return" id="paypalReturn" value="">
+    <input type="hidden" name="cancel_return" id="paypalCancelReturn" value="">
     <input type="hidden" name="no_shipping" value="2">
   </form>
 
@@ -393,6 +393,14 @@
 
     let invoiceRows = [];
     let selectedInvoice = null;
+    let directLookupQuery = "";
+
+    function normalizeLookupToken(value) {
+      return String(value || "")
+        .trim()
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g, "");
+    }
 
     function toCurrencyNumber(amountText) {
       const numeric = Number(String(amountText).replace(/[^0-9.-]/g, ""));
@@ -425,6 +433,13 @@
         invoiceRows = jsonData;
         setStatus("Invoice Database Ready", "good");
         lookupBtn.disabled = false;
+
+        if (directLookupQuery) {
+          setStatus("Direct invoice link detected. Running lookup...", "warn");
+          setTimeout(() => {
+            onLookup();
+          }, 2200);
+        }
       } catch (error) {
         console.error("Invoice loading error:", error);
         setStatus("Unable to load invoice source. Use the billing support form below.", "bad");
@@ -434,6 +449,7 @@
 
     function findRow(query) {
       const normalized = query.trim().toLowerCase();
+      const normalizedToken = normalizeLookupToken(query);
       if (!normalized) {
         return null;
       }
@@ -441,7 +457,20 @@
       return invoiceRows.find((row) => {
         const username = String(row.Username || "").trim().toLowerCase();
         const latestInvoice = String(row.LatestInvoice || "").trim().toLowerCase();
-        return username === normalized || latestInvoice === normalized;
+        const usernameToken = normalizeLookupToken(username);
+        const latestInvoiceToken = normalizeLookupToken(latestInvoice);
+
+        if (
+          username === normalized ||
+          latestInvoice === normalized ||
+          usernameToken === normalizedToken ||
+          latestInvoiceToken === normalizedToken
+        ) {
+          return true;
+        }
+
+        // Fallback: if schema changes, allow exact token match against any field value.
+        return Object.values(row).some((value) => normalizeLookupToken(value) === normalizedToken);
       }) || null;
     }
 
@@ -508,15 +537,49 @@
         return;
       }
 
+      submitToPayPal(amountNumeric.toFixed(2), invoiceNumber);
+    }
+
+    function submitToPayPal(amountFixed, invoiceNumber) {
+      const safeInvoice = invoiceNumber || "Direct Invoice";
+
       // Populate the hidden PayPal form with dynamic values
-      document.getElementById("paypalItemName").value = "Invoice " + invoiceNumber;
-      document.getElementById("paypalAmount").value = amountNumeric.toFixed(2);
-      document.getElementById("paypalInvoice").value = invoiceNumber;
-      document.getElementById("paypalForm").return = window.location.href;
-      document.getElementById("paypalForm").cancel_return = window.location.href;
+      document.getElementById("paypalItemName").value = "Invoice " + safeInvoice;
+      document.getElementById("paypalAmount").value = amountFixed;
+      document.getElementById("paypalInvoice").value = safeInvoice;
+      document.getElementById("paypalReturn").value = window.location.href;
+      document.getElementById("paypalCancelReturn").value = window.location.href;
       
       // Submit the form
       document.getElementById("paypalForm").submit();
+    }
+
+    function handleDirectLookupFromQuery() {
+      const params = new URLSearchParams(window.location.search);
+      let invoiceParam = "";
+
+      for (const [key, value] of params.entries()) {
+        const k = String(key || "").toLowerCase();
+        if (k === "invoice" || k === "invoicenumber" || k === "invoice_number" || k === "inv" || k === "q") {
+          invoiceParam = String(value || "").trim();
+          break;
+        }
+      }
+
+      if (!invoiceParam) {
+        const hashToken = decodeURIComponent(String(window.location.hash || "").replace(/^#/, "")).trim();
+        if (hashToken) {
+          invoiceParam = hashToken;
+        }
+      }
+
+      if (!invoiceParam) {
+        return;
+      }
+
+      directLookupQuery = invoiceParam;
+      invoiceQueryEl.value = invoiceParam;
+      setStatus("Direct invoice link detected. Preparing lookup...", "warn");
     }
 
     lookupBtn.addEventListener("click", onLookup);
@@ -529,6 +592,7 @@
       }
     });
 
+    handleDirectLookupFromQuery();
     loadInvoiceData();
   </script>
 </body>
