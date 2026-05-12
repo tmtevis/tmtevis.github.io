@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Creation Services | Tevis Engineering Solutions</title>
+  <meta name="description" content="Custom website design and development for service businesses, artists, and startups. Strategic tool selection, multi-page functionality, and e-commerce integration.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1a;
+      --panel: #121b2e;
+      --panel-soft: #0f1624;
+      --text: #e8f0fd;
+      --muted: #afc0dd;
+      --line: #273051;
+      --blue: #5ea5ff;
+      --accent-primary: #ff6b9d;
+      --accent-secondary: #ffa500;
+      --accent-tertiary: #7ee8d8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(255, 107, 157, 0.15), transparent 40%),
+        radial-gradient(circle at 90% 5%, rgba(94, 165, 255, 0.12), transparent 30%),
+        radial-gradient(circle at 60% 85%, rgba(126, 232, 216, 0.1), transparent 35%),
+        linear-gradient(180deg, #0d1220 0%, #08090f 100%);
+      line-height: 1.65;
+    }
+    .container {
+      width: min(1140px, 92%);
+      margin: 0 auto;
+    }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      backdrop-filter: blur(8px);
+      background: rgba(8, 9, 15, 0.85);
+      border-bottom: 1px solid rgba(94, 165, 255, 0.22);
+    }
+    .topbar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.9rem;
+      color: var(--text);
+      text-decoration: none;
+    }
+    .logo-slot {
+      width: 56px;
+      height: 56px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: inset 0 0 0 1px rgba(8, 17, 34, 0.1);
+      display: inline-block;
+    }
+    .logo-lockup {
+      display: flex;
+      gap: 0.4rem;
+      align-items: baseline;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-family: "Montserrat", sans-serif;
+      white-space: nowrap;
+      line-height: 1;
+    }
+    .logo-primary { font-size: 1.2rem; font-weight: 800; color: #ffffff; }
+    .logo-secondary { font-size: 0.92rem; font-weight: 500; color: #d5e7ff; }
+
+    .nav-links {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #d6e8ff;
+      border: 1px solid rgba(94, 165, 255, 0.28);
+      border-radius: 999px;
+      padding: 0.42rem 0.78rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      background: rgba(94, 165, 255, 0.08);
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .nav-links a:hover {
+      transform: translateY(-1px);
+      background: rgba(94, 165, 255, 0.18);
+    }
+
+    .hero {
+      padding: 3.5rem 0 2rem;
+      text-align: left;
+    }
+    .eyebrow {
+      display: inline-block;
+      border: 1px solid rgba(255, 107, 157, 0.5);
+      border-radius: 999px;
+      padding: 0.32rem 0.72rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, rgba(255, 107, 157, 0.15), rgba(255, 165, 0, 0.12));
+      color: #ffd6e8;
+      margin-bottom: 0.9rem;
+    }
+    h1 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      font-size: clamp(2rem, 6vw, 3.3rem);
+      line-height: 1.12;
+      margin-bottom: 0.9rem;
+      background: linear-gradient(120deg, #ff6b9d, #ffa500, #7ee8d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero p {
+      max-width: 920px;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .cta-row {
+      margin-top: 1.4rem;
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.78rem 1.05rem;
+      font-weight: 700;
+      border: 1px solid transparent;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: linear-gradient(120deg, var(--accent-primary), var(--accent-secondary));
+      color: #ffffff;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(255, 107, 157, 0.3);
+    }
+    .btn-secondary {
+      border-color: rgba(94, 165, 255, 0.35);
+      background: rgba(94, 165, 255, 0.12);
+      color: #d9eaff;
+    }
+    .btn-secondary:hover {
+      background: rgba(94, 165, 255, 0.22);
+    }
+
+    .section {
+      margin-top: 1.25rem;
+      background: rgba(11, 18, 30, 0.7);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.3rem;
+    }
+    .section h2 {
+      font-family: "Montserrat", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 1.35rem;
+      margin-bottom: 0.85rem;
+      color: #f1f7ff;
+    }
+    .section p {
+      color: var(--muted);
+      margin-bottom: 0.7rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.95rem;
+      margin-top: 0.85rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid #2f4468;
+      border-radius: 14px;
+      padding: 1.1rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 14px 14px 0 0;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(255, 107, 157, 0.4);
+      box-shadow: 0 12px 28px rgba(255, 107, 157, 0.15);
+    }
+    .card:hover::before {
+      opacity: 1;
+    }
+    .card h3 {
+      font-family: "Montserrat", sans-serif;
+      font-size: 1.05rem;
+      margin-bottom: 0.6rem;
+      color: #f0f5ff;
+    }
+    .card p,
+    .card li {
+      font-size: 0.94rem;
+      color: #c5d5eb;
+    }
+    ul {
+      list-style: none;
+      margin-top: 0.35rem;
+    }
+    li {
+      position: relative;
+      padding-left: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      top: 0;
+      color: var(--accent-primary);
+      font-weight: bold;
+    }
+
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+      margin-top: 0.9rem;
+    }
+    .showcase-card {
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 165, 0, 0.08));
+      border: 1px solid rgba(255, 107, 157, 0.25);
+      border-radius: 14px;
+      padding: 1.2rem;
+      transition: all 0.3s ease;
+    }
+    .showcase-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 165, 0, 0.4);
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.15), rgba(255, 165, 0, 0.12));
+    }
+    .showcase-card strong {
+      display: block;
+      color: var(--accent-primary);
+      margin-bottom: 0.4rem;
+      font-size: 0.95rem;
+    }
+    .showcase-card p {
+      color: #c5d5eb;
+      font-size: 0.94rem;
+    }
+
+    .complexity-section {
+      margin-top: 1.2rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.8rem;
+    }
+    .complexity-card {
+      background: var(--panel-soft);
+      border: 1px solid #2a3d5f;
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .complexity-card h4 {
+      color: var(--accent-secondary);
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+    .complexity-card p {
+      color: #b5c8e0;
+      font-size: 0.93rem;
+    }
+
+    .process-flow {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0.7rem;
+      margin-top: 0.8rem;
+      counter-reset: flow-counter;
+    }
+    .process-step {
+      background: var(--panel);
+      border: 1px solid #2f4468;
+      border-radius: 12px;
+      padding: 0.95rem;
+      position: relative;
+    }
+    .process-step::before {
+      counter-increment: flow-counter;
+      content: counter(flow-counter);
+      position: absolute;
+      top: -12px;
+      right: 12px;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: #0a0f1a;
+      background: linear-gradient(120deg, var(--accent-secondary), var(--accent-primary));
+    }
+    .process-step strong {
+      display: block;
+      color: #d6e7ff;
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+    }
+    .process-step p {
+      font-size: 0.92rem;
+      color: #b5c8e0;
+    }
+
+    .highlight-box {
+      margin-top: 0.95rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 107, 157, 0.3);
+      background: rgba(255, 107, 157, 0.08);
+      padding: 0.9rem 1rem;
+      color: #f0d5e2;
+      font-size: 0.95rem;
+    }
+
+    .mini-note {
+      margin-top: 0.7rem;
+      font-size: 0.9rem;
+      color: #8fa3bf;
+    }
+
+    footer {
+      text-align: center;
+      margin: 2rem 0 1.7rem;
+      color: #7896b3;
+      font-size: 0.92rem;
+    }
+
+    @media (max-width: 700px) {
+      .topbar-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .logo-slot {
+        width: 48px;
+        height: 48px;
+      }
+      .logo-primary { font-size: 1.02rem; }
+      .logo-secondary { font-size: 0.8rem; }
+      .hero { padding-top: 2.8rem; }
+      h1 { font-size: 2rem; }
+      .section { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="index.html" aria-label="Back to Tevis Engineering Solutions home">
+        <span class="logo-slot" aria-hidden="true"></span>
+        <span class="logo-lockup">
+          <span class="logo-primary">Tevis Engineering</span>
+          <span class="logo-secondary">Solutions</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Quick links">
+        <a href="index.html">Home</a>
+        <a href="how_support_works.html">How Support Works</a>
+        <a href="pricing_sheet.html">Pricing Sheet</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="eyebrow">Creative Web Solutions</span>
+      <h1>Custom Website Design and Development</h1>
+      <p>
+        Every business has a unique story, workflow, and audience. We create websites that match your vision and solve real business problems—from simple landing pages to complex multi-function platforms with commerce, booking, and community features. We help you choose the right tools for your budget and goals, then build something that works.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="index.html#contact">Start a Project</a>
+        <a class="btn btn-secondary" href="#types">Explore Website Types</a>
+      </div>
+    </section>
+
+    <section class="section" id="types">
+      <h2>Website Types We Build</h2>
+      <p>
+        Different businesses need different solutions. Here are the primary website types we specialize in:
+      </p>
+      <div class="showcase-grid">
+        <article class="showcase-card">
+          <strong>Service Portals & Booking Sites</strong>
+          <p>
+            Appointment scheduling, booking calendars, service selection tools, and client dashboards. Clients can book, reschedule, and track their service requests without email back-and-forth.
+          </p>
+        </article>
+        <article class="showcase-card">
+          <strong>Build a Following (Mailing List & Community)</strong>
+          <p>
+            Content hubs with email list signup, newsletter automation, community messaging, and subscriber-only resources. Perfect for creators, coaches, and thought leaders building an audience.
+          </p>
+        </article>
+        <article class="showcase-card">
+          <strong>Gallery and Portfolio Sites</strong>
+          <p>
+            Beautiful, responsive galleries for artists, photographers, designers, and makers. Image-heavy layouts, lightbox galleries, filtering, search, and seamless e-commerce integration for selling work.
+          </p>
+        </article>
+        <article class="showcase-card">
+          <strong>Storefronts and E-Commerce</strong>
+          <p>
+            Product catalogs, shopping carts, payment processing, inventory tracking, and order management. From simple single-product sites to multi-category stores with real business operations.
+          </p>
+        </article>
+        <article class="showcase-card">
+          <strong>Brochure and Company Sites</strong>
+          <p>
+            Professional presence for service businesses, consultants, and agencies. Clean design, team bios, case studies, service descriptions, and lead capture forms.
+          </p>
+        </article>
+        <article class="showcase-card">
+          <strong>Hybrid Multi-Function Platforms</strong>
+          <p>
+            Combinations of the above: a gallery with e-commerce, a booking portal with a newsletter, a storefront with a community. We handle complex, integrated workflows.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="strategy">
+      <h2>Strategic Tool Selection</h2>
+      <p>
+        There is no one-size-fits-all platform for web development. We help you choose the right approach based on your budget, timeline, business model, and technical requirements.
+      </p>
+      <div class="grid">
+        <article class="card">
+          <h3>Platform Evaluation</h3>
+          <ul>
+            <li>Hosted platforms vs. self-hosted solutions</li>
+            <li>Template-based vs. fully custom builds</li>
+            <li>Headless e-commerce integration</li>
+            <li>Scalability and growth expectations</li>
+            <li>Long-term maintenance and cost</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Hosting and Infrastructure</h3>
+          <ul>
+            <li>Shared vs. dedicated hosting</li>
+            <li>Static site generators for fast, cheap deployments</li>
+            <li>CDN and performance optimization</li>
+            <li>Backup, redundancy, and disaster recovery</li>
+            <li>Security and compliance requirements</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>Integration and Workflow</h3>
+          <ul>
+            <li>Payment processing and invoicing</li>
+            <li>Email automation and newsletters</li>
+            <li>Analytics and conversion tracking</li>
+            <li>CRM and customer database linkage</li>
+            <li>Custom automation and third-party APIs</li>
+          </ul>
+        </article>
+      </div>
+      <p class="mini-note" style="margin-top: 1rem;">
+        During discovery, we ask the right questions so you make informed decisions, not just follow trends.
+      </p>
+    </section>
+
+    <section class="section" id="complexity">
+      <h2>Pricing Complexity and Scope Considerations</h2>
+      <p>
+        Website costs vary dramatically based on what you need. Here's what moves a project from simple to complex:
+      </p>
+      <div class="complexity-section">
+        <article class="complexity-card">
+          <h4>Simple (Lower Cost)</h4>
+          <p>Single-page or 3-5 page brochure site. Template-based, no custom functionality, minimal design customization.</p>
+        </article>
+        <article class="complexity-card">
+          <h4>Moderate (Mid Cost)</h4>
+          <p>5-15 pages, some custom design, basic contact forms, SEO optimization, simple blog or content management.</p>
+        </article>
+        <article class="complexity-card">
+          <h4>Complex (Higher Cost)</h4>
+          <p>Multi-page with custom functionality: booking systems, e-commerce, user accounts, payment processing, integrations.</p>
+        </article>
+        <article class="complexity-card">
+          <h4>Very Complex (Enterprise Cost)</h4>
+          <p>Database-driven, real-time updates, custom workflows, advanced security, third-party integrations, ongoing optimization.</p>
+        </article>
+      </div>
+      <div class="highlight-box">
+        <strong>What drives cost up:</strong> User accounts and authentication, payment and transaction processing, database design and management, custom integrations (CRM, accounting, email), inventory management, multi-language support, custom analytics, role-based content control, real-time notifications.
+      </div>
+    </section>
+
+    <section class="section" id="workflow">
+      <h2>Our Build Workflow</h2>
+      <p>
+        Every project follows a disciplined process from strategy through launch and support.
+      </p>
+      <div class="process-flow">
+        <div class="process-step">
+          <strong>Discovery</strong>
+          <p>We understand your business, audience, goals, and constraints. We ask about budget, timeline, and technical appetite.</p>
+        </div>
+        <div class="process-step">
+          <strong>Strategy and Platform Selection</strong>
+          <p>We recommend the right approach and platform for your needs, with pros/cons of each option.</p>
+        </div>
+        <div class="process-step">
+          <strong>Scope and Design Approval</strong>
+          <p>We define features, pages, workflow, and get your sign-off on sitemap and design direction.</p>
+        </div>
+        <div class="process-step">
+          <strong>Design and Development</strong>
+          <p>We build and iterate. Regular checkpoints let you see progress and provide feedback.</p>
+        </div>
+        <div class="process-step">
+          <strong>Testing and QA</strong>
+          <p>We test functionality, performance, cross-browser compatibility, and accessibility.</p>
+        </div>
+        <div class="process-step">
+          <strong>Launch and Training</strong>
+          <p>We deploy, do any final tweaks, and train your team on updates and maintenance.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="scope">
+      <h2>Get Started</h2>
+      <p>
+        Website projects are scoped and priced via statement of work. Every site is unique, so every quote reflects your specific needs.
+      </p>
+      <p>
+        Schedule a discovery call, and we'll discuss your vision, answer questions about platforms and approaches, and provide a clear estimate.
+      </p>
+      <div class="highlight-box">
+        <strong>What to bring to discovery:</strong> Your rough budget range, timeline, key must-have features, and examples of websites (or competitors) you like. The more specific you are, the better we can estimate and plan.
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Tevis Engineering Solutions | Cleveland, Ohio | Veteran-Owned IT Services
+  </footer>
+</body>
+</html>
