@@ -1,0 +1,24 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Custom 3D printed topographic map of any state">
+  <defs>
+    <linearGradient id="st-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E4FBF5"/><stop offset="1" stop-color="#2FB9C9"/>
+    </linearGradient>
+    <clipPath id="st-clip"><path d="M96 96 Q150 70 230 88 L300 84 L296 150 Q300 196 250 210 L150 214 Q100 206 96 160 Z"/></clipPath>
+  </defs>
+  <rect width="400" height="300" fill="url(#st-bg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="2">
+    <path d="M0 50 Q100 34 200 50 T400 50"/><path d="M0 256 Q100 240 200 256 T400 256"/>
+  </g>
+  <path d="M96 96 Q150 70 230 88 L300 84 L296 150 Q300 196 250 210 L150 214 Q100 206 96 160 Z" fill="#FFF7EC" stroke="#221C3A" stroke-width="4" stroke-dasharray="2 0" stroke-linejoin="round"/>
+  <g clip-path="url(#st-clip)" fill="none" stroke="#2BB39E" stroke-width="3">
+    <path d="M86 110 Q200 92 320 116"/><path d="M86 140 Q200 124 320 148"/><path d="M96 172 Q200 158 300 182"/>
+  </g>
+  <g clip-path="url(#st-clip)" fill="none" stroke="#FF6A3D" stroke-width="3">
+    <circle cx="210" cy="148" r="16"/><circle cx="210" cy="148" r="30"/>
+  </g>
+  <path d="M210 110 a22 22 0 1 0 0.1 0 Z" fill="#FF3D77"/>
+  <path d="M210 175 C 190 150 188 130 210 130 C 232 130 230 150 210 175 Z" fill="#FF3D77"/>
+  <circle cx="210" cy="142" r="8" fill="#FFF7EC"/>
+  <g font-family="monospace" fill="#FFFFFF" font-size="15" opacity="0.92"><text x="120" y="252">YOUR STATE →</text></g>
+  <g stroke="#FFF7EC" stroke-width="2.4" stroke-linecap="round"><path d="M320 56 h10 M325 51 v10"/></g>
+</svg>

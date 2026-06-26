@@ -1,1103 +1,331 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tevis Engineering Solutions | Cleveland IT Support</title>
-  <meta name="description" content="Veteran-Owned IT Support, Consulting, and 3D Printing Services for Small Businesses and Individuals in Cleveland.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tyler's Diode Designs — Precision Printed. Uniquely Yours.</title>
+  <meta name="description" content="Tyler's Diode Designs makes specialized 3D printed maps, signs, statues, accessories, and lasercraft — novelty art of Ohio topography, skylines, and stadiums. A maker-studio spinoff of TES, LLC. Shop SKUs or request a custom commission." />
+  <meta name="theme-color" content="#FBF6EE" />
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="assets/img/favicon.svg" />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-  <style>
-    :root {
-      --bg: #0a0a0a;
-      --card: #161616;
-      --text: #e0e0e0;
-      --text-light: #aaaaaa;
-      --blue: #0077ff;
-      --accent: #ff2d55;
-      --border: #333;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-    }
-    html { scroll-behavior: smooth; }
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Tyler's Diode Designs — Precision Printed. Uniquely Yours." />
+  <meta property="og:description" content="3D printed maps, signs, statues, accessories & lasercraft. Ohio topography, skylines & stadiums. Shop ready-made or request a custom commission." />
+  <meta property="og:image" content="assets/img/logo.svg" />
 
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-on-scroll {
-      opacity: 0;
-      animation: fadeInUp 0.8s forwards;
-    }
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
 
-    /* ==================== HEADER WITH BLURRED BACKGROUND ==================== */
-    header {
-      position: relative;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem 7rem;
-      min-height: 620px;
-      overflow: hidden;
-    }
+  <link rel="stylesheet" href="assets/css/styles.css" />
 
-    header::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: url('https://i.imgur.com/iNOhNJv.jpeg') center/cover no-repeat;
-      filter: blur(5px) brightness(0.75) saturate(0.85);
-      transform: scale(1.08);
-      z-index: 1;
-    }
+  <!-- PayPal JS SDK — same business account / client-id as tevisengineering.com pay_invoice.html.
+       Dynamic cart total is passed into createOrder() at checkout time (see assets/js/main.js). -->
+  <script src="https://www.paypal.com/sdk/js?client-id=Ab_dnVs8tumZ0eMkFfSuR9eR5ut5xYKPmEbgCRODAyopaxWByLowbaOpY9pgZJKAa_nliulcrbPBQ9IC&currency=USD&components=buttons&enable-funding=venmo&intent=capture" defer></script>
 
-    header::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(rgba(0, 20, 50, 0.82), rgba(0, 20, 50, 0.88));
-      z-index: 2;
-    }
-
-    nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 0.5rem 2.2rem 2.3rem;
-      position: relative;
-      z-index: 40;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 0.95rem;
-      color: white;
-      text-decoration: none;
-      min-height: 64px;
-      padding-right: 1.5rem;
-    }
-    .logo-img {
-      /* Final logo image target size: 60px x 60px */
-      width: 60px;
-      height: 60px;
-      border-radius: 12px;
-      object-fit: cover;
-      background: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.32);
-    }
-    .logo-placeholder {
-      display: inline-block;
-    }
-    .logo-lockup {
-      display: flex;
-      align-items: baseline;
-      gap: 0.4rem;
-      font-family: 'Montserrat', sans-serif;
-      line-height: 1;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
-    .logo-primary {
-      font-size: 1.42rem;
-      font-weight: 800;
-      color: #ffffff;
-    }
-    .logo-secondary {
-      font-size: 1rem;
-      font-weight: 500;
-      color: #d8e6ff;
-    }
-    nav a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s;
-    }
-    nav a:hover {
-      color: var(--blue);
-    }
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.65rem;
-    }
-    .nav-pay-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0.58rem 1rem;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.35);
-      background: linear-gradient(135deg, #0f8bd8, #1aa36e);
-      color: #ffffff;
-      font-family: 'Montserrat', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      font-size: 0.78rem;
-      font-weight: 700;
-      line-height: 1;
-      text-decoration: none;
-      box-shadow: 0 10px 18px rgba(11, 117, 177, 0.28);
-      transition: transform 0.2s ease, filter 0.2s ease, box-shadow 0.2s ease;
-    }
-    .nav-pay-btn:hover {
-      color: #ffffff;
-      transform: translateY(-1px);
-      filter: brightness(1.07);
-      box-shadow: 0 14px 20px rgba(11, 117, 177, 0.34);
-    }
-    .hamburger {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 5px;
-      width: 44px;
-      height: 44px;
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      border-radius: 12px;
-      background: rgba(0, 0, 0, 0.35);
-      cursor: pointer;
-      padding: 0 10px;
-    }
-    .hamburger span {
-      display: block;
-      width: 100%;
-      height: 2px;
-      background: #fff;
-      border-radius: 2px;
-      transition: transform 0.2s ease, opacity 0.2s ease;
-    }
-    .nav-menu {
-      position: absolute;
-      top: calc(100% - 1rem);
-      right: 2rem;
-      width: min(320px, calc(100vw - 2rem));
-      background: #08101b;
-      border: 1px solid rgba(124, 172, 255, 0.42);
-      border-radius: 14px;
-      padding: 0.6rem;
-      display: none;
-      flex-direction: column;
-      gap: 0.25rem;
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.62);
-      z-index: 50;
-    }
-    .nav-menu a {
-      padding: 0.85rem 0.9rem;
-      border-radius: 10px;
-      color: #e8f0ff;
-      font-size: 0.98rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
-    }
-    .nav-menu a:hover {
-      background: rgba(0, 119, 255, 0.14);
-      color: white;
-    }
-    .nav-menu.is-open {
-      display: flex;
-    }
-    .hamburger.is-open span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
-    .hamburger.is-open span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.is-open span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
-
-    .hero {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2rem 1rem;
-      position: relative;
-      z-index: 5;
-    }
-    .hero h1 {
-      font-family: 'Montserrat', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      font-size: 3.4rem;
-      margin-bottom: 0.5rem;
-      font-weight: 700;
-    }
-    .tagline {
-      font-size: 1.4rem;
-      color: #a0c4ff;
-      margin-bottom: 2rem;
-    }
-    .btn {
-      display: inline-block;
-      background: var(--accent);
-      color: white;
-      padding: 16px 40px;
-      font-size: 1.15rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 50px;
-      transition: all 0.4s ease;
-      box-shadow: 0 8px 25px rgba(255, 45, 85, 0.3);
-    }
-    .btn:hover {
-      background: #ff4d6b;
-      transform: translateY(-5px) scale(1.05);
-    }
-
-    section {
-      padding: 80px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    h2 {
-      font-family: 'Montserrat', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.03em;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-bottom: 3.5rem;
-      color: white;
-    }
-    h2:after {
-      content: '';
-      width: 80px;
-      height: 3px;
-      background: var(--blue);
-      display: block;
-      margin: 12px auto;
-      border-radius: 2px;
-    }
-    .services-grid, .pricing-grid, .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-    }
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 2.2rem;
-      transition: all 0.4s ease;
-    }
-    .card:hover {
-      transform: translateY(-12px);
-      border-color: var(--blue);
-      box-shadow: 0 25px 40px rgba(0, 119, 255, 0.2);
-    }
-    .card h3 {
-      font-family: 'Montserrat', sans-serif;
-      color: var(--blue);
-      margin-bottom: 1.3rem;
-      font-size: 1.45rem;
-    }
-    ul { list-style: none; }
-    li {
-      padding: 8px 0;
-      color: var(--text-light);
-      position: relative;
-      padding-left: 1.6rem;
-    }
-    li:before {
-      content: "→";
-      color: var(--accent);
-      position: absolute;
-      left: 0;
-    }
-    .veteran-badge {
-      background: linear-gradient(135deg, #C8102E, #ff4d6b);
-      color: white;
-      padding: 12px 28px;
-      border-radius: 50px;
-      display: inline-block;
-      font-weight: 600;
-      margin: 2rem 0;
-      font-size: 1.1rem;
-      box-shadow: 0 8px 20px rgba(200, 16, 46, 0.4);
-    }
-    .trust-bar {
-      background: #111;
-      padding: 40px 20px;
-      text-align: center;
-    }
-    .trust-bar div {
-      display: inline-block;
-      margin: 0 20px;
-      font-weight: 600;
-      color: var(--text-light);
-    }
-    .pricing-grid .card {
-      text-align: center;
-    }
-    .pricing-intro {
-      max-width: 820px;
-      margin: 0 auto 2rem;
-      text-align: center;
-      color: var(--text-light);
-      font-size: 1.08rem;
-    }
-    .pricing-note {
-      max-width: 900px;
-      margin: 0 auto 2.25rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid rgba(0, 119, 255, 0.28);
-      border-radius: 14px;
-      background: rgba(0, 119, 255, 0.1);
-      color: #d7e7ff;
-      font-size: 1rem;
-      line-height: 1.7;
-      text-align: center;
-    }
-    .pricing-discount-note {
-      max-width: 900px;
-      margin: -0.8rem auto 2.25rem;
-      padding: 1rem 1.2rem;
-      border: 1px solid rgba(255, 45, 85, 0.35);
-      border-radius: 14px;
-      background: rgba(255, 45, 85, 0.1);
-      color: #ffd9e3;
-      font-size: 0.98rem;
-      line-height: 1.7;
-      text-align: center;
-    }
-    .contact-discount-note {
-      max-width: 760px;
-      margin: 0 auto 1.4rem;
-      padding: 0.85rem 1rem;
-      border: 1px solid rgba(255, 45, 85, 0.28);
-      border-radius: 12px;
-      background: rgba(255, 45, 85, 0.08);
-      color: #ffd9e3;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      text-align: center;
-    }
-    .plan-meta {
-      margin-top: 0.9rem;
-      color: #c8d7ea;
-      font-size: 0.98rem;
-    }
-    .plan-details {
-      margin-top: 1rem;
-      text-align: left;
-      color: #c9d8ef;
-      font-size: 0.95rem;
-      line-height: 1.6;
-      list-style: none;
-      padding-left: 0;
-    }
-    .plan-details li {
-      padding: 5px 0;
-      color: #c9d8ef;
-      padding-left: 1.4rem;
-    }
-    .plan-details li:before {
-      content: "•";
-      color: #66a9ff;
-      left: 0;
-    }
-    .pricing-breakdown {
-      margin-top: 1.5rem;
-      padding-top: 1.2rem;
-      border-top: 1px solid rgba(0, 119, 255, 0.2);
-      text-align: left;
-      color: #c9d8ef;
-      font-size: 0.93rem;
-    }
-    .pricing-breakdown p {
-      color: #a0b5d8;
-      font-size: 0.88rem;
-      margin-bottom: 0.8rem;
-      font-weight: 500;
-    }
-    .pricing-breakdown ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-    .pricing-breakdown li {
-      padding: 6px 0;
-      color: #c9d8ef;
-      padding-left: 1.4rem;
-    }
-    .pricing-breakdown li:before {
-      content: "→";
-      color: #5eb3ff;
-      left: 0;
-      position: absolute;
-    }
-    .plan-badge {
-      display: inline-block;
-      margin-bottom: 1rem;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: rgba(0, 119, 255, 0.14);
-      color: #b7d7ff;
-      border: 1px solid rgba(0, 119, 255, 0.3);
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
-    .pricing-grid .featured {
-      border-color: rgba(0, 119, 255, 0.65);
-      box-shadow: 0 22px 40px rgba(0, 119, 255, 0.18);
-      transform: translateY(-4px);
-    }
-    .pricing-grid strong {
-      font-size: 2.1rem;
-      color: var(--blue);
-      display: block;
-      margin: 1rem 0;
-    }
-    .pricing-reassurance {
-      max-width: 820px;
-      margin: 2rem auto 0;
-      text-align: center;
-      color: #cfcfcf;
-      font-size: 1.05rem;
-    }
-    .agreement-box {
-      margin: 2.5rem auto 0;
-      max-width: 1100px;
-      background: #121212;
-      border: 1px solid #2b2b2b;
-      border-radius: 18px;
-      padding: 2rem;
-    }
-    .agreement-box h3 {
-      font-family: 'Montserrat', sans-serif;
-      color: #e7f0ff;
-      text-align: center;
-      font-size: 1.55rem;
-      margin-bottom: 1.4rem;
-    }
-    .agreement-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.1rem;
-    }
-    .agreement-item {
-      background: #191919;
-      border: 1px solid #2f2f2f;
-      border-radius: 14px;
-      padding: 1rem 1rem 0.9rem;
-    }
-    .agreement-item h4 {
-      font-family: 'Montserrat', sans-serif;
-      color: #8bc0ff;
-      margin-bottom: 0.55rem;
-      font-size: 1rem;
-    }
-    .agreement-item p {
-      color: #c7c7c7;
-      font-size: 0.95rem;
-      line-height: 1.55;
-    }
-    footer {
-      background: #050505;
-      color: #777;
-      text-align: center;
-      padding: 3rem 1rem 2rem;
-      border-top: 1px solid #222;
-    }
-    .social-links a {
-      color: #aaa;
-      text-decoration: none;
-      margin: 0 20px;
-      font-size: 1.4rem;
-      transition: all 0.3s;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .social-links a:hover {
-      color: var(--blue);
-      transform: translateY(-3px);
-    }
-    .contact-form {
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .payment-methods {
-      margin: 1.2rem auto 0;
-      max-width: 860px;
-      padding: 1.1rem 1.1rem 1rem;
-      border: 1px solid rgba(0, 119, 255, 0.22);
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(0, 119, 255, 0.1), rgba(255, 45, 85, 0.06));
-    }
-    .payment-methods h3 {
-      margin: 0 0 0.75rem;
-      font-family: 'Montserrat', sans-serif;
-      color: #e7f0ff;
-      font-size: 1.04rem;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      text-align: center;
-    }
-    .payment-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 0.6rem;
-    }
-    .payment-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.65rem 0.75rem;
-      border-radius: 999px;
-      background: rgba(8, 20, 38, 0.72);
-      border: 1px solid rgba(144, 186, 255, 0.25);
-      color: #d9e8ff;
-      font-weight: 600;
-      font-size: 0.95rem;
-    }
-    .payment-chip i {
-      color: #84c2ff;
-      font-size: 1rem;
-    }
-    .payment-chip.paypal i {
-      color: #7ac3ff;
-    }
-    .payment-chip.venmo i {
-      color: #56b8ff;
-    }
-    .payment-chip.cash i,
-    .payment-chip.check i {
-      color: #8fdba7;
-    }
-    .payment-note {
-      margin-top: 0.8rem;
-      text-align: center;
-      color: #b8cce8;
-      font-size: 0.9rem;
-      line-height: 1.55;
-    }
-    input, textarea {
-      width: 100%;
-      background: #1f1f1f;
-      border: 1px solid #444;
-      color: white;
-      padding: 15px 18px;
-      border-radius: 12px;
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
-    }
-    input:focus, textarea:focus {
-      outline: none;
-      border-color: var(--blue);
-      box-shadow: 0 0 0 4px rgba(0, 119, 255, 0.2);
-    }
-    button[type="submit"] {
-      width: 100%;
-      padding: 18px;
-      font-size: 1.2rem;
-      background: linear-gradient(135deg, var(--blue), #3399ff);
-      border: none;
-      border-radius: 50px;
-      color: white;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.4s;
-    }
-    button[type="submit"]:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 15px 30px rgba(0, 119, 255, 0.4);
-    }
-    .floating-btn {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: var(--accent);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 50px;
-      text-decoration: none;
-      box-shadow: 0 10px 25px rgba(255,45,85,0.4);
-      z-index: 1000;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .floating-btn.is-hidden {
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(10px);
-    }
-    .support-works-cta-wrap {
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
-    .support-works-cta {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      padding: 0.8rem 1.2rem;
-      border: 1px solid rgba(0, 119, 255, 0.4);
-      background: rgba(0, 119, 255, 0.12);
-      border-radius: 999px;
-      color: #d7e7ff;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .support-works-cta:hover {
-      background: rgba(0, 119, 255, 0.22);
-      transform: translateY(-2px);
-    }
-    @media (max-width: 720px) {
-      nav {
-        padding: 0.5rem 1rem 2rem;
-      }
-      .brand {
-        min-height: 56px;
-        padding-right: 0.6rem;
-      }
-      .logo-img {
-        width: 52px;
-        height: 52px;
-      }
-      .logo-primary {
-        font-size: 1.12rem;
-      }
-      .logo-secondary {
-        font-size: 0.82rem;
-      }
-      .nav-actions {
-        gap: 0.45rem;
-      }
-      .nav-pay-btn {
-        padding: 0.52rem 0.78rem;
-        font-size: 0.68rem;
-      }
-      .nav-menu {
-        right: 1rem;
-      }
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Store",
+    "name": "Tyler's Diode Designs",
+    "description": "Specialized 3D printed maps, signs, statues, accessories and lasercraft depicting Ohio topography, skylines and stadiums.",
+    "slogan": "Precision Printed. Uniquely Yours.",
+    "parentOrganization": { "@type": "Organization", "name": "TES, LLC", "url": "https://tevisengineering.com" },
+    "areaServed": "US",
+    "knowsAbout": ["3D printing", "topographic maps", "laser engraving", "custom signage"]
+  }
+  </script>
 </head>
 <body>
-  <header>
-    <nav>
-      <a href="#" class="brand" aria-label="Tevis Engineering Solutions home">
-        <!-- Logo slot kept white for now. Replace with an <img> at 60px x 60px (desktop), 52px x 52px (mobile). -->
-        <!-- Example: <img src="assets/logo.png" alt="Tevis Engineering Solutions logo" class="logo-img"> -->
-        <span class="logo-img logo-placeholder" aria-hidden="true"></span>
-        <span class="logo-lockup">
-          <span class="logo-primary">Tevis Engineering</span>
-          <span class="logo-secondary">Solutions</span>
-        </span>
+  <a class="skip-link" href="#shop">Skip to shop</a>
+
+  <!-- ============================ HEADER ============================ -->
+  <header class="site-header" id="home">
+    <div class="container site-header__inner">
+      <a class="brand" href="#home" aria-label="Tyler's Diode Designs — home">
+        <img class="brand__logo" src="assets/img/logo.svg" alt="" width="46" height="46" />
+        <span class="brand__name">Tyler's Diode Designs<small>A spinoff of TES, LLC</small></span>
       </a>
-      <div class="nav-actions">
-        <a href="pay_invoice.html" class="nav-pay-btn">Pay Invoice</a>
-        <button class="hamburger" id="navToggle" aria-controls="mainMenu" aria-expanded="false" aria-label="Open navigation menu" type="button">
-          <span></span>
-          <span></span>
-          <span></span>
+
+      <nav class="main-nav" id="mainNav" aria-label="Primary">
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#shop">Shop</a></li>
+          <li><a href="#custom">Custom Orders</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <button class="cart-btn" id="cartOpen" aria-label="Open cart" aria-haspopup="dialog">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          <span class="label">Cart</span>
+          <span class="cart-count" id="cartCount" aria-live="polite">0</span>
         </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-controls="mainNav" aria-expanded="false"><span></span></button>
       </div>
-      <div class="nav-menu" id="mainMenu">
-        <a href="#services">Services</a>
-        <a href="how_support_works.html">How Support Works</a>
-        <a href="data_destruction.html">Data Destruction</a>
-        <a href="knowledge_transfer.html">Knowledge Transfer</a>
-        <a href="website_creation.html">Website Creation</a>
-        <a href="pay_invoice.html">Pay Invoice</a>
-        <a href="pricing_sheet.html">Pricing Sheet</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-      </div>
-    </nav>
-    <div class="hero">
-      <p style="font-size:1.0rem; margin-bottom:0.5rem; opacity:0.9;">Cleveland-Based • Air Force Veteran Owned</p>
-      <h1>IT Support &amp; Custom Engineering Solutions</h1>
-      <p class="tagline">Military-Grade Reliability for Small Businesses and Individuals</p>
-      <a href="#contact" class="btn">Get Help Today</a>
     </div>
   </header>
 
-  <section id="about">
-    <h2>About Tevis Engineering Solutions</h2>
-    <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
-      Founded by Tyler Tevis, an Air Force Veteran and degreed computer engineer with a career in research and 7 years of experience in computer science,
-      with a focus in prototype design (electrical, mechanical, biomedical, software) and IT support. He has co-authored numerous publications relating
-      to his engineering contributions to work in healthcare solutions and continues to let that drive his passion for technology.
-    </p>
-    <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
-      Providing reliable, local and remote IT support and solutions across Cleveland with scaled-to-fit solutions that don't break the bank.
-      We deliver military-grade precision along with practical consulting and 3D printing solutions. Truly a one-stop-shop for your technology needs at an affordable rate.
-    </p>
-    <p style="max-width:800px; margin:0 auto 2rem; text-align:center; font-size:1.15rem;">
-      Contact us to see how we can improve antiquated processes, expand your network, deploy those workstations and harness the technology that's
-      out there to take your productivity to the next level - or restore it to its former glory!
-    </p>
-    <div style="text-align:center;">
-    </div>
-  </section>
+  <main>
+    <!-- ============================ HERO =========================== -->
+    <section class="hero">
+      <div class="container hero__grid">
+        <div class="hero__content">
+          <span class="hero__badge"><span class="dot"></span> Designed &amp; printed in Ohio</span>
+          <h1 class="hero__title">Precision Printed.<br /><span class="pop">Uniquely Yours.</span></h1>
+          <p class="hero__lead">Novelty art you can hold — topographic states, hometown skylines, game-day stadiums, signs, and laser-cut keepsakes, fabricated layer by layer.</p>
+          <div class="hero__cta">
+            <a class="btn btn--primary btn--lg" href="#shop">Shop Now</a>
+            <a class="btn btn--ghost btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Request a Custom Order</a>
+          </div>
+          <div class="hero__proof">
+            <div><b>100%</b><span>Printed to order</span></div>
+            <div><b>5</b><span>Product categories</span></div>
+            <div><b>Ohio</b><span>Designed &amp; made</span></div>
+          </div>
+        </div>
 
-  <div class="trust-bar">
-    <div>Automation • System Administration • Hardware Support</div>
-    <div>3D Design • Prototyping • 3D Printing</div>
-    <div>Cleveland-Based • Remote Support Available</div>
-  </div>
+        <div class="hero__stage">
+          <img class="hero__art" src="assets/img/hero-scene.svg" alt="A 3D printer building a topographic relief map layer by layer" width="480" height="400" />
+          <span class="chip chip--1"><img src="assets/img/topo-ohio.svg" alt="" /> Topo Maps</span>
+          <span class="chip chip--2"><img src="assets/img/stadium.svg" alt="" /> Stadiums</span>
+          <span class="chip chip--3"><img src="assets/img/keychain.svg" alt="" /> Lasercraft</span>
+          <span class="sticker">Made in&nbsp;Ohio</span>
+        </div>
+      </div>
+    </section>
 
-  <section id="services" style="background:#111;">
-    <h2>Services</h2>
-    <div class="services-grid">
-      <div class="card animate-on-scroll">
-        <h3>Setup &amp; Deployment</h3>
-        <ul>
-          <li>Desktop, Laptop &amp; Windows 10/11 Deployments</li>
-          <li>Printer, Scanner &amp; All-in-One Setup</li>
-          <li>Network &amp; Wi-Fi Optimization</li>
-          <li>Azure &amp; Microsoft 365 Configuration</li>
-          <li>Automated Phone Tree Systems</li>
-          <li>Smart Home Integration &amp; Demo</li>
-          <li>3D Printer Setup &amp; Demo</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <h3>Troubleshooting &amp; Repair</h3>
-        <ul>
-          <li>Slow PC Optimization &amp; Cleanup</li>
-          <li>Data Backup &amp; Restore</li>
-          <li>Hardware/Software Issue Diagnosis</li>
-          <li>Wi-Fi &amp; Connectivity Problems</li>
-          <li>Virus/Malware Removal</li>
-          <li>Email &amp; Spam Resolution</li>
-          <li>Password Reset Walkthrough</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <h3>Automation &amp; Efficiency</h3>
-        <ul>
-          <li>Custom Scripting &amp; PowerShell Automation</li>
-          <li>Business Process Workflows</li>
-          <li>RingCentral Call Trees &amp; Routing</li>
-          <li>Excel Macros &amp; Data Tools</li>
-          <li>AI Tool Selection &amp; Deployment</li>
-          <li>Tedious Task Elimination</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <h3>IT Consulting</h3>
-        <ul>
-          <li>Technology Strategy &amp; Roadmap Planning</li>
-          <li>Cloud Migration Consulting</li>
-          <li>Workflow Efficiency Audits</li>
-          <li>Software &amp; Tool Recommendations</li>
-          <li>Hardware Specification &amp; Procurement</li>
-          <li>Small Business Tech Budget Planning</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <h3>3D Printing Services</h3>
-        <ul>
-          <li>Custom 3D Design &amp; Prototyping</li>
-          <li>Functional Parts &amp; Replacement Components</li>
-          <li>3D Printer Setup, Calibration &amp; Troubleshooting</li>
-          <li>Material Selection Guidance</li>
-          <li>Small Batch Production</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <h3>Cybersecurity &amp; Home Support</h3>
-        <ul>
-          <li>Antivirus, Backups &amp; Spam Protection</li>
-          <li>Patient Tech Tutoring for Seniors</li>
-          <li>Video Calling &amp; Streaming Setup</li>
-          <li>Smart Home Setup &amp; Demo</li>
-          <li>Ongoing Monthly Support Plans</li>
-        </ul>
+    <!-- =========================== MARQUEE ========================= -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__track">
+        <span>Topographic Maps</span><span>Hometown Skylines</span><span>Game-Day Stadiums</span><span>Layered Signs</span><span>Laser Keychains &amp; Magnets</span><span>Custom Commissions</span>
+        <span>Topographic Maps</span><span>Hometown Skylines</span><span>Game-Day Stadiums</span><span>Layered Signs</span><span>Laser Keychains &amp; Magnets</span><span>Custom Commissions</span>
       </div>
     </div>
-  </section>
 
-  <section id="pricing">
-    <div class="support-works-cta-wrap">
-      <a href="how_support_works.html" class="support-works-cta">How Support Works</a>
-    </div>
-    <h2>Pricing Options</h2>
-    <p class="pricing-intro">Simple, transparent pricing built for small businesses that need reliable support without enterprise pricing. Every tier has clear boundaries so you know exactly what is included.</p>
-    <p class="pricing-note"><strong>Free 15-minute Zoom initial consultation:</strong> great for introductions, goals, and fit. This is different from a paid technical consultation, where deliverables are provided (such as a scope of work or plan of action).</p>
-    <p class="pricing-discount-note"><strong>Veteran and senior discounts available:</strong> discount amounts vary based on service type, scope, and support level. Contact us for exact pricing details for your situation. To all veterans, thank you for your service and continued support.</p>
-    <div class="pricing-grid">
-      <div class="card animate-on-scroll featured">
-        <span class="plan-badge">Standard Rate</span>
-        <h3>Hourly</h3>
-        <p><strong>$80/hour</strong></p>
-        <small>1-hour minimum</small>
-        <p class="plan-meta">Best for one-off troubleshooting, quick fixes, and short tasks.</p>
-        <ul class="plan-details">
-          <li>Remote and on-site support available</li>
-          <li>After-hours work billed at premium rate</li>
-          <li>No long-term commitment required</li>
-        </ul>
-        <div class="pricing-breakdown">
-          <p><strong>After the 1-hour:</strong></p>
+    <!-- ========================= CATEGORIES ======================== -->
+    <section class="section cats">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">Browse the workshop</span>
+          <h2 class="section__title">Five ways to <span class="squiggle">make it real</span></h2>
+          <p class="section__lead">From wall-worthy relief maps to pocket-sized lasercraft — every piece starts as a design and ends on your shelf.</p>
+        </div>
+        <div class="cat-grid">
+          <a class="cat-card reveal" data-delay="0" href="#shop" data-filter="maps" style="--accent: var(--c-maps)">
+            <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg></span>
+            <h3>3D Printed Maps</h3>
+            <p>Topographic states, lakes &amp; cities in layered relief.</p>
+            <span class="cat-card__link">Explore →</span>
+          </a>
+          <a class="cat-card reveal" data-delay="1" href="#shop" data-filter="signs" style="--accent: var(--c-signs)">
+            <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M5 6h11l3 3-3 3H5z"/><path d="M12 12v9"/><path d="M8 21h8"/></svg></span>
+            <h3>Signs</h3>
+            <p>Layered name plates, monograms &amp; keepsakes.</p>
+            <span class="cat-card__link">Explore →</span>
+          </a>
+          <a class="cat-card reveal" data-delay="2" href="#shop" data-filter="accessories" style="--accent: var(--c-accessories)">
+            <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/></svg></span>
+            <h3>Accessories</h3>
+            <p>Desk caddies, phone stands &amp; everyday helpers.</p>
+            <span class="cat-card__link">Explore →</span>
+          </a>
+          <a class="cat-card reveal" data-delay="3" href="#shop" data-filter="statues" style="--accent: var(--c-statues)">
+            <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6-4v16"/><path d="M9 21V3l6 3v15"/><path d="M15 21V8l6 3v10"/><path d="M2 21h20"/></svg></span>
+            <h3>Statues</h3>
+            <p>Skylines &amp; stadiums sculpted in printed relief.</p>
+            <span class="cat-card__link">Explore →</span>
+          </a>
+          <a class="cat-card reveal" data-delay="4" href="#shop" data-filter="lasercraft" style="--accent: var(--c-lasercraft)">
+            <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+            <h3>Lasercraft</h3>
+            <p>Keychains, magnets &amp; engraved coasters.</p>
+            <span class="cat-card__link">Explore →</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ SHOP =========================== -->
+    <section class="section" id="shop">
+      <div class="container">
+        <div class="section__head reveal">
+          <span class="eyebrow">The shop</span>
+          <h2 class="section__title">Ready to ship</h2>
+          <p class="section__lead">Signature designs, printed to order. Tap a category to filter — or add a few favorites to your cart.</p>
+        </div>
+
+        <div class="shop__bar reveal">
+          <div class="filters" id="filters" role="group" aria-label="Filter products by category">
+            <button class="filter is-active" data-filter="all">All</button>
+            <button class="filter" data-filter="maps">Maps</button>
+            <button class="filter" data-filter="signs">Signs</button>
+            <button class="filter" data-filter="accessories">Accessories</button>
+            <button class="filter" data-filter="statues">Statues</button>
+            <button class="filter" data-filter="lasercraft">Lasercraft</button>
+          </div>
+          <p class="shop__note" id="shopNote">12 designs</p>
+        </div>
+
+        <div class="product-grid" id="productGrid">
+          <!-- Cards injected by JS from the product catalog -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================= CUSTOM ORDERS ======================= -->
+    <section class="section custom" id="custom">
+      <div class="container">
+        <div class="custom__panel reveal">
+          <div class="custom__grid">
+            <div class="custom__head">
+              <span class="eyebrow">Custom commissions</span>
+              <h2 class="custom__title">Got a one-of-a-kind idea?</h2>
+              <p class="custom__text">Bring us your town, your team, your trail map, or that inside joke that needs to exist in real life. We model it, print it, and finish it — from a single keepsake to a full batch for an event or shop.</p>
+              <div class="custom__cta">
+                <a class="btn btn--primary btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Start a Custom Request</a>
+                <a class="btn btn--light btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Get a Quote</a>
+              </div>
+            </div>
+            <div class="steps">
+              <div class="step">
+                <span class="step__num">1</span>
+                <div><h4>Share your idea</h4><p>Send sketches, photos, dimensions, or just a description through our contact form. No idea is too weird.</p></div>
+              </div>
+              <div class="step">
+                <span class="step__num">2</span>
+                <div><h4>Get a quote &amp; proof</h4><p>We reply with pricing, material options, and a digital preview before a single layer is printed.</p></div>
+              </div>
+              <div class="step">
+                <span class="step__num">3</span>
+                <div><h4>We print &amp; ship</h4><p>Approve the proof and we fabricate, hand-finish, and ship it straight to your door.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================ ABOUT ========================== -->
+    <section class="section" id="about">
+      <div class="container about__grid">
+        <div class="about__text reveal">
+          <span class="eyebrow">Our story</span>
+          <h2 class="section__title">Where engineering meets <span class="squiggle">play</span></h2>
+          <p><strong>Tyler's Diode Designs</strong> is the maker-studio spinoff of <strong>TES, LLC</strong> (Tevis Engineering Services). Where TES brings the precision and problem-solving, this studio channels it into playful, tangible art you can put on a shelf.</p>
+          <p>Every map, statue, sign, and trinket is modeled and printed in-house here in Ohio. We love celebrating <strong>local landmarks</strong> — the skylines, the stadiums, and the rolling topography of the Buckeye State and beyond.</p>
+          <p>From ready-to-ship favorites to one-off commissions, the goal is the same: turn a precise digital design into something with a little soul.</p>
+          <div class="lineage">
+            <span class="node">TES, LLC<small>Engineering</small></span>
+            <span class="arrow">→</span>
+            <span class="node">Tyler's Diode Designs<small>Maker studio</small></span>
+          </div>
+        </div>
+        <div class="about__cards reveal" data-delay="1">
+          <div class="fact"><b>12</b><span>Signature designs</span></div>
+          <div class="fact"><b>5</b><span>Product categories</span></div>
+          <div class="fact"><b>1:1</b><span>Custom commissions</span></div>
+          <div class="fact"><b>100%</b><span>Made in Ohio</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================== CTA BAND ========================= -->
+    <section class="section cta-band">
+      <div class="container">
+        <div class="cta-band__inner reveal">
+          <h2>Let's print something only you would think of.</h2>
+          <p>Browse the shop for ready-made pieces, or tell us about your custom idea — quotes are always free.</p>
+          <div class="hero__cta" style="justify-content:center">
+            <a class="btn btn--ghost btn--lg" href="#shop">Browse the Shop</a>
+            <a class="btn btn--ghost btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Request a Custom Order</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================ FOOTER ========================== -->
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="#home" aria-label="Tyler's Diode Designs — home">
+            <img class="brand__logo" src="assets/img/logo.svg" alt="" width="44" height="44" />
+            <span class="brand__name">Tyler's Diode Designs</span>
+          </a>
+          <p>Specialized 3D printed maps, signs, statues, accessories &amp; lasercraft — designed and made in Ohio.</p>
+          <div class="footer__social">
+            <a href="#" data-soon aria-label="Instagram (coming soon)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="#" data-soon aria-label="Facebook (coming soon)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h3l.5-3H13V9c0-.9.3-1.5 1.6-1.5H17V4.8c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V11H7v3h3.3v8H13Z"/></svg></a>
+            <a href="#" data-soon aria-label="TikTok (coming soon)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 4c.3 2 1.6 3.6 3.5 4v3c-1.4 0-2.7-.4-3.8-1.1V15a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v3.1a2.5 2.5 0 1 0 1.7 2.4V4H16Z"/></svg></a>
+          </div>
+        </div>
+
+        <div class="footer__col">
+          <h4>Shop</h4>
           <ul>
-            <li>Billed in 10 minute increments at $15.00</li>
+            <li><a href="#shop" data-filter="maps">3D Printed Maps</a></li>
+            <li><a href="#shop" data-filter="signs">Signs</a></li>
+            <li><a href="#shop" data-filter="accessories">Accessories</a></li>
+            <li><a href="#shop" data-filter="statues">Statues</a></li>
+            <li><a href="#shop" data-filter="lasercraft">Lasercraft</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col">
+          <h4>Studio</h4>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#custom">Custom Orders</a></li>
+            <li><a href="#custom">How It Works</a></li>
+            <li><a href="https://tevisengineering.com" target="_blank" rel="noopener">TES, LLC</a></li>
+          </ul>
+        </div>
+
+        <div class="footer__col footer__contact">
+          <h4>Contact</h4>
+          <ul>
+            <li><a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg> Custom quotes &amp; contact</a></li>
+            <li><a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 7 9 6 9-6"/></svg> Dedicated inbox — coming soon</a></li>
+            <li><span style="display:flex;gap:10px;align-items:center;color:#ADA5C6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:17px;height:17px;color:var(--amber);flex:none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg> Ohio, USA</span></li>
           </ul>
         </div>
       </div>
-      <div class="card animate-on-scroll">
-        <span class="plan-badge">Best for Busy Weeks or New Equipment</span>
-        <h3>Weekly Service Rate</h3>
-        <p><strong>$550/week</strong></p>
-        <small>Up to 7 billable hours included/week</small>
-        <p class="plan-meta">Ideal for short-term rollout projects like setting up hardware, mass software deployment, and post-deployment optimization. </p>
-        <ul class="plan-details">
-            <li> Additional hours billed at $100/hour in half-hour increments. </li>
-          <li>Designed for high-activity implementation weeks</li>
-          <li>Unused hours do not roll over</li>
-          <li>Engineering design work is excluded and separately scoped, requiring technical consultation resulting in approved SOW</li>
-        </ul>
-        <small> Max 12 billable hours/week.</small>
-      </div>
-      <div class="card animate-on-scroll">
-        <span class="plan-badge">Best for Ongoing Support</span>
-        <h3>Monthly Managed Support</h3>
-        <p><strong>$1,560/month</strong></p>
-        <small>Includes up to 24 billable hours/month</small>
-        <p class="plan-meta">Longer-term support relationship covering maintenance and day-to-day admin operations without overcommitting your budget. Effective rate: $65/hour on billable time.</p>
-        <ul class="plan-details">
-          <li>Support availability up to 6 hours/week</li>
-          <li>Password resets, device upkeep, admin tasks, procurement coordination, process improvement, automation, and other routine IT tasks</li>
-          <li>Engineering design work is excluded and separately scoped, requiring technical consultation resulting in approved SOW</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <span class="plan-badge">Specialized Engineering</span>
-        <h3>Engineering Projects</h3>
-        <p><strong>Milestone priced</strong></p>
-        <small>Deliverables, not hour commitments</small>
-        <p class="plan-meta">For advanced engineering support including circuit design, board layout, building, and testing with agreed milestones and due dates.</p>
-        <ul class="plan-details">
-          <li>Formal scope of work and acceptance criteria</li>
-          <li>Structured deliverables at defined project checkpoints</li>
-          <li>Change requests handled through formal change orders</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <span class="plan-badge">Best for Planning</span>
-        <h3>Technical Consultation</h3>
-        <p><strong>$50 per billable hour</strong></p>
-        <small>Deliverable-Backed Consulting</small>
-        <p class="plan-meta">Paid technical consultation includes a scope draft, plan of action, and recommendations. 100% of this fee is credited toward the accepted project.</p>
-        <ul class="plan-details">
-          <li>Different from the free 15-minute intro call; technical rather than high-level</li>
-          <li>Best for scoping a project before implementation</li>
-          <li>Written outcomes you can act on</li>
-        </ul>
-      </div>
-      <div class="card animate-on-scroll">
-        <span class="plan-badge">Support Agreement</span>
-        <h3>Support Plan Boundaries</h3>
-        <small>Scope of Regular Services Provided</small>
-        <p class="plan-meta">Hourly, weekly and monthly support plans are for improvement, support and administration of existing IT infrastructure - not intended for engineering work related to design or delivery of any novel equipment or piece of software.</p>
-        <ul class="plan-details">
-          <li>Custom design/build work is moved to engineering project scope</li>
-          <li>No support-hour conversion into engineering deliverables</li>
-          <li>Major redesign work requires separate statement of work (SOW) approval</li>
-        </ul>
-      </div>
-    </div>
-    <p class="pricing-reassurance">
-      Cleveland area on-site or remote service, transparent scope boundaries, and a free 15-minute Zoom intro call before paid technical consultation.
-    </p>
-    <p style="text-align:center; margin-top:2rem;">
-      <a href="pricing_sheet.html" class="btn">View Full Pricing Details Here</a>
-    </p>
-    <div class="agreement-box animate-on-scroll">
-      <h3>Service Agreement Highlights</h3>
-      <div class="agreement-grid">
-        <div class="agreement-item">
-          <h4>Deposits and Milestones</h4>
-          <p>Projects up to $5,000 use 50% kickoff and 50% delivery billing. Larger projects use milestone billing (40% kickoff, 30% midpoint, 30% delivery).</p>
-        </div>
-        <div class="agreement-item">
-          <h4>Payment Terms</h4>
-          <p>Weekly invoices are net 7 days. Monthly support invoices are net 15 days. Project milestone invoices are due on issue.</p>
-        </div>
-        <div class="agreement-item">
-          <h4>Late Payments</h4>
-          <p>Friendly reminder at 5 days overdue, 5% late fee after 10 days, and active support pauses on accounts 30+ days past due.</p>
-        </div>
-        <div class="agreement-item">
-          <h4>Monthly Hard Cap Rule</h4>
-          <p>Monthly support includes up to 24 billable hours with availability capped at 28 billable hours. Hours 25-28 require written approval and are billed at the standard overage rate of $100/hour.</p>
-        </div>
-        <div class="agreement-item">
-          <h4>Scope Change Process</h4>
-          <p>New requirements are handled through a written change order showing added scope, estimated effort, and updated price before work begins.</p>
-        </div>
-        <div class="agreement-item">
-          <h4>Support vs Engineering</h4>
-          <p>Support plans cover maintenance/admin operations. Engineering design, custom build/test, and formal deliverables require a separate project SOW.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <section id="testimonials" style="background:#111;">
-    <h2>What Clients Are Saying</h2>
-    <div class="testimonials-grid">
-      <div class="card animate-on-scroll">
-        <p style="font-style:italic; margin-bottom:1.5rem;">"Tyler helped us set up our RingCentral phone system in one day, sending our calls to the right deparments. Extremely professional and patient. Highly recommend!"</p>
-        <p><strong>— Sarah M., Small Business Owner</strong></p>
+      <div class="footer__bottom">
+        <span>© <span id="year">2026</span> Tyler's Diode Designs — a spinoff of TES, LLC. All rights reserved.</span>
+        <span class="font-mono">// precision printed in ohio</span>
       </div>
-      <div class="card animate-on-scroll">
-        <p style="font-style:italic; margin-bottom:1.5rem;">"Helped my elderly parents with their tech setup while I lived abroad. Very respectful and explained everything clearly. Worth every penny."</p>
-        <p><strong>— Michael R., Cleveland</strong></p>
-      </div>
-      <div class="card animate-on-scroll">
-        <p style="font-style:italic; margin-bottom:1.5rem;">"I've been putting off making back-ups of my hard drive... and then disaster struck. Luckily, Tyler was able to help me restore and educate me on better practices."</p>
-        <p><strong>— David K., Local Contractor</strong></p>
-      </div>
-      <div class="card animate-on-scroll">
-        <p style="font-style:italic; margin-bottom:1.5rem;">"Thanks for making everything so easy in getting our second conference room setup!"</p>
-        <p><strong>— Greg P., CEO - Local Business</strong></p>
-      </div>
-      <div class="card animate-on-scroll">
-        <p style="font-style:italic; margin-bottom:1.5rem;">"I was sort of upset with myself over how much time I had apparently been wasting manually fiddling around with spreadsheets for timekeeping when Tyler quickly whipped up some magic to do the work for me, but then I remembered how much free time I have now! Thanks Tyler!"</p>
-        <p><strong>— Barbara I., Small Business Owner</strong></p>
-      </div>
-    </div>
-  </section>
-
-  <section style="background:#111; text-align:center; padding:90px 20px;">
-    <h2>Why Choose Tevis Engineering Solutions?</h2>
-    <p style="max-width:820px; margin:0 auto; font-size:1.25rem; color:#ccc; line-height:1.8;">
-      <strong>Results-Driven IT Support from a Cleveland-Based Air Force Veteran.</strong><br><br>
-      With military-honed precision, disciplined execution, and ample real-world experience in systems administration,
-      cloud infrastructure, engineering, and prototype development, Tevis Engineering delivers dependable solutions that actually move the needle.
-    </p>
-    <p style="max-width:820px; margin:25px auto 0; font-size:1.2rem; color:#bbb;">
-      From streamlining operations and automating repetitive tasks to solving complex technical challenges and bringing ideas to life with 3D printing —
-      clients trust Tevis Engineering Solutions to reduce downtime, strengthen security, lower costs, and give them back valuable time.
-    </p>
-    <p style="max-width:820px; margin:25px auto 0; font-size:1.2rem; color:#bbb;">
-      Let Tevis Engineering Solutions give you the white glove service and support that will make us your trusted IT service provider in your home, every day life or small business.
-    </p>
-    <div style="margin-top: 3rem;">
-      <span class="veteran-badge">Precision • Integrity • Results</span>
-    </div>
-  </section>
-
-  <section id="contact" style="background:#0a0a0a;">
-    <h2>Contact Us</h2>
-    <div class="contact-form">
-      <form action="https://formspree.io/f/maqvanal" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Email Address" required>
-        <input type="tel" name="phone" placeholder="Phone Number">
-        <input type="text" name="company" placeholder="Company / Home (optional)">
-        <textarea name="message" rows="6" placeholder="How Can I Help You Today? (IT Support, Consulting, 3D Printing, etc.)" required></textarea>
-        <input type="text" name="_honeypot" style="display:none;" tabindex="-1" autocomplete="off">
-        <button type="submit">Send Message</button>
-      </form>
-      <p style="text-align:center; margin-top:2rem; color:#aaa;">
-        📍 Cleveland Hts, Ohio — local and remote support provided<br>
-        📞 (814) 384-5117 • 📧 tyler.m.tevis@gmail.com
-      </p>
-    </div>
-  </section>
-
-  <footer>
-    <p>&copy; 2026 Tevis Engineering Solutions • Cleveland, OH</p>
-    <div class="social-links">
-      <a href="https://linkedin.com/in/tylertevis/" target="_blank">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-      <a href="https://github.com/tmtevis" target="_blank">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a href="https://account.venmo.com/u/tyler-teee" target="_blank" rel="noopener noreferrer" aria-label="Venmo link placeholder">
-        <i class="fa-brands fa-venmo"></i> Venmo
-      </a>
-      <a href="https://www.paypal.biz/tevisengineeringsolutions" target="_blank" rel="noopener noreferrer" aria-label="PayPal link placeholder">
-        <i class="fa-brands fa-paypal"></i> PayPal
-      </a>
     </div>
   </footer>
 
-  <a href="#contact" class="floating-btn">
-    💬 Get a Free 15 Minute Consultation
-  </a>
+  <!-- ========================== CART DRAWER ====================== -->
+  <div class="cart-overlay" id="cartOverlay"></div>
+  <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
+    <div class="cart__head">
+      <h3>Your Cart <span class="font-mono" style="font-size:.8rem;color:var(--muted)" id="cartHeadCount"></span></h3>
+      <button class="cart__close" id="cartClose" aria-label="Close cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div class="cart__items" id="cartItems"></div>
+    <div class="cart__success" id="cartSuccess" hidden></div>
+    <div class="cart__foot" id="cartFoot" hidden>
+      <div class="cart__row"><span>Subtotal</span><span id="cartSubtotal" class="font-mono">$0.00</span></div>
+      <div class="cart__row" style="font-size:.82rem"><span>Shipping &amp; pickup</span><span style="color:var(--muted)">Arranged after checkout</span></div>
+      <div class="cart__row total"><span>Amount due</span><span id="cartTotal">$0.00</span></div>
+      <div id="paypal-button-container"></div>
+      <p class="cart__hint">Secure checkout by <strong>PayPal</strong>, Venmo, or card. After payment we'll email you to arrange shipping or local pickup. Custom order? <a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Contact us</a>.</p>
+    </div>
+  </aside>
 
-  <script>
-    const navToggle = document.querySelector('#navToggle');
-    const mainMenu = document.querySelector('#mainMenu');
+  <!-- ============================ TOASTS ========================= -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
 
-    if (navToggle && mainMenu) {
-      navToggle.addEventListener('click', () => {
-        const isOpen = mainMenu.classList.toggle('is-open');
-        navToggle.classList.toggle('is-open', isOpen);
-        navToggle.setAttribute('aria-expanded', String(isOpen));
-      });
-
-      mainMenu.querySelectorAll('a').forEach((link) => {
-        link.addEventListener('click', () => {
-          mainMenu.classList.remove('is-open');
-          navToggle.classList.remove('is-open');
-          navToggle.setAttribute('aria-expanded', 'false');
-        });
-      });
-
-      document.addEventListener('click', (event) => {
-        const target = event.target;
-        if (!(target instanceof Element)) {
-          return;
-        }
-        if (!mainMenu.contains(target) && !navToggle.contains(target)) {
-          mainMenu.classList.remove('is-open');
-          navToggle.classList.remove('is-open');
-          navToggle.setAttribute('aria-expanded', 'false');
-        }
-      });
-    }
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.animationDelay = (Math.random() * 0.3) + 's';
-          entry.target.classList.add('animate-on-scroll');
-        }
-      });
-    }, { threshold: 0.15 });
-    document.querySelectorAll('.card, section').forEach(el => observer.observe(el));
-
-    const contactSection = document.querySelector('#contact');
-    const floatingCta = document.querySelector('.floating-btn');
-
-    if (contactSection && floatingCta) {
-      const ctaVisibilityObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          floatingCta.classList.toggle('is-hidden', entry.isIntersecting);
-        });
-      }, {
-        threshold: 0,
-        rootMargin: "0px 0px 140px 0px"
-      });
-
-      ctaVisibilityObserver.observe(contactSection);
-    }
-  </script>
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

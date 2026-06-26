@@ -1,0 +1,29 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D printed city skyline statue">
+  <defs>
+    <linearGradient id="sk-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE3EA"/><stop offset="1" stop-color="#FF6E92"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#sk-bg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2">
+    <path d="M0 48 Q100 32 200 48 T400 48"/>
+  </g>
+  <circle cx="300" cy="80" r="30" fill="#FFFFFF" opacity="0.35"/>
+  <g fill="#FFF7EC" stroke="#221C3A" stroke-width="4" stroke-linejoin="round">
+    <path d="M96 220 V150 H128 V220 Z"/>
+    <path d="M132 220 V110 H156 V90 L168 78 L180 90 V110 H188 V220 Z"/>
+    <path d="M192 220 V132 H222 V220 Z"/>
+    <path d="M226 220 V96 H252 V220 Z"/>
+    <path d="M256 220 V160 H300 V220 Z"/>
+  </g>
+  <g fill="#FF6E92">
+    <rect x="104" y="162" width="6" height="8"/><rect x="116" y="162" width="6" height="8"/>
+    <rect x="200" y="146" width="6" height="8"/><rect x="210" y="146" width="6" height="8"/>
+    <rect x="234" y="112" width="6" height="8"/><rect x="234" y="132" width="6" height="8"/>
+    <rect x="270" y="176" width="6" height="8"/><rect x="284" y="176" width="6" height="8"/>
+  </g>
+  <path d="M168 78 V60" stroke="#221C3A" stroke-width="3"/><circle cx="168" cy="58" r="4" fill="#FF6A3D"/>
+  <rect x="78" y="220" width="244" height="22" rx="6" fill="#E04E72" stroke="#221C3A" stroke-width="4"/>
+  <g stroke="#FFF7EC" stroke-width="2.4" stroke-linecap="round"><path d="M334 60 h10 M339 55 v10"/></g>
+  <circle cx="339" cy="60" r="3" fill="#FFF7EC"/>
+</svg>

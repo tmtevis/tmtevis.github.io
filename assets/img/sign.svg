@@ -1,0 +1,25 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Layered 3D printed name sign">
+  <defs>
+    <linearGradient id="sg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ECE7FF"/><stop offset="1" stop-color="#8A6CFF"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#sg-bg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="2">
+    <path d="M0 48 Q100 32 200 48 T400 48"/><path d="M0 258 Q100 242 200 258 T400 258"/>
+  </g>
+  <g stroke="#221C3A" stroke-width="4" stroke-linecap="round"><path d="M120 40 V72"/><path d="M280 40 V72"/></g>
+  <circle cx="120" cy="40" r="6" fill="#FFF7EC" stroke="#221C3A" stroke-width="3"/>
+  <circle cx="280" cy="40" r="6" fill="#FFF7EC" stroke="#221C3A" stroke-width="3"/>
+  <rect x="78" y="86" width="244" height="34" rx="8" fill="#6A4BE0"/>
+  <rect x="70" y="72" width="260" height="150" rx="14" fill="#FFF7EC" stroke="#221C3A" stroke-width="4"/>
+  <g fill="#7A5CFF"><rect x="96" y="96" width="208" height="18" rx="9"/></g>
+  <g fill="#221C3A" opacity="0.86">
+    <rect x="110" y="132" width="180" height="16" rx="8"/>
+    <rect x="130" y="160" width="140" height="12" rx="6"/>
+  </g>
+  <g fill="#FF6A3D"><circle cx="200" cy="196" r="7"/></g>
+  <g fill="none" stroke="#8A6CFF" stroke-width="3" opacity="0.6"><path d="M84 210 H316"/></g>
+  <g stroke="#FFF7EC" stroke-width="2.4" stroke-linecap="round"><path d="M338 64 h10 M343 59 v10"/></g>
+  <circle cx="343" cy="64" r="3" fill="#FFF7EC"/>
+</svg>

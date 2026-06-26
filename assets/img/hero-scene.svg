@@ -1,0 +1,82 @@
+<svg viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A 3D printer building a topographic relief map layer by layer">
+  <defs>
+    <linearGradient id="hs-frame" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2E2748"/><stop offset="1" stop-color="#211B36"/>
+    </linearGradient>
+    <linearGradient id="hs-fil" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFB24D"/><stop offset="1" stop-color="#FF5E8A"/>
+    </linearGradient>
+    <radialGradient id="hs-glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#FFE08A" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#FFE08A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- soft backdrop glow -->
+  <ellipse cx="240" cy="210" rx="210" ry="150" fill="#FFFFFF" opacity="0.10"/>
+
+  <!-- base -->
+  <rect x="92" y="300" width="296" height="26" rx="9" fill="url(#hs-frame)"/>
+  <rect x="120" y="326" width="34" height="14" rx="5" fill="#1B162C"/>
+  <rect x="326" y="326" width="34" height="14" rx="5" fill="#1B162C"/>
+
+  <!-- gantry frame -->
+  <rect x="106" y="60" width="14" height="246" rx="6" fill="url(#hs-frame)"/>
+  <rect x="360" y="60" width="14" height="246" rx="6" fill="url(#hs-frame)"/>
+  <rect x="100" y="54" width="280" height="16" rx="7" fill="url(#hs-frame)"/>
+  <!-- X rail -->
+  <rect x="120" y="92" width="240" height="8" rx="4" fill="#3A335A"/>
+
+  <!-- filament spool -->
+  <circle cx="150" cy="138" r="30" fill="#FF6A3D"/>
+  <circle cx="150" cy="138" r="30" fill="none" stroke="#221C3A" stroke-width="4"/>
+  <circle cx="150" cy="138" r="9" fill="#FFF7EC" stroke="#221C3A" stroke-width="3"/>
+  <g fill="none" stroke="#FFC773" stroke-width="2" opacity="0.8">
+    <circle cx="150" cy="138" r="22"/><circle cx="150" cy="138" r="16"/>
+  </g>
+  <!-- filament thread to print head -->
+  <path d="M150 108 C150 84 150 80 175 80 C210 80 218 84 230 92" fill="none" stroke="url(#hs-fil)" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- print head carriage -->
+  <rect x="212" y="78" width="56" height="30" rx="6" fill="url(#hs-frame)"/>
+  <rect x="220" y="86" width="14" height="8" rx="2" fill="#12B5A5"/>
+  <circle cx="252" cy="92" r="3" fill="#FF6A3D"/>
+  <!-- nozzle -->
+  <path d="M230 108 L250 108 L242 124 L238 124 Z" fill="#4A4368"/>
+  <path d="M238 124 L242 124 L240 130 Z" fill="#FF6A3D"/>
+
+  <!-- glowing extrusion -->
+  <circle cx="240" cy="150" r="26" fill="url(#hs-glow)"/>
+  <path d="M240 130 L240 196" stroke="url(#hs-fil)" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
+  <path d="M240 130 L240 196" stroke="#FFD24D" stroke-width="2.4" stroke-linecap="round"/>
+
+  <!-- print bed -->
+  <rect x="158" y="276" width="164" height="12" rx="4" fill="#7FD9CC" stroke="#221C3A" stroke-width="4"/>
+  <rect x="236" y="288" width="8" height="14" fill="#3A335A"/>
+
+  <!-- topographic relief model: stacked contour terraces (printed bottom-up) -->
+  <g stroke="#221C3A" stroke-width="3.5" stroke-linejoin="round">
+    <ellipse cx="240" cy="270" rx="74" ry="14" fill="#FFF7EC"/>
+    <ellipse cx="240" cy="256" rx="60" ry="13" fill="#FFF1DD"/>
+    <ellipse cx="240" cy="242" rx="47" ry="12" fill="#FFE9C9"/>
+    <ellipse cx="238" cy="228" rx="34" ry="11" fill="#FFDFAE"/>
+  </g>
+  <!-- top terrace currently printing (dashed) -->
+  <ellipse cx="238" cy="214" rx="22" ry="9" fill="#FFD79A" stroke="#221C3A" stroke-width="3" stroke-dasharray="5 5"/>
+  <!-- layer lines -->
+  <g stroke="#FF8A3D" stroke-width="1.6" opacity="0.55">
+    <path d="M178 270 H302"/><path d="M186 256 H294"/><path d="M195 242 H285"/>
+  </g>
+  <!-- summit marker -->
+  <circle cx="238" cy="210" r="4" fill="#FF3D77"/>
+
+  <!-- diode sparks -->
+  <g stroke="#FFF7EC" stroke-width="2.6" stroke-linecap="round" opacity="0.95">
+    <path d="M356 150 h12 M362 144 v12"/>
+    <path d="M120 226 h10 M125 221 v10"/>
+    <path d="M330 226 h10 M335 221 v10"/>
+  </g>
+  <circle cx="362" cy="150" r="3.4" fill="#FFF7EC"/>
+  <circle cx="86" cy="120" r="4" fill="#FFD24D"/>
+  <circle cx="404" cy="250" r="4" fill="#FFD24D"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Laser-engraved Ohio keychain">
+  <defs>
+    <linearGradient id="kc-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFF3C9"/><stop offset="1" stop-color="#F5B400"/>
+    </linearGradient>
+    <clipPath id="kc-clip"><path d="M150 110 L236 110 L244 168 Q224 206 192 232 Q176 208 158 198 Q146 190 138 188 L138 150 Z"/></clipPath>
+  </defs>
+  <rect width="400" height="300" fill="url(#kc-bg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.2" stroke-width="2">
+    <path d="M0 52 Q100 36 200 52 T400 52"/><path d="M0 256 Q100 240 200 256 T400 256"/>
+  </g>
+  <circle cx="150" cy="88" r="20" fill="none" stroke="#7A5520" stroke-width="7"/>
+  <circle cx="150" cy="88" r="9" fill="none" stroke="#7A5520" stroke-width="4"/>
+  <path d="M150 110 L236 110 L244 168 Q224 206 192 232 Q176 208 158 198 Q146 190 138 188 L138 150 Z" fill="#8A5A1E" stroke="#5A3A12" stroke-width="4" stroke-linejoin="round"/>
+  <g clip-path="url(#kc-clip)" fill="none" stroke="#FFE7A8" stroke-width="2.6" opacity="0.85">
+    <path d="M130 130 Q190 118 252 138"/><path d="M134 158 Q190 146 244 166"/><path d="M142 186 Q186 176 224 192"/>
+  </g>
+  <circle cx="190" cy="150" r="6" fill="#FFD24D"/>
+  <g stroke="#FFFBE8" stroke-width="2.4" stroke-linecap="round"><path d="M320 70 h10 M325 65 v10"/></g>
+  <circle cx="325" cy="70" r="3" fill="#FFFBE8"/>
+</svg>

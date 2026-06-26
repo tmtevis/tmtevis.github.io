@@ -1,0 +1,24 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D printed topographic phone stand">
+  <defs>
+    <linearGradient id="ph-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFEEDA"/><stop offset="1" stop-color="#FF9A3D"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#ph-bg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2">
+    <path d="M0 50 Q100 34 200 50 T400 50"/><path d="M0 258 Q100 242 200 258 T400 258"/>
+  </g>
+  <ellipse cx="200" cy="232" rx="140" ry="24" fill="#FFFFFF" opacity="0.22"/>
+  <g transform="rotate(-12 200 150)">
+    <rect x="150" y="64" width="104" height="150" rx="16" fill="#FFF7EC" stroke="#221C3A" stroke-width="4"/>
+    <rect x="164" y="80" width="76" height="104" rx="6" fill="#9FE7DC"/>
+    <g fill="none" stroke="#2BB39E" stroke-width="2.6">
+      <path d="M166 110 Q202 98 238 112"/><path d="M166 132 Q202 120 238 134"/><path d="M166 154 Q202 142 238 156"/>
+    </g>
+    <circle cx="202" cy="198" r="6" fill="#FF6A3D"/>
+  </g>
+  <path d="M150 214 H300 L286 250 H164 Z" fill="#E0552B" stroke="#221C3A" stroke-width="4" stroke-linejoin="round"/>
+  <g stroke="#FFF7EC" stroke-width="3" opacity="0.7"><path d="M168 230 H282"/></g>
+  <g stroke="#FFF7EC" stroke-width="2.4" stroke-linecap="round"><path d="M330 66 h10 M335 61 v10"/></g>
+  <circle cx="335" cy="66" r="3" fill="#FFF7EC"/>
+</svg>

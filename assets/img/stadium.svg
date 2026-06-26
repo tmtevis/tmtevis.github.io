@@ -1,0 +1,24 @@
+<svg viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="3D printed game-day stadium replica">
+  <defs>
+    <linearGradient id="sd-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFE6EC"/><stop offset="1" stop-color="#FF5E8A"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="300" fill="url(#sd-bg)"/>
+  <g fill="none" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2">
+    <path d="M0 50 Q100 34 200 50 T400 50"/><path d="M0 256 Q100 240 200 256 T400 256"/>
+  </g>
+  <ellipse cx="200" cy="168" rx="156" ry="96" fill="#FFF7EC" stroke="#221C3A" stroke-width="4"/>
+  <ellipse cx="200" cy="168" rx="120" ry="68" fill="#E04E72"/>
+  <ellipse cx="200" cy="168" rx="84" ry="46" fill="#5BBF7B" stroke="#221C3A" stroke-width="3"/>
+  <g stroke="#FFF7EC" stroke-width="2.6" opacity="0.9">
+    <path d="M200 124 V212"/><ellipse cx="200" cy="168" rx="20" ry="12" fill="none"/>
+  </g>
+  <g stroke="#221C3A" stroke-width="2.4" opacity="0.45">
+    <path d="M200 100 V120"/><path d="M200 216 V236"/><path d="M62 168 H86"/><path d="M314 168 H338"/>
+  </g>
+  <g fill="#FFD24D"><circle cx="120" cy="110" r="4"/><circle cx="280" cy="110" r="4"/><circle cx="120" cy="226" r="4"/><circle cx="280" cy="226" r="4"/></g>
+  <path d="M200 96 V78" stroke="#221C3A" stroke-width="3"/><circle cx="200" cy="76" r="4" fill="#FF6A3D"/>
+  <g stroke="#FFF7EC" stroke-width="2.4" stroke-linecap="round"><path d="M338 70 h10 M343 65 v10"/></g>
+  <circle cx="343" cy="70" r="3" fill="#FFF7EC"/>
+</svg>
