@@ -263,6 +263,7 @@
       '</div>';
     }).join("");
     cartFoot.hidden = false;
+    initPayPal();
     var sub = cartSubtotal();
     $("#cartSubtotal").textContent = money(sub); $("#cartTotal").textContent = money(sub);
   }
@@ -371,12 +372,15 @@
     };
   }
 
+  var paypalReady = false;
   function initPayPal() {
+    if (paypalReady) return;
     if (!window.paypal) {
       var btn = $("#paypal-button-container");
       if (btn) btn.innerHTML = '<p style="font-size:.82rem;color:var(--muted);text-align:center;margin-top:6px">PayPal unavailable — contact us to complete your order.</p>';
       return;
     }
+    paypalReady = true;
     paypal.Buttons({
       style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'checkout', height: 48 },
       createOrder: function (data, actions) {
@@ -396,5 +400,5 @@
     }).render('#paypal-button-container');
   }
 
-  renderProducts(); wire(); observeReveals(); updateBadge(); renderCart(); initPayPal();
+  renderProducts(); wire(); observeReveals(); updateBadge(); renderCart();
 })();
