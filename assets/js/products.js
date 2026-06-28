@@ -16,11 +16,17 @@
      badge     optional ribbon, e.g. "Bestseller", "New", "Made to order"
      gallery   [ "ohio_1.jpg", ... ] — photos, shown in numerical order
      sizes     [ { id, label, note, addPrice } ]  (omit for one-size items)
-     colors    [ filamentKey, ... ] — keys into FILAMENTS (set by stock)
+     colors    [ filamentKey, ... ] — keys into FILAMENTS (the swatches you
+                  keep in stock). Shown on the product as a drop-down menu.
+                  ORDER MATTERS: the FIRST key is the default selection, so
+                  list the color shown in the photo / that you have on hand
+                  first. Omit on madeToOrder items (see below).
      madeToOrder  true => QUOTE-ONLY. The item is NOT directly purchasable:
                   the card + pop-up hide the price and show a "Request a
                   quote" button that sends the customer to the contact form
                   (api.CONTACT_URL). Use for any custom / commissioned piece.
+                  Do NOT give these a `colors` list — color is settled during
+                  the quote, so no color picker is shown.
    ===================================================================== */
 
 (function (root) {
@@ -36,19 +42,24 @@
 
   /* ---- Category registry (label + accent CSS var) ---- */
   var CATEGORIES = {
-    maps:        { label: "Maps",        accent: "var(--c-maps)" },
-    signs:       { label: "Signs",       accent: "var(--c-signs)" },
-    accessories: { label: "Accessories", accent: "var(--c-accessories)" },
-    statues:     { label: "Statues",     accent: "var(--c-statues)" },
-    lasercraft:  { label: "Lasercraft",  accent: "var(--c-lasercraft)" }
+    maps:    { label: "Maps",        accent: "var(--c-maps)" },
+    statues: { label: "Statues",     accent: "var(--c-statues)" },
+    custom:  { label: "Custom Work", accent: "var(--c-custom)" }
   };
 
-  /* ---- Filament swatches Tyler keeps in stock ---- */
-  /* hex drives the swatch dot; `var` points at a token for brand colors  */
+  /* ---- Filament stock — the SINGLE source of truth for colors ----
+     One entry per color you keep on hand. Fields:
+       label     name shown in the color drop-down
+       hex       the swatch-dot color. This is the ONLY place colors live —
+                 there is nothing in the CSS to keep in sync anymore.
+       addPrice  OPTIONAL upcharge for a premium filament. When set, the
+                 drop-down shows e.g. "Scarlet Red + $4.00" and that amount
+                 is added to the item's price in the cart. Omit for no upcharge.
+     Restock / retire colors by editing this one list. */
   var FILAMENTS = {
     bone:      { label: "Bone White",   hex: "#ECE6DA" },
     charcoal:  { label: "Charcoal",     hex: "#2D2A33" },
-    buckeye:   { label: "Buckeye Red",  hex: "#B5341F" },
+    scarlet:   { label: "Scarlet Red",  hex: "#B5341F", addPrice: 4 },
     tangerine: { label: "Tangerine",    hex: "#FF6A3D" },
     marigold:  { label: "Marigold",     hex: "#F5B400" },
     forest:    { label: "Forest Green", hex: "#2E7D5B" },
@@ -82,7 +93,7 @@
         { id: "6in", label: '6"', note: "Framed, ~6 in", addPrice: 0 },
         { id: "8in", label: '8"', note: "Framed, ~8 in", addPrice: 18 }
       ],
-      colors: ["bone", "buckeye", "charcoal", "marble"]
+      colors: ["bone", "scarlet", "charcoal", "marble"]
     },
     {
       id: "TDD-CLE-02", slug: "cleveland", name: "Cleveland Skyline Relief",
@@ -108,25 +119,24 @@
     },
     {
       id: "TDD-NBHD-04", slug: "neighborhood", name: "Custom Neighborhood Street Map",
-      category: "maps", price: 34,
+      category: "custom", price: 34,
       blurb: "Your streets, two-tone and laser-clean.",
       desc: "Send us an address and we'll render the surrounding streets, blocks, and waterways as a crisp two-tone plaque. A first home, a hometown, a favorite trail town — pick the two colors and we print it to order.",
       gallery: g("neighborhood", 1),
-      madeToOrder: true,
-      colors: ["bone", "charcoal", "buckeye", "lake", "forest"]
+      madeToOrder: true
     },
     {
       id: "TDD-OSU-05", slug: "osu", name: 'Ohio Stadium "Horseshoe" Replica',
-      category: "statues", price: 48, badge: "Game day",
+      category: "maps", price: 48, badge: "Game day",
       blurb: "The Horseshoe in miniature, every section in relief.",
       desc: "The Shoe, scaled down to your shelf — stands, tunnel, and surrounding campus printed in fine detail on a framed base. The desk trophy for anyone who bleeds scarlet and gray.",
       gallery: g("osu", 1),
       sizes: SIZE_4_6,
-      colors: ["bone", "buckeye", "marble"]
+      colors: ["bone", "scarlet", "marble"]
     },
     {
       id: "TDD-BRN-06", slug: "browns-stadium", name: "Huntington Bank Field Replica",
-      category: "statues", price: 48,
+      category: "maps", price: 48,
       blurb: "Huntington Bank Field — the lakefront house of the Browns.",
       desc: "A miniature of Huntington Bank Field on the Cleveland lakefront, home of the Browns — bowl, stands, and concourse 3D printed in fine relief on a framed base. Pick your colors for game-day pride that lives on the shelf all season long.",
       gallery: g("browns-stadium", 1),
@@ -135,16 +145,16 @@
     },
     {
       id: "TDD-PRG-07", slug: "progressive-field", name: "Progressive Field Replica",
-      category: "statues", price: 48,
+      category: "maps", price: 48,
       blurb: "Progressive Field — home of the Cleveland Guardians.",
       desc: "Progressive Field in 3D-printed relief — the grandstands, the diamond, and the downtown block it sits on, mounted on a framed base. The home-opener gift for the Guardians fan who has everything.",
       gallery: g("progressive-field", 1),
       sizes: SIZE_4_6,
-      colors: ["bone", "buckeye", "marble"]
+      colors: ["bone", "scarlet", "marble"]
     },
     {
       id: "TDD-GRD-08", slug: "guardian-bowl", name: "Guardian Catch-All Bowl",
-      category: "accessories", price: 28, badge: "New",
+      category: "statues", price: 28, badge: "New",
       blurb: "An Art-Deco guardian holding a tray for your keys.",
       desc: "Inspired by Cleveland's stone Guardians of Traffic, this winged sentinel cradles a little bowl perfect for keys, coins, rings, and the daily pocket dump. Equal parts statue and entryway helper.",
       gallery: g("guardian-bowl", 2),
@@ -164,29 +174,26 @@
     },
     {
       id: "TDD-FACE-10", slug: "half_face-scan", name: "Half-Face Anatomy Bust",
-      category: "statues", price: 40, madeToOrder: true,
+      category: "custom", price: 40, madeToOrder: true,
       blurb: "A portrait peeled back to the skull, half and half.",
       desc: "One side a calm sculpted face, the other the bone beneath it. Printed in a smooth two-tone finish that makes the anatomy pop. A bold little memento mori for the desk, the studio, or the spooky shelf.",
-      gallery: [IMG + "half_face-scan.jpg"],
-      colors: ["bone", "graphite", "charcoal"]
+      gallery: [IMG + "half_face-scan.jpg"]
     },
     {
       id: "TDD-CTRL-12", slug: "controller", name: "Custom Design & Print Service",
-      category: "accessories", price: 26,
+      category: "custom", price: 26,
       blurb: "Got a part or gadget in mind? We model it and print it.",
       desc: "Need something that doesn't exist yet? Send us your idea — a snap-fit enclosure for a circuit board, a replacement part, a bracket, a prototype, a one-off gadget — and we'll model it, 3D print it, and finish it. The enclosure pictured is just one example of what's possible. Tell us what you're after and we'll send a quote.",
       gallery: g("controller", 2),
-      madeToOrder: true,
-      colors: ["tangerine", "charcoal", "buckeye", "forest", "lake", "bone"]
+      madeToOrder: true
     },
     {
       id: "TDD-AWRD-13", slug: "custom_award", name: "Custom Awards",
-      category: "signs", price: 36, badge: "Made to order",
+      category: "custom", price: 36, badge: "Made to order",
       blurb: "3D-printed keepsakes and awards for lodges, clubs, and companies.",
       desc: "Commemorative awards and recognition pieces in a carved-stone finish — your crest, your dates, your wording. Pictured: a run for a Masonic lodge. Great for clubs, teams, retirements, and any milestone worth keeping on a desk.",
       gallery: [IMG + "custom_award.jpg"],
-      madeToOrder: true,
-      colors: ["marble", "bone", "graphite"]
+      madeToOrder: true
     }
   ];
 

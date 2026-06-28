@@ -28,19 +28,29 @@
 
   var $ = function (s, c) { return (c || document).querySelector(s); };
   function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); }
-  function isLight(hex) { var h = hex.replace("#", ""); return (0.299 * parseInt(h.substr(0,2),16) + 0.587 * parseInt(h.substr(2,2),16) + 0.114 * parseInt(h.substr(4,2),16)) > 150; }
 
   /* --------------------------- Favorites --------------------------- */
   var favs = {};
 
   /* ----------------------- Render product grid --------------------- */
   var grid = $("#productGrid");
-  function unitPrice(p, sizeId) {
-    if (!p.sizes) return p.price;
-    var s = p.sizes.filter(function (x) { return x.id === sizeId; })[0] || p.sizes[0];
-    return p.price + (s.addPrice || 0);
+  function filamentAdd(colorKey) {
+    var f = colorKey && FILAMENTS[colorKey];
+    return (f && f.addPrice) || 0;
+  }
+  function unitPrice(p, sizeId, colorKey) {
+    var price = p.price;
+    if (p.sizes) {
+      var s = p.sizes.filter(function (x) { return x.id === sizeId; })[0] || p.sizes[0];
+      price += (s.addPrice || 0);
+    }
+    return price + filamentAdd(colorKey);
   }
   function hasOptions(p) { return !!(p.sizes || (p.colors && p.colors.length > 1)); }
+  /* Whether the price can rise from the base (sizes, or an upcharged color) — drives the "$NN +" hint. */
+  function hasUpcharge(p) {
+    return !!(p.sizes || (p.colors && p.colors.some(function (k) { return filamentAdd(k) > 0; })));
+  }
 
   function renderProducts() {
     grid.innerHTML = PRODUCTS.map(function (p, i) {
@@ -62,7 +72,7 @@
             (p.madeToOrder
               ? '<span class="product-card__price product-card__price--quote">By quote</span>' +
                 '<a class="add-btn add-btn--quote" href="' + QUOTE_URL + '" target="_blank" rel="noopener">' + I.mail + ' Request a quote</a>'
-              : '<span class="product-card__price">$' + d + '<small>.' + c + (p.sizes ? ' +' : '') + '</small></span>' +
+              : '<span class="product-card__price">$' + d + '<small>.' + c + (hasUpcharge(p) ? ' +' : '') + '</small></span>' +
                 '<button class="add-btn" type="button" data-add="' + p.id + '">' + (hasOptions(p) ? I.search + ' Options' : I.plus + ' Add') + '</button>'
             ) +
           '</div>' +
@@ -106,7 +116,7 @@
   function renderQuickView() {
     var p = qvState.product; if (!p) return;
     var cat = CATEGORIES[p.category];
-    var unit = unitPrice(p, qvState.size), total = unit * qvState.qty;
+    var unit = unitPrice(p, qvState.size, qvState.color), total = unit * qvState.qty;
 
     var gallery = '<div class="gallery__main">' +
         '<img src="' + p.gallery[qvState.gi] + '" alt="' + esc(p.name) + '" />' +
@@ -120,12 +130,19 @@
       }).join("") + '</div>' : '');
 
     var colors = (p.colors && p.colors.length) ? (function () {
-      var sel = FILAMENTS[qvState.color];
-      return '<div><div class="qv__opt-label"><span>Color</span><small>' + esc(sel ? sel.label : "") + '</small></div>' +
-        '<div class="swatches">' + p.colors.map(function (k) {
-          var f = FILAMENTS[k], light = isLight(f.hex);
-          return '<button class="swatch' + (light ? ' is-light' : '') + (k === qvState.color ? ' is-on' : '') + '" data-color="' + k + '" title="' + esc(f.label) + '" aria-label="' + esc(f.label) + '" style="background:' + f.hex + '"></button>';
-        }).join("") + '</div></div>';
+      var sel = FILAMENTS[qvState.color] || FILAMENTS[p.colors[0]];
+      return '<div><div class="qv__opt-label"><span>Color</span></div>' +
+        '<div class="color-select">' +
+          '<span class="color-select__dot" style="background:' + (sel ? sel.hex : "#ccc") + '"></span>' +
+          '<select class="color-select__input" data-color-select aria-label="Choose a color">' +
+            p.colors.map(function (k) {
+              var f = FILAMENTS[k]; if (!f) return "";
+              var up = f.addPrice ? " + " + money(f.addPrice) : "";
+              return '<option value="' + k + '"' + (k === qvState.color ? " selected" : "") + '>' + esc(f.label + up) + '</option>';
+            }).join("") +
+          '</select>' +
+          '<svg class="color-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' +
+        '</div></div>';
     })() : '';
 
     var sizes = p.sizes ? (function () {
@@ -146,8 +163,7 @@
             (p.badge ? '<span class="pc-badge" style="position:static">' + esc(p.badge) + '</span>' : '') + '</div>' +
           '<div><h2 class="qv__title">' + esc(p.name) + '</h2><p class="qv__desc">' + esc(p.desc) + '</p></div>' +
           (p.madeToOrder
-            ? colors +
-              '<div class="qv__foot" style="margin-top:6px">' +
+            ? '<div class="qv__foot" style="margin-top:6px">' +
                 '<a class="btn btn--primary btn--lg btn--block" href="' + QUOTE_URL + '" target="_blank" rel="noopener" style="text-decoration:none">' + I.mail + ' Request a quote</a>' +
                 '<p class="qv__ship">' + I.sparkle + " Made to order — send us the details on our contact form and we'll reply with a quote and timing." + '</p>' +
               '</div>'
@@ -181,7 +197,7 @@
   function saveCart() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {} }
   function lineKey(id, size, color) { return id + "|" + (size || "") + "|" + (color || ""); }
   function cartCount() { return cart.reduce(function (n, e) { return n + e.qty; }, 0); }
-  function lineUnit(e) { return unitPrice(byId(e.id), e.size); }
+  function lineUnit(e) { return unitPrice(byId(e.id), e.size, e.color); }
   function cartSubtotal() { return cart.reduce(function (s, e) { return s + lineUnit(e) * e.qty; }, 0); }
 
   function addToCart(id, size, color, qty) {
@@ -269,10 +285,13 @@
       if (t.closest("#qvClose")) return closeQuickView();
       var gnav = t.closest("[data-gnav]"); if (gnav) { var n = qvState.product.gallery.length; qvState.gi = (qvState.gi + parseInt(gnav.dataset.gnav, 10) + n) % n; return renderQuickView(); }
       var gthumb = t.closest("[data-gthumb]"); if (gthumb) { qvState.gi = parseInt(gthumb.dataset.gthumb, 10); return renderQuickView(); }
-      var col = t.closest("[data-color]"); if (col) { qvState.color = col.dataset.color; return renderQuickView(); }
       var sz = t.closest("[data-size]"); if (sz) { qvState.size = sz.dataset.size; return renderQuickView(); }
       var q = t.closest("[data-qty]"); if (q) { qvState.qty = Math.max(1, Math.min(99, qvState.qty + parseInt(q.dataset.qty, 10))); return renderQuickView(); }
       if (t.closest("#qvAdd")) return qvAddToCart();
+    });
+    qvRoot.addEventListener("change", function (e) {
+      var sel = e.target.closest("[data-color-select]");
+      if (sel) { qvState.color = sel.value; renderQuickView(); }
     });
     qvOverlay.addEventListener("click", function (e) { if (e.target === qvOverlay) closeQuickView(); });
 
