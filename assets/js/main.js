@@ -352,13 +352,13 @@
     var total = cartSubtotal();
     var summary = cart.map(function (e) {
       var p = byId(e.id), vl = variantLabel(e);
-      return p.name + (vl ? ‘ (‘ + vl + ‘)’ : ‘’) + ‘ x’ + e.qty;
-    }).join(‘, ‘);
+      return p.name + (vl ? " (" + vl + ")" : "") + " x" + e.qty;
+    }).join(", ");
     return {
       purchase_units: [{
         description: summary.substring(0, 127),
-        custom_id: cart.map(function (e) { return e.id + ‘x’ + e.qty; }).join(‘,’).substring(0, 127),
-        amount: { value: total.toFixed(2), currency_code: ‘USD’ }
+        custom_id: cart.map(function (e) { return e.id + "x" + e.qty; }).join(",").substring(0, 127),
+        amount: { value: total.toFixed(2), currency_code: "USD" }
       }]
     };
   }
