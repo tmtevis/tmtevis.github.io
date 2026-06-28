@@ -213,13 +213,15 @@ We'll ship to you anywhere in the U.S. — shipping's calculated at checkout. Or
       <div class="cart__row"><span>Subtotal</span><span id="cartSubtotal" class="font-mono">$0.00</span></div>
       <div class="cart__row" style="font-size:.82rem"><span>Shipping &amp; pickup</span><span style="color:var(--muted)">Arranged after checkout</span></div>
       <div class="cart__row total"><span>Amount due</span><span id="cartTotal">$0.00</span></div>
-      <button class="btn btn--primary btn--block btn--lg" style="margin-top:10px" onclick="alert('Demo checkout — the live storefront wires this to PayPal / Venmo / card.')">Checkout</button>
-      <p class="cart__hint">Secure checkout by <strong>PayPal</strong>, Venmo, or card. After payment we'll email you to arrange shipping or local pickup.</p>
+      <div id="paypal-button-container" style="margin-top:10px"></div>
+      <p class="cart__hint">Checkout securely via <strong>PayPal</strong> or Venmo. After payment we'll reach out to arrange shipping or local pickup.</p>
     </div>
   </aside>
 
   <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
 
+  <!-- PayPal JS SDK — components=buttons for dynamic cart checkout -->
+  <script src="https://www.paypal.com/sdk/js?client-id=BAATiSTB_Fkb1J2JpXPMhGOEoe-hwoU1YCuRs1W9RoS-DfvUlcFSW0C0ESziaGeGXa2c1oQwaYuBjxugXY&components=buttons&enable-funding=venmo&currency=USD&intent=capture"></script>
   <script src="assets/js/products.js"></script>
   <script src="assets/js/main.js"></script>
 </body>

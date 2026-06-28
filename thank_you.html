@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Received — Tyler's Diode Designs</title>
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <style>
+    .ty-section {
+      min-height: calc(100vh - var(--header-h) - 180px);
+      display: flex;
+      align-items: center;
+      padding: clamp(48px, 9vw, 96px) 0;
+    }
+    .ty-card {
+      background: var(--paper-2);
+      border: var(--border-card);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-lg);
+      padding: clamp(36px, 7vw, 72px) clamp(28px, 6vw, 64px);
+      max-width: 640px;
+      margin-inline: auto;
+      text-align: center;
+    }
+    .ty-icon {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #12B5A5 0%, #16D4C2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 28px;
+      box-shadow: 0 10px 28px rgba(18, 181, 165, 0.35);
+    }
+    .ty-icon svg { width: 36px; height: 36px; color: #fff; }
+    .ty-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--teal); font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .ty-eyebrow::before { content: ""; width: 26px; height: 2px; border-radius: 2px; background: linear-gradient(90deg, #12B5A5, #16D4C2); }
+    .ty-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 2.9rem);
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    .ty-lead {
+      font-size: 1.06rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 32px;
+    }
+    .ty-steps {
+      background: rgba(34, 28, 58, 0.04);
+      border: 1.5px solid var(--line);
+      border-radius: var(--r-lg);
+      padding: 24px 28px;
+      margin-bottom: 32px;
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .ty-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .ty-step__num {
+      flex: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--grad-sunset);
+      color: #2A1124;
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+    }
+    .ty-step__body h4 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .ty-step__body p {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+    .ty-txn {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      background: rgba(34, 28, 58, 0.05);
+      border-radius: var(--r-sm);
+      padding: 10px 16px;
+      margin-bottom: 32px;
+      letter-spacing: 0.05em;
+      word-break: break-all;
+    }
+    .ty-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header" id="home">
+    <div class="container site-header__inner">
+      <a class="brand" href="index.html" aria-label="Tyler's Diode Designs — home">
+        <img class="brand__logo" src="assets/img/logo.svg" alt="" width="46" height="46" />
+        <span class="brand__name">Tyler's Diode Designs<small>A spinoff of TES, LLC</small></span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <section class="ty-section">
+      <div class="container">
+        <div class="ty-card">
+
+          <div class="ty-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"/>
+            </svg>
+          </div>
+
+          <span class="ty-eyebrow">Payment confirmed</span>
+          <h1 class="ty-title">Order received — <span class="squiggle">thanks!</span></h1>
+          <p class="ty-lead">Your PayPal payment went through and your order is officially in the queue. Here's what happens next:</p>
+
+          <div class="ty-steps" role="list">
+            <div class="ty-step" role="listitem">
+              <span class="ty-step__num">1</span>
+              <div class="ty-step__body">
+                <h4>Confirmation email on its way</h4>
+                <p>PayPal will send a receipt to your email. Keep it — it has your transaction ID.</p>
+              </div>
+            </div>
+            <div class="ty-step" role="listitem">
+              <span class="ty-step__num">2</span>
+              <div class="ty-step__body">
+                <h4>We'll reach out to arrange fulfillment</h4>
+                <p>Expect a message from us within 1–2 business days to confirm shipping or coordinate local pickup.</p>
+              </div>
+            </div>
+            <div class="ty-step" role="listitem">
+              <span class="ty-step__num">3</span>
+              <div class="ty-step__body">
+                <h4>We print, finish, and ship</h4>
+                <p>Your piece is printed to order right here in Ohio — handfinished and packed before it heads your way.</p>
+              </div>
+            </div>
+          </div>
+
+          <p id="txnLine" class="ty-txn" hidden></p>
+
+          <div class="ty-actions">
+            <a class="btn btn--primary btn--lg" href="index.html#shop">Back to the Shop</a>
+            <a class="btn btn--ghost btn--lg" href="index.html#contact">Contact Us</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contact">
+    <div class="container">
+      <div class="footer__grid">
+        <div class="footer__brand">
+          <a class="brand" href="index.html" aria-label="Tyler's Diode Designs — home">
+            <img class="brand__logo" src="assets/img/logo.svg" alt="" width="44" height="44" />
+            <span class="brand__name">Tyler's Diode Designs</span>
+          </a>
+          <p>Specialized 3D printed maps, statues, accessories &amp; custom work — designed and made in Ohio.</p>
+        </div>
+        <div class="footer__col"><h4>Shop</h4><ul>
+          <li><a href="index.html#shop">3D Printed Maps</a></li>
+          <li><a href="index.html#shop">Statues</a></li>
+          <li><a href="index.html#shop">Custom Work</a></li>
+        </ul></div>
+        <div class="footer__col"><h4>Studio</h4><ul>
+          <li><a href="index.html#about">About</a></li>
+          <li><a href="index.html#custom">Custom Orders</a></li>
+          <li><a href="https://tevisengineering.com" target="_blank" rel="noopener">TES, LLC</a></li>
+        </ul></div>
+        <div class="footer__col footer__contact"><h4>Contact</h4><ul>
+          <li><a href="index.html#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg> Custom quotes &amp; contact</a></li>
+          <li><span style="display:flex;gap:10px;align-items:center;color:#ADA5C6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:17px;height:17px;color:var(--amber);flex:none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg> Ohio, USA</span></li>
+        </ul></div>
+      </div>
+      <div class="footer__bottom">
+        <span>© <span id="year"></span> Tyler's Diode Designs — a spinoff of TES, LLC. All rights reserved.</span>
+        <span class="font-mono">// precision printed in ohio</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Surface PayPal transaction ID if present in the URL (PayPal appends ?tx=... on return)
+    const params = new URLSearchParams(window.location.search);
+    const tx = params.get('tx') || params.get('txn_id');
+    if (tx) {
+      const el = document.getElementById('txnLine');
+      el.textContent = 'PayPal transaction ID: ' + tx;
+      el.hidden = false;
+    }
+  </script>
+
+</body>
+</html>

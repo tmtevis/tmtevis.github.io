@@ -70,6 +70,18 @@
     marble:    { label: "Marble",       hex: "#E9E6E1" }
   };
 
+  /* ---- Background paper colors — for products with a paper backing ----
+     Shiny construction paper available as frame backgrounds.
+     First key = default selection. No addPrice — included in base price. */
+  var BACKGROUNDS = {
+    blue:  { label: "Blue",   hex: "#1A56B0" },
+    red:   { label: "Red",    hex: "#C0392B" },
+    black: { label: "Black",  hex: "#1A1A1A" },
+    white: { label: "White",  hex: "#F5F5F0" },
+    green: { label: "Green",  hex: "#2E7D32" },
+    gold:  { label: "Gold",   hex: "#F9A825" }
+  };
+
   /* ---- Reusable size presets ---- */
   var SIZE_4_6 = [
     { id: "4in", label: '4"', note: "Palm-sized, ~4 in wide", addPrice: 0 },
@@ -85,7 +97,7 @@
   var PRODUCTS = [
     {
       id: "TDD-OH-01", slug: "ohio", name: "Ohio Topographic Relief Map",
-      category: "maps", price: 42, badge: "Bestseller",
+      category: "maps", price: 40, badge: "Bestseller",
       blurb: "The whole Buckeye State in layered elevation, framed and ready to hang.",
       desc: "Every ridge and river valley of Ohio, rendered from real elevation data and printed in crisp relief. Comes matted in a black shadow-box frame so it lands ready for the wall or the shelf the day it arrives.",
       gallery: g("ohio", 4),
@@ -93,7 +105,8 @@
         { id: "6in", label: '6"', note: "Framed, ~6 in", addPrice: 0 },
         { id: "8in", label: '8"', note: "Framed, ~8 in", addPrice: 18 }
       ],
-      colors: ["bone", "scarlet", "charcoal", "marble"]
+      colors: ["bone", "lake", "scarlet", "charcoal", "marble"],
+      bgColors: ["blue", "red", "black", "white", "green", "gold"]
     },
     {
       id: "TDD-CLE-02", slug: "cleveland", name: "Cleveland Skyline Relief",
@@ -200,6 +213,7 @@
   var api = {
     CATEGORIES: CATEGORIES,
     FILAMENTS: FILAMENTS,
+    BACKGROUNDS: BACKGROUNDS,
     PRODUCTS: PRODUCTS,
     CONTACT_URL: CONTACT_URL,
     byId: function (id) { return PRODUCTS.filter(function (p) { return p.id === id; })[0]; },

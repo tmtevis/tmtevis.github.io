@@ -7,7 +7,7 @@
 (function () {
   "use strict";
   var T = window.TDD;
-  var CATEGORIES = T.CATEGORIES, FILAMENTS = T.FILAMENTS, PRODUCTS = T.PRODUCTS;
+  var CATEGORIES = T.CATEGORIES, FILAMENTS = T.FILAMENTS, BACKGROUNDS = T.BACKGROUNDS, PRODUCTS = T.PRODUCTS;
   var byId = T.byId, money = T.money;
   var QUOTE_URL = T.CONTACT_URL || "https://tevisengineering.com/contact.html";
 
@@ -46,7 +46,7 @@
     }
     return price + filamentAdd(colorKey);
   }
-  function hasOptions(p) { return !!(p.sizes || (p.colors && p.colors.length > 1)); }
+  function hasOptions(p) { return !!(p.sizes || (p.colors && p.colors.length > 1) || (p.bgColors && p.bgColors.length > 0)); }
   /* Whether the price can rise from the base (sizes, or an upcharged color) — drives the "$NN +" hint. */
   function hasUpcharge(p) {
     return !!(p.sizes || (p.colors && p.colors.some(function (k) { return filamentAdd(k) > 0; })));
@@ -97,13 +97,14 @@
 
   /* ========================= QUICK-VIEW =========================== */
   var qvOverlay = $("#qvOverlay"), qvRoot = $("#qv");
-  var qvState = { product: null, gi: 0, size: null, color: null, qty: 1 };
+  var qvState = { product: null, gi: 0, size: null, color: null, bgColor: null, qty: 1 };
 
   function openQuickView(id) {
     var p = byId(id); if (!p) return;
     qvState = { product: p, gi: 0, qty: 1,
       size: p.sizes ? p.sizes[0].id : null,
-      color: (p.colors && p.colors.length) ? p.colors[0] : null };
+      color: (p.colors && p.colors.length) ? p.colors[0] : null,
+      bgColor: (p.bgColors && p.bgColors.length) ? p.bgColors[0] : null };
     renderQuickView();
     qvOverlay.classList.add("is-open");
     document.body.style.overflow = "hidden";
@@ -145,6 +146,21 @@
         '</div></div>';
     })() : '';
 
+    var bgColors = (p.bgColors && p.bgColors.length) ? (function () {
+      var sel = BACKGROUNDS[qvState.bgColor] || BACKGROUNDS[p.bgColors[0]];
+      return '<div><div class="qv__opt-label"><span>Background</span></div>' +
+        '<div class="color-select">' +
+          '<span class="color-select__dot" style="background:' + (sel ? sel.hex : "#ccc") + '"></span>' +
+          '<select class="color-select__input" data-bg-color-select aria-label="Choose a background color">' +
+            p.bgColors.map(function (k) {
+              var bg = BACKGROUNDS[k]; if (!bg) return "";
+              return '<option value="' + k + '"' + (k === qvState.bgColor ? " selected" : "") + '>' + esc(bg.label) + '</option>';
+            }).join("") +
+          '</select>' +
+          '<svg class="color-select__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' +
+        '</div></div>';
+    })() : '';
+
     var sizes = p.sizes ? (function () {
       var selS = p.sizes.filter(function (s) { return s.id === qvState.size; })[0];
       return '<div><div class="qv__opt-label"><span>' + esc(p.sizeLabel || "Size") + '</span><small>' + esc(selS ? selS.note : "") + '</small></div>' +
@@ -167,7 +183,7 @@
                 '<a class="btn btn--primary btn--lg btn--block" href="' + QUOTE_URL + '" target="_blank" rel="noopener" style="text-decoration:none">' + I.mail + ' Request a quote</a>' +
                 '<p class="qv__ship">' + I.sparkle + " Made to order — send us the details on our contact form and we'll reply with a quote and timing." + '</p>' +
               '</div>'
-            : colors + sizes +
+            : colors + bgColors + sizes +
               '<div class="qv__qty-row"><span>Quantity</span>' +
                 '<div class="qty"><button type="button" data-qty="-1" aria-label="Decrease">−</button><span>' + qvState.qty + '</span><button type="button" data-qty="1" aria-label="Increase">+</button></div></div>' +
               '<div class="qv__foot">' +
@@ -182,7 +198,7 @@
 
   function qvAddToCart() {
     var p = qvState.product;
-    addToCart(p.id, qvState.size, qvState.color, qvState.qty);
+    addToCart(p.id, qvState.size, qvState.color, qvState.bgColor, qvState.qty);
     var btn = $("#qvAdd");
     btn.innerHTML = I.check + " Added!";
     btn.style.background = "var(--teal)"; btn.style.color = "#06302b"; btn.style.boxShadow = "none";
@@ -195,25 +211,25 @@
   var cart = loadCart();
   function loadCart() { try { var r = localStorage.getItem(STORAGE_KEY); var a = r ? JSON.parse(r) : []; return Array.isArray(a) ? a.filter(function (e) { return e && byId(e.id) && e.qty > 0; }) : []; } catch (e) { return []; } }
   function saveCart() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {} }
-  function lineKey(id, size, color) { return id + "|" + (size || "") + "|" + (color || ""); }
+  function lineKey(id, size, color, bgColor) { return id + "|" + (size || "") + "|" + (color || "") + "|" + (bgColor || ""); }
   function cartCount() { return cart.reduce(function (n, e) { return n + e.qty; }, 0); }
   function lineUnit(e) { return unitPrice(byId(e.id), e.size, e.color); }
   function cartSubtotal() { return cart.reduce(function (s, e) { return s + lineUnit(e) * e.qty; }, 0); }
 
-  function addToCart(id, size, color, qty) {
+  function addToCart(id, size, color, bgColor, qty) {
     qty = qty || 1;
-    var key = lineKey(id, size, color);
-    var line = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) === key; })[0];
-    if (line) line.qty += qty; else cart.push({ id: id, size: size, color: color, qty: qty });
+    var key = lineKey(id, size, color, bgColor);
+    var line = cart.filter(function (e) { return lineKey(e.id, e.size, e.color, e.bgColor) === key; })[0];
+    if (line) line.qty += qty; else cart.push({ id: id, size: size, color: color, bgColor: bgColor, qty: qty });
     saveCart(); updateBadge(); renderCart();
   }
   function setQty(key, qty) {
-    var line = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) === key; })[0];
+    var line = cart.filter(function (e) { return lineKey(e.id, e.size, e.color, e.bgColor) === key; })[0];
     if (!line) return; line.qty = qty;
-    if (line.qty <= 0) cart = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) !== key; });
+    if (line.qty <= 0) cart = cart.filter(function (e) { return lineKey(e.id, e.size, e.color, e.bgColor) !== key; });
     saveCart(); updateBadge(); renderCart();
   }
-  function removeFromCart(key) { cart = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) !== key; }); saveCart(); updateBadge(); renderCart(); }
+  function removeFromCart(key) { cart = cart.filter(function (e) { return lineKey(e.id, e.size, e.color, e.bgColor) !== key; }); saveCart(); updateBadge(); renderCart(); }
 
   var cartCountEl = $("#cartCount"), cartHeadCount = $("#cartHeadCount"), cartItemsEl = $("#cartItems"), cartFoot = $("#cartFoot");
   function updateBadge() { var n = cartCount(); cartCountEl.textContent = n; cartCountEl.classList.toggle("is-active", n > 0); if (cartHeadCount) cartHeadCount.textContent = n ? "(" + n + ")" : ""; }
@@ -222,6 +238,7 @@
     var bits = [];
     if (e.size) { var p = byId(e.id); var s = p.sizes && p.sizes.filter(function (x) { return x.id === e.size; })[0]; if (s) bits.push(s.label); }
     if (e.color && FILAMENTS[e.color]) bits.push(FILAMENTS[e.color].label);
+    if (e.bgColor && BACKGROUNDS && BACKGROUNDS[e.bgColor]) bits.push(BACKGROUNDS[e.bgColor].label + " bg");
     return bits.join(" · ");
   }
 
@@ -234,7 +251,7 @@
       return;
     }
     cartItemsEl.innerHTML = cart.map(function (e) {
-      var p = byId(e.id), key = lineKey(e.id, e.size, e.color), unit = lineUnit(e), vl = variantLabel(e);
+      var p = byId(e.id), key = lineKey(e.id, e.size, e.color, e.bgColor), unit = lineUnit(e), vl = variantLabel(e);
       return '<div class="cart-item" data-key="' + key + '">' +
         '<div class="cart-item__img"><img src="' + p.gallery[0] + '" alt="" /></div>' +
         '<div><div class="cart-item__name">' + esc(p.name) + '</div>' +
@@ -275,7 +292,7 @@
       if (fav) { var id = fav.dataset.fav; favs[id] = !favs[id]; fav.classList.toggle("is-on", favs[id]); return; }
       if (add) { var pid = add.dataset.add, p = byId(pid);
         if (hasOptions(p)) { openQuickView(pid); }
-        else { addToCart(pid, null, p.colors && p.colors[0], 1); add.classList.add("is-added"); add.innerHTML = I.check + " Added"; showToast(p.name + " added to cart"); setTimeout(function () { add.classList.remove("is-added"); add.innerHTML = I.plus + " Add"; }, 1300); }
+        else { addToCart(pid, null, p.colors && p.colors[0], p.bgColors && p.bgColors[0], 1); add.classList.add("is-added"); add.innerHTML = I.check + " Added"; showToast(p.name + " added to cart"); setTimeout(function () { add.classList.remove("is-added"); add.innerHTML = I.plus + " Add"; }, 1300); }
         return; }
       if (open) openQuickView(open.dataset.open);
     });
@@ -292,6 +309,8 @@
     qvRoot.addEventListener("change", function (e) {
       var sel = e.target.closest("[data-color-select]");
       if (sel) { qvState.color = sel.value; renderQuickView(); }
+      var bgSel = e.target.closest("[data-bg-color-select]");
+      if (bgSel) { qvState.bgColor = bgSel.value; renderQuickView(); }
     });
     qvOverlay.addEventListener("click", function (e) { if (e.target === qvOverlay) closeQuickView(); });
 
@@ -326,5 +345,56 @@
     var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
   }
 
-  renderProducts(); wire(); observeReveals(); updateBadge(); renderCart();
+  /* ========================= PAYPAL CHECKOUT ======================== */
+  function buildPayPalOrder() {
+    var items = cart.map(function (e) {
+      var p = byId(e.id), unit = lineUnit(e), vl = variantLabel(e);
+      return {
+        name: (p.name + (vl ? ' — ' + vl : '')).substring(0, 127),
+        quantity: String(e.qty),
+        unit_amount: { value: unit.toFixed(2), currency_code: 'USD' },
+        category: 'PHYSICAL_GOODS'
+      };
+    });
+    var total = cartSubtotal();
+    return {
+      purchase_units: [{
+        description: ("Tyler’s Diode Designs — " + cartCount() + " item" + (cartCount() !== 1 ? 's' : '')).substring(0, 127),
+        custom_id: cart.map(function (e) { return e.id + 'x' + e.qty; }).join(',').substring(0, 127),
+        amount: {
+          value: total.toFixed(2),
+          currency_code: 'USD',
+          breakdown: { item_total: { value: total.toFixed(2), currency_code: 'USD' } }
+        },
+        items: items
+      }]
+    };
+  }
+
+  function initPayPal() {
+    if (!window.paypal) {
+      var btn = $("#paypal-button-container");
+      if (btn) btn.innerHTML = '<p style="font-size:.82rem;color:var(--muted);text-align:center;margin-top:6px">PayPal unavailable — contact us to complete your order.</p>';
+      return;
+    }
+    paypal.Buttons({
+      style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'checkout', height: 48 },
+      createOrder: function (data, actions) {
+        if (!cart.length) { showToast('Your cart is empty.'); return; }
+        return actions.order.create(buildPayPalOrder());
+      },
+      onApprove: function (data, actions) {
+        return actions.order.capture().then(function (details) {
+          cart = []; saveCart(); updateBadge(); renderCart(); closeCart();
+          window.location.href = 'thank_you.html?tx=' + data.orderID;
+        });
+      },
+      onError: function (err) {
+        showToast('Payment error — please try again or contact us.');
+        console.error('PayPal error:', err);
+      }
+    }).render('#paypal-button-container');
+  }
+
+  renderProducts(); wire(); observeReveals(); updateBadge(); renderCart(); initPayPal();
 })();
