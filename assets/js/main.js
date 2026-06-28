@@ -348,26 +348,16 @@
 
   /* ========================= PAYPAL CHECKOUT ======================== */
   function buildPayPalOrder() {
-    var items = cart.map(function (e) {
-      var p = byId(e.id), unit = lineUnit(e), vl = variantLabel(e);
-      return {
-        name: (p.name + (vl ? ' — ' + vl : '')).substring(0, 127),
-        quantity: String(e.qty),
-        unit_amount: { value: unit.toFixed(2), currency_code: 'USD' },
-        category: 'PHYSICAL_GOODS'
-      };
-    });
     var total = cartSubtotal();
+    var summary = cart.map(function (e) {
+      var p = byId(e.id), vl = variantLabel(e);
+      return p.name + (vl ? ‘ (‘ + vl + ‘)’ : ‘’) + ‘ x’ + e.qty;
+    }).join(‘, ‘);
     return {
       purchase_units: [{
-        description: ("Tyler’s Diode Designs — " + cartCount() + " item" + (cartCount() !== 1 ? 's' : '')).substring(0, 127),
-        custom_id: cart.map(function (e) { return e.id + 'x' + e.qty; }).join(',').substring(0, 127),
-        amount: {
-          value: total.toFixed(2),
-          currency_code: 'USD',
-          breakdown: { item_total: { value: total.toFixed(2), currency_code: 'USD' } }
-        },
-        items: items
+        description: summary.substring(0, 127),
+        custom_id: cart.map(function (e) { return e.id + ‘x’ + e.qty; }).join(‘,’).substring(0, 127),
+        amount: { value: total.toFixed(2), currency_code: ‘USD’ }
       }]
     };
   }
@@ -395,7 +385,7 @@
       },
       onError: function (err) {
         showToast('Payment error — please try again or contact us.');
-        console.error('PayPal error:', err);
+        console.error('PayPal onError:', JSON.stringify(err, null, 2));
       }
     }).render('#paypal-button-container');
   }
