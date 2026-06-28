@@ -1,61 +1,162 @@
 /* =====================================================================
-   Tyler's Diode Designs — Storefront
-   A whimsical "topographic workshop" theme.
-   Palette: warm paper + diode-glow sunset + category accents.
+   Tyler's Diode Designs — production stylesheet (tokens + storefront)
+   Generated from the TDD design system. Edit tokens at the top.
    ===================================================================== */
+@import url("https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap");
 
-/* ----------------------------- Tokens ------------------------------ */
+/* =====================================================================
+   Tyler's Diode Designs — Color tokens
+   "Topographic workshop": warm paper + diode-glow sunset + category accents
+   ===================================================================== */
 :root {
-  /* Paper / ink */
-  --paper:      #FBF6EE;
-  --paper-2:    #FFFDF8;
-  --ink:        #221C3A;
-  --ink-soft:   #4A4368;
-  --muted:      #6E6884;
-  --line:       rgba(34, 28, 58, 0.12);
-  --line-strong:rgba(34, 28, 58, 0.22);
+  /* ---- Paper / ink (surfaces + text) ---- */
+  --paper:       #FBF6EE;   /* page background  */
+  --paper-2:     #FFFDF8;   /* cards, raised surfaces */
+  --ink:         #221C3A;   /* primary text, dark UI */
+  --ink-soft:    #4A4368;   /* secondary text */
+  --muted:       #6E6884;   /* tertiary / meta text */
+  --line:        rgba(34, 28, 58, 0.12);   /* hairline borders */
+  --line-strong: rgba(34, 28, 58, 0.22);   /* stronger borders */
 
-  /* Brand diode glow */
-  --tangerine:  #FF6A3D;
+  /* ---- Brand "diode glow" sunset ---- */
+  --tangerine:  #FF6A3D;   /* primary brand pop */
   --amber:      #FFB24D;
   --coral:      #FF3D77;
-  --teal:       #12B5A5;
-  --violet:     #7A5CFF;
+  --teal:       #12B5A5;   /* success / confirm */
+  --violet:     #7A5CFF;   /* focus ring / accent */
   --gold:       #F5B400;
 
-  /* Category accents */
+  /* ---- Category accents ---- */
   --c-maps:        #16B6A4;
   --c-signs:       #7A5CFF;
   --c-accessories: #FF7A1A;
   --c-statues:     #FF4E7E;
   --c-lasercraft:  #E2A100;
 
-  /* Gradients */
-  --grad-sunset: linear-gradient(135deg, #FFB24D 0%, #FF6A3D 48%, #FF3D77 100%);
-  --grad-hero:   radial-gradient(120% 120% at 80% -10%, #FFD9A8 0%, #FFB68C 26%, #FF8FA6 55%, #C98BFF 100%);
-  --grad-band:   linear-gradient(135deg, #2A2348 0%, #3A2C63 50%, #5B3C7A 100%);
+  /* ---- Gradients ---- */
+  --grad-sunset: linear-gradient(135deg, #FFB24D 0%, #FF6A3D 48%, #FF3D77 100%); /* @kind color */
+  --grad-hero:   radial-gradient(120% 120% at 80% -10%, #FFD9A8 0%, #FFB68C 26%, #FF8FA6 55%, #C98BFF 100%); /* @kind color */
+  --grad-band:   linear-gradient(135deg, #2A2348 0%, #3A2C63 50%, #5B3C7A 100%); /* @kind color */
 
-  /* Shape */
-  --r-sm: 12px;
-  --r:    18px;
-  --r-lg: 26px;
-  --r-xl: 36px;
-  --pill: 999px;
+  /* ---- Semantic aliases ---- */
+  --bg-page:        var(--paper);
+  --surface-card:   var(--paper-2);
+  --text-strong:    var(--ink);
+  --text-body:      var(--ink-soft);
+  --text-muted:     var(--muted);
+  --border-subtle:  var(--line);
+  --border-strong:  var(--line-strong);
+  --accent-primary: var(--tangerine);
+  --accent-focus:   var(--violet);
+  --accent-success: var(--teal);
 
-  /* Shadows (warm-tinted) */
-  --shadow-sm: 0 2px 8px rgba(58, 38, 30, 0.08);
-  --shadow-md: 0 10px 28px rgba(58, 38, 30, 0.12);
-  --shadow-lg: 0 26px 60px rgba(58, 38, 30, 0.18);
-  --shadow-pop: 0 14px 30px rgba(255, 106, 61, 0.30);
-
-  /* Type */
-  --font-display: "Fredoka", "Trebuchet MS", sans-serif;
-  --font-body: "Nunito", system-ui, -apple-system, Segoe UI, sans-serif;
-  --font-mono: "Space Mono", ui-monospace, "Courier New", monospace;
-
-  --container: 1200px;
-  --header-h: 76px;
+  /* ---- Filament colors (in-stock swatches the shop sells) ---- */
+  --fil-bone:       #ECE6DA;
+  --fil-charcoal:   #2D2A33;
+  --fil-buckeye:    #B5341F;   /* Ohio red */
+  --fil-tangerine:  #FF6A3D;
+  --fil-marigold:   #F5B400;
+  --fil-forest:     #2E7D5B;
+  --fil-lake:       #2A6FB0;
+  --fil-grape:      #6A4BC4;
+  --fil-blush:      #F08FA6;
+  --fil-graphite:   #5A5560;
 }
+
+/* =====================================================================
+   Tyler's Diode Designs — Typography tokens
+   Display: Fredoka (rounded, friendly). Body: Nunito. Mono: Space Mono.
+   ===================================================================== */
+:root {
+  /* ---- Families ---- */
+  --font-display: "Fredoka", "Trebuchet MS", sans-serif;
+  --font-body:    "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "Space Mono", ui-monospace, "Courier New", monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular:   400; /* @kind font */
+  --fw-medium:    500; /* @kind font */
+  --fw-semibold:  600; /* @kind font */
+  --fw-bold:      700; /* @kind font */
+  --fw-extrabold: 800; /* @kind font */
+
+  /* ---- Type scale (fluid where it matters) ---- */
+  --fs-eyebrow:   0.72rem;   /* mono, tracked-out labels */
+  --fs-meta:      0.78rem;   /* SKU / captions */
+  --fs-small:     0.86rem;
+  --fs-body:      1rem;      /* base 17px on <body> */
+  --fs-lead:      1.08rem;
+  --fs-h4:        1.12rem;
+  --fs-h3:        1.45rem;
+  --fs-h2:        clamp(2rem, 4.6vw, 3.1rem);   /* @kind font */
+  --fs-h1:        clamp(2.6rem, 6.2vw, 4.6rem); /* @kind font */
+
+  /* ---- Line heights ---- */
+  --lh-tight:     1.08; /* @kind font */   /* headings */
+  --lh-snug:      1.2;  /* @kind font */
+  --lh-body:      1.6;  /* @kind font */
+
+  /* ---- Letter spacing ---- */
+  --ls-tight:     -0.02em; /* @kind font */  /* big display */
+  --ls-heading:   -0.01em; /* @kind font */
+  --ls-eyebrow:    0.22em; /* @kind font */  /* mono eyebrows */
+  --ls-mono:       0.05em; /* @kind font */
+}
+
+/* =====================================================================
+   Tyler's Diode Designs — Shape, spacing, shadow & layout tokens
+   ===================================================================== */
+:root {
+  /* ---- Spacing scale ---- */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  22px;
+  --space-6:  32px;
+  --space-7:  44px;
+  --space-8:  64px;
+  --space-9:  96px;
+
+  /* ---- Corner radii (generous, playful) ---- */
+  --r-sm:  12px;
+  --r:     18px;
+  --r-lg:  26px;
+  --r-xl:  36px;
+  --pill:  999px;
+
+  /* ---- Borders ---- */
+  --border-hair:  1.5px solid var(--line);
+  --border-card:  1.5px solid var(--line);
+
+  /* ---- Shadows (warm-tinted, never neutral gray) ---- */
+  --shadow-sm:  0 2px 8px rgba(58, 38, 30, 0.08);
+  --shadow-md:  0 10px 28px rgba(58, 38, 30, 0.12);
+  --shadow-lg:  0 26px 60px rgba(58, 38, 30, 0.18);
+  --shadow-pop: 0 14px 30px rgba(255, 106, 61, 0.30);  /* glowing CTA */
+
+  /* ---- Motion ---- */
+  --ease-out:    cubic-bezier(0.2, 0.7, 0.3, 1); /* @kind other */
+  --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1); /* @kind other */  /* springy pop */
+  --t-fast:  0.18s; /* @kind other */
+  --t-base:  0.22s; /* @kind other */
+  --t-slow:  0.34s; /* @kind other */
+
+  /* ---- Layout ---- */
+  --container: 1200px; /* @kind spacing */
+  --header-h:  76px; /* @kind spacing */
+}
+
+/* =====================================================================
+   Tyler's Diode Designs — Storefront UI kit styles
+   Tokens come from the design system (../../styles.css). This file holds
+   the component classes; the original storefront's look, preserved.
+   ===================================================================== */
+/* =====================================================================
+   Tyler's Diode Designs — Storefront
+   A whimsical "topographic workshop" theme.
+   Palette: warm paper + diode-glow sunset + category accents.
+   ===================================================================== */
 
 /* ----------------------------- Reset ------------------------------- */
 *, *::before, *::after { box-sizing: border-box; }
@@ -297,6 +398,14 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height
 
 .product-empty { grid-column: 1 / -1; text-align: center; padding: 48px 0; color: var(--muted); font-family: var(--font-display); }
 
+/* New-catalog card extras */
+.product-card__media { cursor: pointer; }
+.pc-badge { position: absolute; bottom: 12px; left: 12px; padding: 5px 12px; border-radius: var(--pill); background: var(--grad-sunset); color: #2A1124; font-family: var(--font-display); font-weight: 700; font-size: 0.74rem; box-shadow: var(--shadow-pop); }
+.pc-mto { display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-mono); font-size: 0.62rem; color: var(--c-accessories); font-weight: 700; }
+.pc-mto svg { width: 12px; height: 12px; }
+.product-card__price--quote { font-family: var(--font-display); font-weight: 600; font-size: 1.1rem; color: var(--ink-soft); align-self: center; }
+.add-btn--quote { font-size: 0.82rem; padding: 11px 15px; text-decoration: none; }
+
 /* ------------------------- Custom Orders --------------------------- */
 .custom { position: relative; }
 .custom__panel {
@@ -503,4 +612,86 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; scroll-behavior: auto !important; }
   .reveal { opacity: 1; transform: none; }
+}
+
+/* =====================================================================
+   QUICK-VIEW POP-UP  (the upgrade: gallery + color + size + qty)
+   ===================================================================== */
+.qv-overlay {
+  position: fixed; inset: 0; z-index: 200; display: flex; align-items: center; justify-content: center;
+  padding: max(16px, 4vh) 16px; background: rgba(20, 15, 35, 0.55); backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden; transition: opacity .26s ease, visibility .26s ease;
+}
+.qv-overlay.is-open { opacity: 1; visibility: visible; }
+.qv {
+  position: relative; width: min(940px, 100%); max-height: 92vh; overflow-y: auto;
+  background: var(--paper); border-radius: var(--r-xl); box-shadow: var(--shadow-lg); border: 1.5px solid var(--line);
+  transform: translateY(16px) scale(0.98); transition: transform .3s cubic-bezier(.34,1.56,.64,1);
+}
+.qv-overlay.is-open .qv { transform: translateY(0) scale(1); }
+.qv__close {
+  position: absolute; top: 14px; right: 14px; z-index: 5; width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,0.92); display: grid; place-items: center; box-shadow: var(--shadow-sm);
+  color: var(--ink-soft); transition: transform .2s ease;
+}
+.qv__close:hover { transform: scale(1.12) rotate(90deg); }
+.qv__close svg { width: 17px; height: 17px; }
+.qv__grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 0; }
+.qv__media { padding: 26px 22px 26px 26px; }
+.qv__detail { padding: 30px 30px 26px 8px; display: flex; flex-direction: column; gap: 16px; }
+.qv__tags { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.qv__title { font-size: 1.7rem; line-height: 1.1; }
+.qv__desc { margin-top: 10px; color: var(--ink-soft); font-size: 0.98rem; line-height: 1.6; }
+.qv__opt-label { display: flex; gap: 8px; align-items: baseline; margin-bottom: 10px; font-family: var(--font-display); font-weight: 600; color: var(--ink); }
+.qv__opt-label small { font-family: var(--font-mono); font-size: 0.76rem; color: var(--muted); font-weight: 400; }
+.qv__qty-row { display: flex; align-items: center; gap: 14px; }
+.qv__qty-row > span { font-family: var(--font-display); font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+.qv__foot { margin-top: auto; padding-top: 14px; border-top: 1px solid var(--line); }
+.qv__price-row { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 12px; }
+.qv__price-each { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+.qv__price-total { font-family: var(--font-display); font-weight: 600; font-size: 1.6rem; color: var(--ink); }
+.qv__ship { margin-top: 12px; display: flex; align-items: center; gap: 8px; justify-content: center; font-size: 0.78rem; color: var(--muted); }
+.qv__ship svg { width: 15px; height: 15px; }
+
+/* ---- Gallery ---- */
+.gallery__main { position: relative; aspect-ratio: 4 / 3; border-radius: var(--r-lg); overflow: hidden; background: #f0eadf; border: 1.5px solid var(--line); box-shadow: var(--shadow-sm); }
+.gallery__main img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gallery__nav { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.92); display: grid; place-items: center; box-shadow: var(--shadow-sm); color: var(--ink-soft); transition: transform .2s ease; }
+.gallery__nav:hover { transform: translateY(-50%) scale(1.12); }
+.gallery__nav svg { width: 20px; height: 20px; }
+.gallery__nav--prev { left: 12px; } .gallery__nav--next { right: 12px; }
+.gallery__count { position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); padding: 4px 12px; border-radius: var(--pill); background: rgba(34,28,58,0.62); color: #fff; backdrop-filter: blur(4px); font-family: var(--font-mono); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.06em; }
+.gallery__thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+.gallery__thumb { width: 60px; height: 60px; border-radius: var(--r-sm); overflow: hidden; background: #f0eadf; border: 2px solid var(--line); transition: border-color .15s ease, transform .15s ease; }
+.gallery__thumb.is-active { border: 2.5px solid var(--ink); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
+.gallery__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ---- Color swatches ---- */
+.swatches { display: flex; flex-wrap: wrap; gap: 10px; }
+.swatch { width: 30px; height: 30px; border-radius: 50%; position: relative; box-shadow: var(--shadow-sm); border: 1.5px solid rgba(255,255,255,0.5); transition: transform .16s ease, box-shadow .18s ease; }
+.swatch.is-light { border-color: var(--line-strong); }
+.swatch.is-on { transform: scale(1.06); box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px var(--ink); }
+.swatch.is-on::after { content: "✓"; position: absolute; inset: 0; display: grid; place-items: center; color: #fff; font-size: 14px; font-weight: 800; }
+.swatch.is-light.is-on::after { color: var(--ink); }
+
+/* ---- Size selector ---- */
+.sizes { display: flex; flex-wrap: wrap; gap: 8px; }
+.size {
+  display: inline-flex; align-items: center; gap: 7px; padding: 10px 16px; border-radius: var(--pill);
+  font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: var(--ink-soft);
+  background: var(--paper-2); border: 2px solid var(--line-strong); transition: all .16s ease;
+}
+.size:hover { border-color: var(--ink); }
+.size.is-on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.size__add { font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); font-weight: 700; }
+.size.is-on .size__add { color: var(--amber); }
+
+/* ---- Qty (modal) ---- */
+.qv .qty { margin-top: 0; }
+.qv .qty button { width: 26px; height: 26px; }
+
+@media (max-width: 720px) {
+  .qv__grid { grid-template-columns: 1fr; }
+  .qv__media { padding: 20px 20px 0; }
+  .qv__detail { padding: 20px; }
 }

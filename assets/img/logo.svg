@@ -1,54 +1,54 @@
-<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tyler's Diode Designs emblem">
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tyler&#39;s Diode Designs emblem">
   <defs>
     <linearGradient id="ldd-badge" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FFB24D"/>
-      <stop offset=".48" stop-color="#FF6A3D"/>
-      <stop offset="1" stop-color="#FF3D77"/>
+      <stop offset="0" stop-color="#FFB24D"></stop>
+      <stop offset=".48" stop-color="#FF6A3D"></stop>
+      <stop offset="1" stop-color="#FF3D77"></stop>
     </linearGradient>
     <radialGradient id="ldd-glow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#FFF6E9" stop-opacity="0.95"/>
-      <stop offset="0.6" stop-color="#FFE08A" stop-opacity="0.35"/>
-      <stop offset="1" stop-color="#FFE08A" stop-opacity="0"/>
+      <stop offset="0" stop-color="#FFF6E9" stop-opacity="0.95"></stop>
+      <stop offset="0.6" stop-color="#FFE08A" stop-opacity="0.35"></stop>
+      <stop offset="1" stop-color="#FFE08A" stop-opacity="0"></stop>
     </radialGradient>
     <clipPath id="ldd-tri">
-      <path d="M33 31 L33 69 L67 50 Z"/>
+      <path d="M33 31 L33 69 L67 50 Z"></path>
     </clipPath>
   </defs>
 
-  <!-- Badge -->
-  <rect x="4" y="4" width="92" height="92" rx="26" fill="url(#ldd-badge)"/>
+  
+  <rect x="4" y="4" width="92" height="92" rx="26" fill="url(#ldd-badge)"></rect>
 
-  <!-- Topographic contour texture -->
+  
   <g fill="none" stroke="#FFF6E9" stroke-opacity="0.16" stroke-width="2">
-    <rect x="14" y="14" width="72" height="72" rx="20"/>
-    <rect x="22" y="22" width="56" height="56" rx="15"/>
-    <rect x="30" y="30" width="40" height="40" rx="11"/>
+    <rect x="14" y="14" width="72" height="72" rx="20"></rect>
+    <rect x="22" y="22" width="56" height="56" rx="15"></rect>
+    <rect x="30" y="30" width="40" height="40" rx="11"></rect>
   </g>
 
-  <!-- Glow behind the cathode (the "lit" diode) -->
-  <circle cx="67" cy="50" r="26" fill="url(#ldd-glow)"/>
+  
+  <circle cx="67" cy="50" r="26" fill="url(#ldd-glow)"></circle>
 
-  <!-- Leads -->
+  
   <g stroke="#FFF6E9" stroke-width="5" stroke-linecap="round">
-    <line x1="17" y1="50" x2="33" y2="50"/>
-    <line x1="67" y1="50" x2="83" y2="50"/>
+    <line x1="17" y1="50" x2="33" y2="50"></line>
+    <line x1="67" y1="50" x2="83" y2="50"></line>
   </g>
 
-  <!-- Diode triangle (anode) -->
-  <path d="M33 31 L33 69 L67 50 Z" fill="#FFF6E9"/>
-  <!-- 3D-print filament layer lines across the triangle -->
+  
+  <path d="M33 31 L33 69 L67 50 Z" fill="#FFF6E9"></path>
+  
   <g clip-path="url(#ldd-tri)" stroke="#FF6A3D" stroke-opacity="0.55" stroke-width="2.4">
-    <line x1="30" y1="37" x2="70" y2="37"/>
-    <line x1="30" y1="43" x2="70" y2="43"/>
-    <line x1="30" y1="50" x2="70" y2="50"/>
-    <line x1="30" y1="57" x2="70" y2="57"/>
-    <line x1="30" y1="63" x2="70" y2="63"/>
+    <line x1="30" y1="37" x2="70" y2="37"></line>
+    <line x1="30" y1="43" x2="70" y2="43"></line>
+    <line x1="30" y1="50" x2="70" y2="50"></line>
+    <line x1="30" y1="57" x2="70" y2="57"></line>
+    <line x1="30" y1="63" x2="70" y2="63"></line>
   </g>
 
-  <!-- Cathode bar -->
-  <rect x="64" y="30" width="6" height="40" rx="3" fill="#FFF6E9"/>
+  
+  <rect x="64" y="30" width="6" height="40" rx="3" fill="#FFF6E9"></rect>
 
-  <!-- Spark accent -->
-  <circle cx="79" cy="34" r="3.4" fill="#FFF6E9"/>
-  <circle cx="79" cy="34" r="6.5" fill="none" stroke="#FFF6E9" stroke-opacity="0.5" stroke-width="1.6"/>
+  
+  <circle cx="79" cy="34" r="3.4" fill="#FFF6E9"></circle>
+  <circle cx="79" cy="34" r="6.5" fill="none" stroke="#FFF6E9" stroke-opacity="0.5" stroke-width="1.6"></circle>
 </svg>

@@ -4,52 +4,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tyler's Diode Designs — Precision Printed. Uniquely Yours.</title>
-  <meta name="description" content="Tyler's Diode Designs makes specialized 3D printed maps, signs, statues, accessories, and lasercraft — novelty art of Ohio topography, skylines, and stadiums. A maker-studio spinoff of TES, LLC. Shop SKUs or request a custom commission." />
-  <meta name="theme-color" content="#FBF6EE" />
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="apple-touch-icon" href="assets/img/favicon.svg" />
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Tyler's Diode Designs — Precision Printed. Uniquely Yours." />
-  <meta property="og:description" content="3D printed maps, signs, statues, accessories & lasercraft. Ohio topography, skylines & stadiums. Shop ready-made or request a custom commission." />
-  <meta property="og:image" content="assets/img/logo.svg" />
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-
   <link rel="stylesheet" href="assets/css/styles.css" />
-
-  <!-- PayPal JS SDK — same business account / client-id as tevisengineering.com pay_invoice.html.
-       Dynamic cart total is passed into createOrder() at checkout time (see assets/js/main.js). -->
-  <script src="https://www.paypal.com/sdk/js?client-id=Ab_dnVs8tumZ0eMkFfSuR9eR5ut5xYKPmEbgCRODAyopaxWByLowbaOpY9pgZJKAa_nliulcrbPBQ9IC&currency=USD&components=buttons&enable-funding=venmo&intent=capture" defer></script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Store",
-    "name": "Tyler's Diode Designs",
-    "description": "Specialized 3D printed maps, signs, statues, accessories and lasercraft depicting Ohio topography, skylines and stadiums.",
-    "slogan": "Precision Printed. Uniquely Yours.",
-    "parentOrganization": { "@type": "Organization", "name": "TES, LLC", "url": "https://tevisengineering.com" },
-    "areaServed": "US",
-    "knowsAbout": ["3D printing", "topographic maps", "laser engraving", "custom signage"]
-  }
-  </script>
 </head>
 <body>
   <a class="skip-link" href="#shop">Skip to shop</a>
 
-  <!-- ============================ HEADER ============================ -->
   <header class="site-header" id="home">
     <div class="container site-header__inner">
       <a class="brand" href="#home" aria-label="Tyler's Diode Designs — home">
         <img class="brand__logo" src="assets/img/logo.svg" alt="" width="46" height="46" />
         <span class="brand__name">Tyler's Diode Designs<small>A spinoff of TES, LLC</small></span>
       </a>
-
       <nav class="main-nav" id="mainNav" aria-label="Primary">
         <ul>
           <li><a href="#home">Home</a></li>
@@ -59,7 +25,6 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
       </nav>
-
       <div class="header-actions">
         <button class="cart-btn" id="cartOpen" aria-label="Open cart" aria-haspopup="dialog">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
@@ -72,16 +37,15 @@
   </header>
 
   <main>
-    <!-- ============================ HERO =========================== -->
     <section class="hero">
       <div class="container hero__grid">
         <div class="hero__content">
           <span class="hero__badge"><span class="dot"></span> Designed &amp; printed in Ohio</span>
           <h1 class="hero__title">Precision Printed.<br /><span class="pop">Uniquely Yours.</span></h1>
-          <p class="hero__lead">Novelty art you can hold — topographic states, hometown skylines, game-day stadiums, signs, and laser-cut keepsakes, fabricated layer by layer.</p>
+          <p class="hero__lead">Novelty art you can hold — topographic states, hometown skylines, game-day stadiums, and laser-cut keepsakes, fabricated layer by layer.</p>
           <div class="hero__cta">
             <a class="btn btn--primary btn--lg" href="#shop">Shop Now</a>
-            <a class="btn btn--ghost btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Request a Custom Order</a>
+            <a class="btn btn--ghost btn--lg" href="#custom">Request a Custom Order</a>
           </div>
           <div class="hero__proof">
             <div><b>100%</b><span>Printed to order</span></div>
@@ -89,77 +53,65 @@
             <div><b>Ohio</b><span>Designed &amp; made</span></div>
           </div>
         </div>
-
         <div class="hero__stage">
           <img class="hero__art" src="assets/img/hero-scene.svg" alt="A 3D printer building a topographic relief map layer by layer" width="480" height="400" />
-          <span class="chip chip--1"><img src="assets/img/topo-ohio.svg" alt="" /> Topo Maps</span>
-          <span class="chip chip--2"><img src="assets/img/stadium.svg" alt="" /> Stadiums</span>
-          <span class="chip chip--3"><img src="assets/img/keychain.svg" alt="" /> Lasercraft</span>
+          <span class="chip chip--1"><img src="assets/img/illustrations/topo-ohio.svg" alt="" /> Topo Maps</span>
+          <span class="chip chip--2"><img src="assets/img/illustrations/stadium.svg" alt="" /> Stadiums</span>
+          <span class="chip chip--3"><img src="assets/img/illustrations/keychain.svg" alt="" /> Lasercraft</span>
           <span class="sticker">Made in&nbsp;Ohio</span>
         </div>
       </div>
     </section>
 
-    <!-- =========================== MARQUEE ========================= -->
     <div class="marquee" aria-hidden="true">
       <div class="marquee__track">
-        <span>Topographic Maps</span><span>Hometown Skylines</span><span>Game-Day Stadiums</span><span>Layered Signs</span><span>Laser Keychains &amp; Magnets</span><span>Custom Commissions</span>
-        <span>Topographic Maps</span><span>Hometown Skylines</span><span>Game-Day Stadiums</span><span>Layered Signs</span><span>Laser Keychains &amp; Magnets</span><span>Custom Commissions</span>
+        <span>Topographic Maps</span><span>Hometown Skylines</span><span>Game-Day Stadiums</span><span>Anatomical Busts</span><span>Custom Enclosures</span><span>Custom Commissions</span>
+        <span>Topographic Maps</span><span>Hometown Skylines</span><span>Game-Day Stadiums</span><span>Anatomical Busts</span><span>Custom Enclosures</span><span>Custom Commissions</span>
       </div>
     </div>
 
-    <!-- ========================= CATEGORIES ======================== -->
-    <section class="section cats">
+    <section class="section cats cats--leadin">
       <div class="container">
         <div class="section__head reveal">
-          <span class="eyebrow">Browse the workshop</span>
-          <h2 class="section__title">Five ways to <span class="squiggle">make it real</span></h2>
-          <p class="section__lead">From wall-worthy relief maps to pocket-sized lasercraft — every piece starts as a design and ends on your shelf.</p>
+          <span class="eyebrow">Start here</span>
+          <h2 class="section__title">Find your corner of the <span class="squiggle">shop</span></h2>
+          <p class="section__lead">Five kinds of made-to-order Ohio art. Tap a category to jump straight into the shop below.</p>
         </div>
         <div class="cat-grid">
           <a class="cat-card reveal" data-delay="0" href="#shop" data-filter="maps" style="--accent: var(--c-maps)">
             <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2-6-2Z"/><path d="M9 4v14M15 6v14"/></svg></span>
-            <h3>3D Printed Maps</h3>
-            <p>Topographic states, lakes &amp; cities in layered relief.</p>
-            <span class="cat-card__link">Explore →</span>
+            <h3>3D Printed Maps</h3><span class="cat-card__link">Explore →</span>
           </a>
           <a class="cat-card reveal" data-delay="1" href="#shop" data-filter="signs" style="--accent: var(--c-signs)">
             <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3"/><path d="M5 6h11l3 3-3 3H5z"/><path d="M12 12v9"/><path d="M8 21h8"/></svg></span>
-            <h3>Signs</h3>
-            <p>Layered name plates, monograms &amp; keepsakes.</p>
-            <span class="cat-card__link">Explore →</span>
+            <h3>Signs &amp; Awards</h3><span class="cat-card__link">Explore →</span>
           </a>
           <a class="cat-card reveal" data-delay="2" href="#shop" data-filter="accessories" style="--accent: var(--c-accessories)">
             <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/><path d="m3 18 9 5 9-5"/></svg></span>
-            <h3>Accessories</h3>
-            <p>Desk caddies, phone stands &amp; everyday helpers.</p>
-            <span class="cat-card__link">Explore →</span>
+            <h3>Accessories</h3><span class="cat-card__link">Explore →</span>
           </a>
           <a class="cat-card reveal" data-delay="3" href="#shop" data-filter="statues" style="--accent: var(--c-statues)">
             <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l6-4v16"/><path d="M9 21V3l6 3v15"/><path d="M15 21V8l6 3v10"/><path d="M2 21h20"/></svg></span>
-            <h3>Statues</h3>
-            <p>Skylines &amp; stadiums sculpted in printed relief.</p>
-            <span class="cat-card__link">Explore →</span>
+            <h3>Statues</h3><span class="cat-card__link">Explore →</span>
           </a>
           <a class="cat-card reveal" data-delay="4" href="#shop" data-filter="lasercraft" style="--accent: var(--c-lasercraft)">
             <span class="cat-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></svg></span>
-            <h3>Lasercraft</h3>
-            <p>Keychains, magnets &amp; engraved coasters.</p>
-            <span class="cat-card__link">Explore →</span>
+            <h3>Lasercraft</h3><span class="cat-card__link">Explore →</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- ============================ SHOP =========================== -->
     <section class="section" id="shop">
       <div class="container">
         <div class="section__head reveal">
           <span class="eyebrow">The shop</span>
-          <h2 class="section__title">Ready to ship</h2>
-          <p class="section__lead">Signature designs, printed to order. Tap a category to filter — or add a few favorites to your cart.</p>
-        </div>
+          <h2 class="section__title">Ship it or grab it local</h2>
+          <p class="section__lead">Signature designs, printed to order right here in Cleveland, Ohio, with two options for fulfillment: shipping or local pick-up.
 
+
+We'll ship to you anywhere in the U.S. — shipping's calculated at checkout. Or contact us to set up a local drop-off / pickup. Tap any piece to see its details and choose your colors and size before you buy.</p>
+        </div>
         <div class="shop__bar reveal">
           <div class="filters" id="filters" role="group" aria-label="Filter products by category">
             <button class="filter is-active" data-filter="all">All</button>
@@ -171,14 +123,10 @@
           </div>
           <p class="shop__note" id="shopNote">12 designs</p>
         </div>
-
-        <div class="product-grid" id="productGrid">
-          <!-- Cards injected by JS from the product catalog -->
-        </div>
+        <div class="product-grid" id="productGrid"></div>
       </div>
     </section>
 
-    <!-- ======================= CUSTOM ORDERS ======================= -->
     <section class="section custom" id="custom">
       <div class="container">
         <div class="custom__panel reveal">
@@ -188,30 +136,20 @@
               <h2 class="custom__title">Got a one-of-a-kind idea?</h2>
               <p class="custom__text">Bring us your town, your team, your trail map, or that inside joke that needs to exist in real life. We model it, print it, and finish it — from a single keepsake to a full batch for an event or shop.</p>
               <div class="custom__cta">
-                <a class="btn btn--primary btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Start a Custom Request</a>
-                <a class="btn btn--light btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Get a Quote</a>
+                <a class="btn btn--primary btn--lg" href="#contact">Start a Custom Request</a>
+                <a class="btn btn--light btn--lg" href="#contact">Get a Quote</a>
               </div>
             </div>
             <div class="steps">
-              <div class="step">
-                <span class="step__num">1</span>
-                <div><h4>Share your idea</h4><p>Send sketches, photos, dimensions, or just a description through our contact form. No idea is too weird.</p></div>
-              </div>
-              <div class="step">
-                <span class="step__num">2</span>
-                <div><h4>Get a quote &amp; proof</h4><p>We reply with pricing, material options, and a digital preview before a single layer is printed.</p></div>
-              </div>
-              <div class="step">
-                <span class="step__num">3</span>
-                <div><h4>We print &amp; ship</h4><p>Approve the proof and we fabricate, hand-finish, and ship it straight to your door.</p></div>
-              </div>
+              <div class="step"><span class="step__num">1</span><div><h4>Share your idea</h4><p>Send sketches, photos, dimensions, or just a description. No idea is too weird.</p></div></div>
+              <div class="step"><span class="step__num">2</span><div><h4>Get a quote &amp; proof</h4><p>We reply with pricing, material options, and a digital preview before a single layer is printed.</p></div></div>
+              <div class="step"><span class="step__num">3</span><div><h4>We print &amp; ship</h4><p>Approve the proof and we fabricate, hand-finish, and ship it straight to your door.</p></div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================ ABOUT ========================== -->
     <section class="section" id="about">
       <div class="container about__grid">
         <div class="about__text reveal">
@@ -219,11 +157,8 @@
           <h2 class="section__title">Where engineering meets <span class="squiggle">play</span></h2>
           <p><strong>Tyler's Diode Designs</strong> is the maker-studio spinoff of <strong>TES, LLC</strong> (Tevis Engineering Services). Where TES brings the precision and problem-solving, this studio channels it into playful, tangible art you can put on a shelf.</p>
           <p>Every map, statue, sign, and trinket is modeled and printed in-house here in Ohio. We love celebrating <strong>local landmarks</strong> — the skylines, the stadiums, and the rolling topography of the Buckeye State and beyond.</p>
-          <p>From ready-to-ship favorites to one-off commissions, the goal is the same: turn a precise digital design into something with a little soul.</p>
           <div class="lineage">
-            <span class="node">TES, LLC<small>Engineering</small></span>
-            <span class="arrow">→</span>
-            <span class="node">Tyler's Diode Designs<small>Maker studio</small></span>
+            <span class="node">TES, LLC<small>Engineering</small></span><span class="arrow">→</span><span class="node">Tyler's Diode Designs<small>Maker studio</small></span>
           </div>
         </div>
         <div class="about__cards reveal" data-delay="1">
@@ -234,23 +169,8 @@
         </div>
       </div>
     </section>
-
-    <!-- ========================== CTA BAND ========================= -->
-    <section class="section cta-band">
-      <div class="container">
-        <div class="cta-band__inner reveal">
-          <h2>Let's print something only you would think of.</h2>
-          <p>Browse the shop for ready-made pieces, or tell us about your custom idea — quotes are always free.</p>
-          <div class="hero__cta" style="justify-content:center">
-            <a class="btn btn--ghost btn--lg" href="#shop">Browse the Shop</a>
-            <a class="btn btn--ghost btn--lg" href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Request a Custom Order</a>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- ============================ FOOTER ========================== -->
   <footer class="site-footer" id="contact">
     <div class="container">
       <div class="footer__grid">
@@ -263,41 +183,26 @@
           <div class="footer__social">
             <a href="#" data-soon aria-label="Instagram (coming soon)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
             <a href="#" data-soon aria-label="Facebook (coming soon)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h3l.5-3H13V9c0-.9.3-1.5 1.6-1.5H17V4.8c-.3 0-1.3-.1-2.5-.1-2.5 0-4.2 1.5-4.2 4.3V11H7v3h3.3v8H13Z"/></svg></a>
-            <a href="#" data-soon aria-label="TikTok (coming soon)"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16 4c.3 2 1.6 3.6 3.5 4v3c-1.4 0-2.7-.4-3.8-1.1V15a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v3.1a2.5 2.5 0 1 0 1.7 2.4V4H16Z"/></svg></a>
           </div>
         </div>
-
-        <div class="footer__col">
-          <h4>Shop</h4>
-          <ul>
-            <li><a href="#shop" data-filter="maps">3D Printed Maps</a></li>
-            <li><a href="#shop" data-filter="signs">Signs</a></li>
-            <li><a href="#shop" data-filter="accessories">Accessories</a></li>
-            <li><a href="#shop" data-filter="statues">Statues</a></li>
-            <li><a href="#shop" data-filter="lasercraft">Lasercraft</a></li>
-          </ul>
-        </div>
-
-        <div class="footer__col">
-          <h4>Studio</h4>
-          <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#custom">Custom Orders</a></li>
-            <li><a href="#custom">How It Works</a></li>
-            <li><a href="https://tevisengineering.com" target="_blank" rel="noopener">TES, LLC</a></li>
-          </ul>
-        </div>
-
-        <div class="footer__col footer__contact">
-          <h4>Contact</h4>
-          <ul>
-            <li><a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg> Custom quotes &amp; contact</a></li>
-            <li><a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 7 9 6 9-6"/></svg> Dedicated inbox — coming soon</a></li>
-            <li><span style="display:flex;gap:10px;align-items:center;color:#ADA5C6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:17px;height:17px;color:var(--amber);flex:none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg> Ohio, USA</span></li>
-          </ul>
-        </div>
+        <div class="footer__col"><h4>Shop</h4><ul>
+          <li><a href="#shop" data-filter="maps">3D Printed Maps</a></li>
+          <li><a href="#shop" data-filter="signs">Signs &amp; Awards</a></li>
+          <li><a href="#shop" data-filter="accessories">Accessories</a></li>
+          <li><a href="#shop" data-filter="statues">Statues</a></li>
+          <li><a href="#shop" data-filter="lasercraft">Lasercraft</a></li>
+        </ul></div>
+        <div class="footer__col"><h4>Studio</h4><ul>
+          <li><a href="#about">About</a></li>
+          <li><a href="#custom">Custom Orders</a></li>
+          <li><a href="#custom">How It Works</a></li>
+          <li><a href="https://tevisengineering.com" target="_blank" rel="noopener">TES, LLC</a></li>
+        </ul></div>
+        <div class="footer__col footer__contact"><h4>Contact</h4><ul>
+          <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 2.5 15 0 18M12 3c-2.5 2.5-2.5 15 0 18"/></svg> Custom quotes &amp; contact</a></li>
+          <li><span style="display:flex;gap:10px;align-items:center;color:#ADA5C6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="width:17px;height:17px;color:var(--amber);flex:none"><path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11Z"/><circle cx="12" cy="10" r="2.6"/></svg> Ohio, USA</span></li>
+        </ul></div>
       </div>
-
       <div class="footer__bottom">
         <span>© <span id="year">2026</span> Tyler's Diode Designs — a spinoff of TES, LLC. All rights reserved.</span>
         <span class="font-mono">// precision printed in ohio</span>
@@ -305,7 +210,10 @@
     </div>
   </footer>
 
-  <!-- ========================== CART DRAWER ====================== -->
+  <!-- Quick-view pop-up -->
+  <div class="qv-overlay" id="qvOverlay"><div class="qv" id="qv" role="dialog" aria-modal="true" aria-label="Product quick view"></div></div>
+
+  <!-- Cart drawer -->
   <div class="cart-overlay" id="cartOverlay"></div>
   <aside class="cart" id="cart" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
     <div class="cart__head">
@@ -313,19 +221,18 @@
       <button class="cart__close" id="cartClose" aria-label="Close cart"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="cart__items" id="cartItems"></div>
-    <div class="cart__success" id="cartSuccess" hidden></div>
     <div class="cart__foot" id="cartFoot" hidden>
       <div class="cart__row"><span>Subtotal</span><span id="cartSubtotal" class="font-mono">$0.00</span></div>
       <div class="cart__row" style="font-size:.82rem"><span>Shipping &amp; pickup</span><span style="color:var(--muted)">Arranged after checkout</span></div>
       <div class="cart__row total"><span>Amount due</span><span id="cartTotal">$0.00</span></div>
-      <div id="paypal-button-container"></div>
-      <p class="cart__hint">Secure checkout by <strong>PayPal</strong>, Venmo, or card. After payment we'll email you to arrange shipping or local pickup. Custom order? <a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">Contact us</a>.</p>
+      <button class="btn btn--primary btn--block btn--lg" style="margin-top:10px" onclick="alert('Demo checkout — the live storefront wires this to PayPal / Venmo / card.')">Checkout</button>
+      <p class="cart__hint">Secure checkout by <strong>PayPal</strong>, Venmo, or card. After payment we'll email you to arrange shipping or local pickup.</p>
     </div>
   </aside>
 
-  <!-- ============================ TOASTS ========================= -->
   <div class="toast-wrap" id="toastWrap" aria-live="polite" aria-atomic="true"></div>
 
+  <script src="assets/js/products.js"></script>
   <script src="assets/js/main.js"></script>
 </body>
 </html>

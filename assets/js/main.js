@@ -1,449 +1,311 @@
 /* =====================================================================
-   Tyler's Diode Designs — Storefront interactions
-   Vanilla JS, no dependencies. Cart persists to localStorage.
+   Tyler's Diode Designs — Storefront UI kit interactions
+   Vanilla JS, no dependencies. Reads the catalog from data/products.js
+   (window.TDD). Cart persists to localStorage and carries the chosen
+   size + color per line. Quick-view pop-up handles gallery / color / size.
    ===================================================================== */
 (function () {
   "use strict";
-
-  /* ------------------------- Product catalog ----------------------- */
-  const CATEGORIES = {
-    maps:        { label: "Maps",        accent: "var(--c-maps)" },
-    signs:       { label: "Signs",       accent: "var(--c-signs)" },
-    accessories: { label: "Accessories", accent: "var(--c-accessories)" },
-    statues:     { label: "Statues",     accent: "var(--c-statues)" },
-    lasercraft:  { label: "Lasercraft",  accent: "var(--c-lasercraft)" }
-  };
-
-  const PRODUCTS = [
-    { id: "TDD-OH-01", name: "Ohio Topographic Relief Map", price: 48, category: "maps",
-      img: "assets/img/topo-ohio.svg", desc: "Layered elevation map of the Buckeye State in rich terrain tones." },
-    { id: "TDD-LE-02", name: "Lake Erie Bathymetric Map", price: 42, category: "maps",
-      img: "assets/img/topo-lake.svg", desc: "Depth-contoured Great Lake, from shoreline shallows to the deep." },
-    { id: "TDD-ST-03", name: "Custom State Topo — Any State", price: 45, category: "maps",
-      img: "assets/img/topo-state.svg", desc: "Pick any U.S. state and we print its peaks and valleys to scale." },
-    { id: "TDD-NS-04", name: "Layered City Name Sign", price: 34, category: "signs",
-      img: "assets/img/sign.svg", desc: "Multi-color layered nameplate for desks, doors, and shelves." },
-    { id: "TDD-FS-05", name: "Established Family Monogram", price: 39, category: "signs",
-      img: "assets/img/sign-est.svg", desc: "Round 'est.' keepsake with your family name and founding year." },
-    { id: "TDD-DO-06", name: "Filament Desk Organizer", price: 24, category: "accessories",
-      img: "assets/img/desk.svg", desc: "Tidy caddy for pens, tools, and the odds and ends of a busy desk." },
-    { id: "TDD-PS-07", name: "Topo-Edge Phone Stand", price: 18, category: "accessories",
-      img: "assets/img/phone-stand.svg", desc: "Angled stand with a contour-line motif for desk or nightstand." },
-    { id: "TDD-SK-08", name: "Columbus Skyline Statue", price: 55, category: "statues",
-      img: "assets/img/skyline.svg", desc: "Your hometown skyline sculpted in crisp printed relief." },
-    { id: "TDD-SD-09", name: "Game-Day Stadium Replica", price: 60, category: "statues",
-      img: "assets/img/stadium.svg", desc: "Miniature of the stadium where the home crowd roars." },
-    { id: "TDD-KC-10", name: "Ohio State Keychain", price: 9, category: "lasercraft",
-      img: "assets/img/keychain.svg", desc: "Pocket-size, laser-engraved Buckeye pride." },
-    { id: "TDD-MG-11", name: "Skyline Fridge Magnet", price: 7, category: "lasercraft",
-      img: "assets/img/magnet.svg", desc: "Laser-cut skyline that sticks the landing on your fridge." },
-    { id: "TDD-CS-12", name: "Engraved Coaster Set (4)", price: 26, category: "lasercraft",
-      img: "assets/img/coaster.svg", desc: "A set of four engraved, hardwood-look coasters." }
-  ];
-
-  const byId = (id) => PRODUCTS.find((p) => p.id === id);
-  const money = (n) => "$" + n.toFixed(2);
+  var T = window.TDD;
+  var CATEGORIES = T.CATEGORIES, FILAMENTS = T.FILAMENTS, PRODUCTS = T.PRODUCTS;
+  var byId = T.byId, money = T.money;
+  var QUOTE_URL = T.CONTACT_URL || "https://tevisengineering.com/contact.html";
 
   /* ----------------------------- Icons ----------------------------- */
-  const ICON_PLUS = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
-  const ICON_HEART = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><path d="M12 20.5C6.5 16.5 3 13 3 9.2A4.2 4.2 0 0 1 12 6a4.2 4.2 0 0 1 9 3.2c0 3.8-3.5 7.3-9 11.3Z"/></svg>';
-  const ICON_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>';
-  const ICON_BAG = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>';
+  var I = {
+    plus:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+    heart: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 20.5C6.5 16.5 3 13 3 9.2A4.2 4.2 0 0 1 12 6a4.2 4.2 0 0 1 9 3.2c0 3.8-3.5 7.3-9 11.3Z"/></svg>',
+    check: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>',
+    bag:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>',
+    close: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>',
+    left:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 6-6 6 6 6"/></svg>',
+    right: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
+    search:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>',
+    truck: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="18" r="1.6"/><circle cx="17" cy="18" r="1.6"/></svg>',
+    sparkle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8Z"/></svg>',
+    mail:  '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/><path d="m3 7 9 6 9-6"/></svg>'
+  };
 
-  /* --------------------------- Cart store -------------------------- */
-  const STORAGE_KEY = "tdd-cart-v1";
-  let cart = loadCart();
+  var $ = function (s, c) { return (c || document).querySelector(s); };
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]; }); }
+  function isLight(hex) { var h = hex.replace("#", ""); return (0.299 * parseInt(h.substr(0,2),16) + 0.587 * parseInt(h.substr(2,2),16) + 0.114 * parseInt(h.substr(4,2),16)) > 150; }
 
-  function loadCart() {
-    try {
-      const raw = localStorage.getItem(STORAGE_KEY);
-      const parsed = raw ? JSON.parse(raw) : [];
-      // Keep only entries that still map to a real product.
-      return Array.isArray(parsed) ? parsed.filter((e) => e && byId(e.id) && e.qty > 0) : [];
-    } catch (e) { return []; }
-  }
-  function saveCart() {
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {}
-  }
-  const cartCount = () => cart.reduce((n, e) => n + e.qty, 0);
-  const cartSubtotal = () => cart.reduce((s, e) => s + (byId(e.id) ? byId(e.id).price * e.qty : 0), 0);
-
-  function addToCart(id, qty) {
-    qty = qty || 1;
-    const line = cart.find((e) => e.id === id);
-    if (line) line.qty += qty; else cart.push({ id: id, qty: qty });
-    // If a post-payment success screen is showing, return to the shopping view.
-    const success = document.getElementById("cartSuccess");
-    if (success && !success.hidden) { success.hidden = true; if (cartItemsEl) cartItemsEl.style.display = ""; }
-    saveCart(); updateBadge(); renderCart();
-  }
-  function setQty(id, qty) {
-    const line = cart.find((e) => e.id === id);
-    if (!line) return;
-    line.qty = qty;
-    if (line.qty <= 0) cart = cart.filter((e) => e.id !== id);
-    saveCart(); updateBadge(); renderCart();
-  }
-  function removeFromCart(id) {
-    cart = cart.filter((e) => e.id !== id);
-    saveCart(); updateBadge(); renderCart();
-  }
-
-  /* --------------------------- DOM refs ---------------------------- */
-  const $ = (sel, ctx) => (ctx || document).querySelector(sel);
-  const grid = $("#productGrid");
-  const cartCountEl = $("#cartCount");
-  const cartHeadCount = $("#cartHeadCount");
-  const cartItemsEl = $("#cartItems");
-  const cartFoot = $("#cartFoot");
-  const toastWrap = $("#toastWrap");
+  /* --------------------------- Favorites --------------------------- */
+  var favs = {};
 
   /* ----------------------- Render product grid --------------------- */
+  var grid = $("#productGrid");
+  function unitPrice(p, sizeId) {
+    if (!p.sizes) return p.price;
+    var s = p.sizes.filter(function (x) { return x.id === sizeId; })[0] || p.sizes[0];
+    return p.price + (s.addPrice || 0);
+  }
+  function hasOptions(p) { return !!(p.sizes || (p.colors && p.colors.length > 1)); }
+
   function renderProducts() {
-    if (!grid) return;
-    grid.innerHTML = PRODUCTS.map((p, i) => {
-      const cat = CATEGORIES[p.category];
-      const dollars = Math.floor(p.price);
-      const cents = Math.round((p.price - dollars) * 100).toString().padStart(2, "0");
-      return (
-        '<article class="product-card reveal" data-category="' + p.category + '" data-delay="' + (i % 4) + '" style="--accent: ' + cat.accent + '">' +
-          '<div class="product-card__media">' +
-            '<span class="product-card__tag">' + cat.label + '</span>' +
-            '<button class="product-card__fav" type="button" aria-pressed="false" aria-label="Save ' + p.name + '">' + ICON_HEART + '</button>' +
-            '<img src="' + p.img + '" alt="' + p.name + '" loading="lazy" width="400" height="300" />' +
+    grid.innerHTML = PRODUCTS.map(function (p, i) {
+      var cat = CATEGORIES[p.category];
+      var d = Math.floor(p.price), c = Math.round((p.price - d) * 100).toString().padStart(2, "0");
+      return '<article class="product-card reveal" data-category="' + p.category + '" data-delay="' + (i % 4) + '" style="--accent: ' + cat.accent + '">' +
+        '<div class="product-card__media" data-open="' + p.id + '">' +
+          '<span class="product-card__tag">' + cat.label + '</span>' +
+          '<button class="product-card__fav" type="button" data-fav="' + p.id + '" aria-label="Save ' + esc(p.name) + '">' + I.heart + '</button>' +
+          (p.badge ? '<span class="pc-badge">' + esc(p.badge) + '</span>' : '') +
+          '<img src="' + p.gallery[0] + '" alt="' + esc(p.name) + '" loading="lazy" />' +
+        '</div>' +
+        '<div class="product-card__body">' +
+          '<h3 class="product-card__name" data-open="' + p.id + '">' + esc(p.name) + '</h3>' +
+          '<p class="product-card__desc">' + esc(p.blurb) + '</p>' +
+          '<div class="product-card__meta"><span class="product-card__sku">SKU · ' + p.id + '</span>' +
+            (p.madeToOrder ? '<span class="pc-mto">' + I.sparkle + ' Made to order</span>' : '') + '</div>' +
+          '<div class="product-card__foot">' +
+            (p.madeToOrder
+              ? '<span class="product-card__price product-card__price--quote">By quote</span>' +
+                '<a class="add-btn add-btn--quote" href="' + QUOTE_URL + '" target="_blank" rel="noopener">' + I.mail + ' Request a quote</a>'
+              : '<span class="product-card__price">$' + d + '<small>.' + c + (p.sizes ? ' +' : '') + '</small></span>' +
+                '<button class="add-btn" type="button" data-add="' + p.id + '">' + (hasOptions(p) ? I.search + ' Options' : I.plus + ' Add') + '</button>'
+            ) +
           '</div>' +
-          '<div class="product-card__body">' +
-            '<h3 class="product-card__name">' + p.name + '</h3>' +
-            '<p class="product-card__desc">' + p.desc + '</p>' +
-            '<div class="product-card__meta"><span class="product-card__sku">SKU · ' + p.id + '</span></div>' +
-            '<div class="product-card__foot">' +
-              '<span class="product-card__price">$' + dollars + '<small>.' + cents + '</small></span>' +
-              '<button class="add-btn" type="button" data-add="' + p.id + '">' + ICON_PLUS + ' Add</button>' +
-            '</div>' +
-          '</div>' +
-        '</article>'
-      );
+        '</div>' +
+      '</article>';
     }).join("");
+    if (shopNote) shopNote.textContent = PRODUCTS.length + " designs";
     observeReveals();
   }
 
   /* ---------------------------- Filtering -------------------------- */
-  let activeFilter = "all";
-  const shopNote = $("#shopNote");
-
+  var shopNote = $("#shopNote");
   function applyFilter(cat) {
-    activeFilter = cat;
-    document.querySelectorAll("#filters .filter").forEach((b) =>
-      b.classList.toggle("is-active", b.dataset.filter === cat));
-    let shown = 0;
-    grid.querySelectorAll(".product-card").forEach((card) => {
-      const match = cat === "all" || card.dataset.category === cat;
-      card.style.display = match ? "" : "none";
-      if (match) shown++;
+    document.querySelectorAll("#filters .filter").forEach(function (b) { b.classList.toggle("is-active", b.dataset.filter === cat); });
+    var shown = 0;
+    grid.querySelectorAll(".product-card").forEach(function (card) {
+      var match = cat === "all" || card.dataset.category === cat;
+      card.style.display = match ? "" : "none"; if (match) shown++;
     });
     if (shopNote) shopNote.textContent = shown + (shown === 1 ? " design" : " designs");
   }
 
-  /* ----------------------------- Badge ----------------------------- */
-  function updateBadge() {
-    const n = cartCount();
-    if (!cartCountEl) return;
-    cartCountEl.textContent = n;
-    cartCountEl.classList.toggle("is-active", n > 0);
-    if (cartHeadCount) cartHeadCount.textContent = n ? "(" + n + ")" : "";
+  /* ========================= QUICK-VIEW =========================== */
+  var qvOverlay = $("#qvOverlay"), qvRoot = $("#qv");
+  var qvState = { product: null, gi: 0, size: null, color: null, qty: 1 };
+
+  function openQuickView(id) {
+    var p = byId(id); if (!p) return;
+    qvState = { product: p, gi: 0, qty: 1,
+      size: p.sizes ? p.sizes[0].id : null,
+      color: (p.colors && p.colors.length) ? p.colors[0] : null };
+    renderQuickView();
+    qvOverlay.classList.add("is-open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeQuickView() {
+    qvOverlay.classList.remove("is-open");
+    if (!$("#cart").classList.contains("is-open")) document.body.style.overflow = "";
   }
 
-  /* --------------------------- Render cart ------------------------- */
+  function renderQuickView() {
+    var p = qvState.product; if (!p) return;
+    var cat = CATEGORIES[p.category];
+    var unit = unitPrice(p, qvState.size), total = unit * qvState.qty;
+
+    var gallery = '<div class="gallery__main">' +
+        '<img src="' + p.gallery[qvState.gi] + '" alt="' + esc(p.name) + '" />' +
+        (p.gallery.length > 1 ?
+          '<button class="gallery__nav gallery__nav--prev" data-gnav="-1" aria-label="Previous photo">' + I.left + '</button>' +
+          '<button class="gallery__nav gallery__nav--next" data-gnav="1" aria-label="Next photo">' + I.right + '</button>' +
+          '<span class="gallery__count">' + (qvState.gi + 1) + ' / ' + p.gallery.length + '</span>' : '') +
+      '</div>' +
+      (p.gallery.length > 1 ? '<div class="gallery__thumbs">' + p.gallery.map(function (src, i) {
+        return '<button class="gallery__thumb' + (i === qvState.gi ? ' is-active' : '') + '" data-gthumb="' + i + '" aria-label="Photo ' + (i + 1) + '"><img src="' + src + '" alt="" /></button>';
+      }).join("") + '</div>' : '');
+
+    var colors = (p.colors && p.colors.length) ? (function () {
+      var sel = FILAMENTS[qvState.color];
+      return '<div><div class="qv__opt-label"><span>Color</span><small>' + esc(sel ? sel.label : "") + '</small></div>' +
+        '<div class="swatches">' + p.colors.map(function (k) {
+          var f = FILAMENTS[k], light = isLight(f.hex);
+          return '<button class="swatch' + (light ? ' is-light' : '') + (k === qvState.color ? ' is-on' : '') + '" data-color="' + k + '" title="' + esc(f.label) + '" aria-label="' + esc(f.label) + '" style="background:' + f.hex + '"></button>';
+        }).join("") + '</div></div>';
+    })() : '';
+
+    var sizes = p.sizes ? (function () {
+      var selS = p.sizes.filter(function (s) { return s.id === qvState.size; })[0];
+      return '<div><div class="qv__opt-label"><span>' + esc(p.sizeLabel || "Size") + '</span><small>' + esc(selS ? selS.note : "") + '</small></div>' +
+        '<div class="sizes">' + p.sizes.map(function (s) {
+          return '<button class="size' + (s.id === qvState.size ? ' is-on' : '') + '" data-size="' + s.id + '"><span>' + esc(s.label) + '</span>' +
+            (s.addPrice ? '<span class="size__add">+' + money(s.addPrice) + '</span>' : '') + '</button>';
+        }).join("") + '</div></div>';
+    })() : '';
+
+    qvRoot.innerHTML =
+      '<button class="qv__close" id="qvClose" aria-label="Close">' + I.close + '</button>' +
+      '<div class="qv__grid">' +
+        '<div class="qv__media">' + gallery + '</div>' +
+        '<div class="qv__detail">' +
+          '<div class="qv__tags"><span class="product-card__tag" style="position:static;box-shadow:none;color:' + cat.accent + ';background:color-mix(in srgb,' + cat.accent + ' 14%, white)">' + cat.label + '</span>' +
+            (p.badge ? '<span class="pc-badge" style="position:static">' + esc(p.badge) + '</span>' : '') + '</div>' +
+          '<div><h2 class="qv__title">' + esc(p.name) + '</h2><p class="qv__desc">' + esc(p.desc) + '</p></div>' +
+          (p.madeToOrder
+            ? colors +
+              '<div class="qv__foot" style="margin-top:6px">' +
+                '<a class="btn btn--primary btn--lg btn--block" href="' + QUOTE_URL + '" target="_blank" rel="noopener" style="text-decoration:none">' + I.mail + ' Request a quote</a>' +
+                '<p class="qv__ship">' + I.sparkle + " Made to order — send us the details on our contact form and we'll reply with a quote and timing." + '</p>' +
+              '</div>'
+            : colors + sizes +
+              '<div class="qv__qty-row"><span>Quantity</span>' +
+                '<div class="qty"><button type="button" data-qty="-1" aria-label="Decrease">−</button><span>' + qvState.qty + '</span><button type="button" data-qty="1" aria-label="Increase">+</button></div></div>' +
+              '<div class="qv__foot">' +
+                '<div class="qv__price-row"><span class="qv__price-each">' + money(unit) + ' each</span><span class="qv__price-total">' + money(total) + '</span></div>' +
+                '<button class="btn btn--primary btn--lg btn--block" id="qvAdd">' + I.bag + ' Add to cart</button>' +
+                '<p class="qv__ship">' + I.truck + " Printed to order. Ships or local pickup arranged after checkout." + '</p>' +
+              '</div>'
+          ) +
+        '</div>' +
+      '</div>';
+  }
+
+  function qvAddToCart() {
+    var p = qvState.product;
+    addToCart(p.id, qvState.size, qvState.color, qvState.qty);
+    var btn = $("#qvAdd");
+    btn.innerHTML = I.check + " Added!";
+    btn.style.background = "var(--teal)"; btn.style.color = "#06302b"; btn.style.boxShadow = "none";
+    showToast(p.name + " added to cart");
+    setTimeout(function () { if ($("#cart")) closeQuickView(); }, 650);
+  }
+
+  /* --------------------------- Cart store -------------------------- */
+  var STORAGE_KEY = "tdd-kit-cart-v1";
+  var cart = loadCart();
+  function loadCart() { try { var r = localStorage.getItem(STORAGE_KEY); var a = r ? JSON.parse(r) : []; return Array.isArray(a) ? a.filter(function (e) { return e && byId(e.id) && e.qty > 0; }) : []; } catch (e) { return []; } }
+  function saveCart() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(cart)); } catch (e) {} }
+  function lineKey(id, size, color) { return id + "|" + (size || "") + "|" + (color || ""); }
+  function cartCount() { return cart.reduce(function (n, e) { return n + e.qty; }, 0); }
+  function lineUnit(e) { return unitPrice(byId(e.id), e.size); }
+  function cartSubtotal() { return cart.reduce(function (s, e) { return s + lineUnit(e) * e.qty; }, 0); }
+
+  function addToCart(id, size, color, qty) {
+    qty = qty || 1;
+    var key = lineKey(id, size, color);
+    var line = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) === key; })[0];
+    if (line) line.qty += qty; else cart.push({ id: id, size: size, color: color, qty: qty });
+    saveCart(); updateBadge(); renderCart();
+  }
+  function setQty(key, qty) {
+    var line = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) === key; })[0];
+    if (!line) return; line.qty = qty;
+    if (line.qty <= 0) cart = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) !== key; });
+    saveCart(); updateBadge(); renderCart();
+  }
+  function removeFromCart(key) { cart = cart.filter(function (e) { return lineKey(e.id, e.size, e.color) !== key; }); saveCart(); updateBadge(); renderCart(); }
+
+  var cartCountEl = $("#cartCount"), cartHeadCount = $("#cartHeadCount"), cartItemsEl = $("#cartItems"), cartFoot = $("#cartFoot");
+  function updateBadge() { var n = cartCount(); cartCountEl.textContent = n; cartCountEl.classList.toggle("is-active", n > 0); if (cartHeadCount) cartHeadCount.textContent = n ? "(" + n + ")" : ""; }
+
+  function variantLabel(e) {
+    var bits = [];
+    if (e.size) { var p = byId(e.id); var s = p.sizes && p.sizes.filter(function (x) { return x.id === e.size; })[0]; if (s) bits.push(s.label); }
+    if (e.color && FILAMENTS[e.color]) bits.push(FILAMENTS[e.color].label);
+    return bits.join(" · ");
+  }
+
   function renderCart() {
-    if (!cartItemsEl) return;
     cartItemsEl.style.display = "";
     if (!cart.length) {
-      cartItemsEl.innerHTML =
-        '<div class="cart-empty">' + ICON_BAG +
-        '<p>Your cart is empty</p>' +
-        '<span>Add a few printed treasures from the shop.</span>' +
-        '<button class="btn btn--ghost" type="button" id="cartEmptyShop">Browse the Shop</button>' +
-        '</div>';
+      cartItemsEl.innerHTML = '<div class="cart-empty">' + I.bag + '<p>Your cart is empty</p><span>Add a few printed treasures from the shop.</span><button class="btn btn--ghost" type="button" id="cartEmptyShop">Browse the Shop</button></div>';
       cartFoot.hidden = true;
-      const shopBtn = $("#cartEmptyShop");
-      if (shopBtn) shopBtn.addEventListener("click", () => { closeCart(); location.hash = "#shop"; });
+      var b = $("#cartEmptyShop"); if (b) b.addEventListener("click", function () { closeCart(); location.hash = "#shop"; });
       return;
     }
-    cartItemsEl.innerHTML = cart.map((e) => {
-      const p = byId(e.id);
-      const lineTotal = p.price * e.qty;
-      return (
-        '<div class="cart-item" data-id="' + p.id + '">' +
-          '<div class="cart-item__img"><img src="' + p.img + '" alt="" /></div>' +
-          '<div>' +
-            '<div class="cart-item__name">' + p.name + '</div>' +
-            '<div class="cart-item__price">' + money(p.price) + ' each</div>' +
-            '<div class="qty">' +
-              '<button type="button" data-dec="' + p.id + '" aria-label="Decrease quantity">−</button>' +
-              '<span>' + e.qty + '</span>' +
-              '<button type="button" data-inc="' + p.id + '" aria-label="Increase quantity">+</button>' +
-            '</div>' +
-          '</div>' +
-          '<div class="cart-item__right">' +
-            '<span class="cart-item__total">' + money(lineTotal) + '</span>' +
-            '<button class="cart-item__remove" type="button" data-remove="' + p.id + '">Remove</button>' +
-          '</div>' +
-        '</div>'
-      );
+    cartItemsEl.innerHTML = cart.map(function (e) {
+      var p = byId(e.id), key = lineKey(e.id, e.size, e.color), unit = lineUnit(e), vl = variantLabel(e);
+      return '<div class="cart-item" data-key="' + key + '">' +
+        '<div class="cart-item__img"><img src="' + p.gallery[0] + '" alt="" /></div>' +
+        '<div><div class="cart-item__name">' + esc(p.name) + '</div>' +
+          (vl ? '<div class="cart-item__price">' + esc(vl) + '</div>' : '') +
+          '<div class="cart-item__price">' + money(unit) + ' each</div>' +
+          '<div class="qty"><button type="button" data-dec="' + key + '" aria-label="Decrease">−</button><span>' + e.qty + '</span><button type="button" data-inc="' + key + '" aria-label="Increase">+</button></div>' +
+        '</div>' +
+        '<div class="cart-item__right"><span class="cart-item__total">' + money(unit * e.qty) + '</span><button class="cart-item__remove" type="button" data-remove="' + key + '">Remove</button></div>' +
+      '</div>';
     }).join("");
     cartFoot.hidden = false;
-    const sub = cartSubtotal();
-    $("#cartSubtotal").textContent = money(sub);
-    $("#cartTotal").textContent = money(sub);
+    var sub = cartSubtotal();
+    $("#cartSubtotal").textContent = money(sub); $("#cartTotal").textContent = money(sub);
   }
 
   /* ------------------------ Cart open/close ------------------------ */
-  const cartEl = $("#cart");
-  const overlay = $("#cartOverlay");
-  const openBtn = $("#cartOpen");
-  let lastFocus = null;
-
-  function openCart() {
-    lastFocus = document.activeElement;
-    cartEl.classList.add("is-open");
-    overlay.classList.add("is-open");
-    cartEl.setAttribute("aria-hidden", "false");
-    document.body.style.overflow = "hidden";
-    const close = $("#cartClose");
-    if (close) close.focus();
-    ensurePayPalButtons();
-  }
-  function closeCart() {
-    cartEl.classList.remove("is-open");
-    overlay.classList.remove("is-open");
-    cartEl.setAttribute("aria-hidden", "true");
-    document.body.style.overflow = "";
-    if (lastFocus && lastFocus.focus) lastFocus.focus();
-  }
-
-  /* ------------------------- PayPal checkout ----------------------- */
-  /* Mirrors the tevisengineering.com pay_invoice.html flow: the live cart
-     total is passed into createOrder() and captured client-side on approval. */
-  let paypalRendered = false;
-  let paypalTries = 0;
-
-  function escapeHtml(s) {
-    return String(s).replace(/[&<>"']/g, (c) =>
-      ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
-  }
-
-  function makeOrderRef() {
-    const d = new Date();
-    const ymd = "" + d.getFullYear() + String(d.getMonth() + 1).padStart(2, "0") + String(d.getDate()).padStart(2, "0");
-    const rnd = Math.random().toString(36).slice(2, 7).toUpperCase();
-    return "TDD-" + ymd + "-" + rnd;
-  }
-
-  function ensurePayPalButtons() {
-    const container = document.getElementById("paypal-button-container");
-    if (!container || !cart.length || paypalRendered) return;
-    if (!window.paypal || !window.paypal.Buttons) {
-      // SDK is deferred — poll briefly until it's ready, then give a graceful fallback.
-      if (paypalTries++ < 40) { setTimeout(ensurePayPalButtons, 150); return; }
-      container.innerHTML = '<p class="cart__paypal-fallback">PayPal didn’t load. Refresh the page, or reach us via the <a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">contact form</a>.</p>';
-      return;
-    }
-    paypalRendered = true;
-    paypalTries = 0;
-    renderPayPalButtons(container);
-  }
-
-  function renderPayPalButtons(container) {
-    container.innerHTML = "";
-    window.paypal.Buttons({
-      style: { layout: "vertical", color: "gold", shape: "pill", label: "paypal", tagline: false, height: 40 },
-      createOrder: function (data, actions) {
-        const subtotal = cartSubtotal();
-        const items = cart.map(function (e) {
-          const p = byId(e.id);
-          return {
-            name: p.name.substring(0, 127),
-            quantity: String(e.qty),
-            sku: p.id,
-            category: "PHYSICAL_GOODS",
-            unit_amount: { currency_code: "USD", value: p.price.toFixed(2) }
-          };
-        });
-        return actions.order.create({
-          purchase_units: [{
-            description: "Tyler's Diode Designs order",
-            custom_id: makeOrderRef(),
-            amount: {
-              currency_code: "USD",
-              value: subtotal.toFixed(2),
-              breakdown: { item_total: { currency_code: "USD", value: subtotal.toFixed(2) } }
-            },
-            items: items
-          }]
-        });
-      },
-      onApprove: function (data, actions) {
-        return actions.order.capture().then(function (details) {
-          let paid = cartSubtotal();
-          try { paid = Number(details.purchase_units[0].amount.value) || paid; } catch (e) {}
-          let name = "friend";
-          try { name = details.payer.name.given_name || name; } catch (e) {}
-          cart = [];
-          saveCart();
-          updateBadge();
-          paypalRendered = false;
-          container.innerHTML = "";
-          showCartSuccess(name, paid, data.orderID);
-        });
-      },
-      onError: function (err) {
-        console.error("PayPal error:", err);
-        paypalRendered = false;
-        container.innerHTML = '<p class="cart__paypal-fallback">Payment couldn’t be completed. Please try again, or reach us via the <a href="https://tevisengineering.com/contact.html" target="_blank" rel="noopener">contact form</a>.</p>';
-      },
-      onCancel: function () { /* leave the buttons in place so they can retry */ }
-    }).render("#paypal-button-container").catch(function (e) {
-      console.error("PayPal render failed:", e);
-      paypalRendered = false;
-    });
-  }
-
-  function showCartSuccess(name, amount, orderId) {
-    const success = document.getElementById("cartSuccess");
-    if (cartItemsEl) cartItemsEl.style.display = "none";
-    if (cartFoot) cartFoot.hidden = true;
-    if (cartHeadCount) cartHeadCount.textContent = "";
-    if (!success) return;
-    success.hidden = false;
-    success.innerHTML =
-      '<div class="cart-success__badge">' + ICON_CHECK + "</div>" +
-      "<h3>Payment received!</h3>" +
-      "<p>Thanks, " + escapeHtml(name) + ". Your payment of <strong>" + money(amount) +
-      "</strong> came through. We’ll email you to confirm details and arrange shipping or local pickup.</p>" +
-      '<p class="cart-success__ref">Order ref · ' + escapeHtml(orderId) + "</p>" +
-      '<button class="btn btn--ghost" type="button" id="successContinue">Keep Shopping</button>';
-    const cont = document.getElementById("successContinue");
-    if (cont) cont.addEventListener("click", function () { resetCartView(); closeCart(); });
-  }
-
-  function resetCartView() {
-    const success = document.getElementById("cartSuccess");
-    if (success) success.hidden = true;
-    if (cartItemsEl) cartItemsEl.style.display = "";
-    renderCart();
-  }
+  var cartEl = $("#cart"), overlay = $("#cartOverlay");
+  function openCart() { cartEl.classList.add("is-open"); overlay.classList.add("is-open"); document.body.style.overflow = "hidden"; }
+  function closeCart() { cartEl.classList.remove("is-open"); overlay.classList.remove("is-open"); if (!qvOverlay.classList.contains("is-open")) document.body.style.overflow = ""; }
 
   /* ------------------------------ Toast ---------------------------- */
-  function showToast(msg) {
-    if (!toastWrap) return;
-    const t = document.createElement("div");
-    t.className = "toast";
-    t.innerHTML = '<span class="toast__dot">' + ICON_CHECK + "</span><span>" + msg + "</span>";
-    toastWrap.appendChild(t);
-    setTimeout(() => t.remove(), 3100);
-  }
+  var toastWrap = $("#toastWrap");
+  function showToast(msg) { var t = document.createElement("div"); t.className = "toast"; t.innerHTML = '<span class="toast__dot">' + I.check + "</span><span>" + esc(msg) + "</span>"; toastWrap.appendChild(t); setTimeout(function () { t.remove(); }, 3100); }
 
   /* --------------------------- Reveal anim ------------------------- */
-  let revealObserver = null;
+  var revealObserver = null;
   function observeReveals() {
-    const els = document.querySelectorAll(".reveal:not(.is-visible)");
-    if (!("IntersectionObserver" in window)) {
-      els.forEach((el) => el.classList.add("is-visible"));
-      return;
-    }
-    if (!revealObserver) {
-      revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-            revealObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
-    }
-    els.forEach((el) => revealObserver.observe(el));
+    var els = document.querySelectorAll(".reveal:not(.is-visible)");
+    if (!("IntersectionObserver" in window)) { els.forEach(function (el) { el.classList.add("is-visible"); }); return; }
+    if (!revealObserver) revealObserver = new IntersectionObserver(function (entries) { entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add("is-visible"); revealObserver.unobserve(en.target); } }); }, { threshold: 0.12, rootMargin: "0px 0px -8% 0px" });
+    els.forEach(function (el) { revealObserver.observe(el); });
   }
 
   /* ------------------------- Event wiring -------------------------- */
-  function wireEvents() {
-    // Add to cart + favorite (delegated on grid)
-    grid.addEventListener("click", (e) => {
-      const add = e.target.closest("[data-add]");
-      if (add) {
-        const p = byId(add.dataset.add);
-        addToCart(p.id);
-        add.classList.add("is-added");
-        add.innerHTML = ICON_CHECK + " Added";
-        showToast(p.name + " added to cart");
-        setTimeout(() => { add.classList.remove("is-added"); add.innerHTML = ICON_PLUS + " Add"; }, 1300);
-        return;
-      }
-      const fav = e.target.closest(".product-card__fav");
-      if (fav) {
-        const on = fav.classList.toggle("is-on");
-        fav.setAttribute("aria-pressed", on ? "true" : "false");
-      }
+  function wire() {
+    grid.addEventListener("click", function (e) {
+      var open = e.target.closest("[data-open]"), add = e.target.closest("[data-add]"), fav = e.target.closest("[data-fav]");
+      if (fav) { var id = fav.dataset.fav; favs[id] = !favs[id]; fav.classList.toggle("is-on", favs[id]); return; }
+      if (add) { var pid = add.dataset.add, p = byId(pid);
+        if (hasOptions(p)) { openQuickView(pid); }
+        else { addToCart(pid, null, p.colors && p.colors[0], 1); add.classList.add("is-added"); add.innerHTML = I.check + " Added"; showToast(p.name + " added to cart"); setTimeout(function () { add.classList.remove("is-added"); add.innerHTML = I.plus + " Add"; }, 1300); }
+        return; }
+      if (open) openQuickView(open.dataset.open);
     });
 
-    // Toolbar filters
-    document.querySelectorAll("#filters .filter").forEach((btn) =>
-      btn.addEventListener("click", () => applyFilter(btn.dataset.filter)));
+    qvRoot.addEventListener("click", function (e) {
+      var t = e.target;
+      if (t.closest("#qvClose")) return closeQuickView();
+      var gnav = t.closest("[data-gnav]"); if (gnav) { var n = qvState.product.gallery.length; qvState.gi = (qvState.gi + parseInt(gnav.dataset.gnav, 10) + n) % n; return renderQuickView(); }
+      var gthumb = t.closest("[data-gthumb]"); if (gthumb) { qvState.gi = parseInt(gthumb.dataset.gthumb, 10); return renderQuickView(); }
+      var col = t.closest("[data-color]"); if (col) { qvState.color = col.dataset.color; return renderQuickView(); }
+      var sz = t.closest("[data-size]"); if (sz) { qvState.size = sz.dataset.size; return renderQuickView(); }
+      var q = t.closest("[data-qty]"); if (q) { qvState.qty = Math.max(1, Math.min(99, qvState.qty + parseInt(q.dataset.qty, 10))); return renderQuickView(); }
+      if (t.closest("#qvAdd")) return qvAddToCart();
+    });
+    qvOverlay.addEventListener("click", function (e) { if (e.target === qvOverlay) closeQuickView(); });
 
-    // Jump links (category cards + footer) that also set a filter
-    document.querySelectorAll('a[data-filter]').forEach((a) =>
-      a.addEventListener("click", () => applyFilter(a.dataset.filter)));
+    document.querySelectorAll("#filters .filter").forEach(function (b) { b.addEventListener("click", function () { applyFilter(b.dataset.filter); }); });
+    document.querySelectorAll("a[data-filter]").forEach(function (a) { a.addEventListener("click", function () { applyFilter(a.dataset.filter); }); });
 
-    // Cart open/close
-    openBtn.addEventListener("click", openCart);
+    $("#cartOpen").addEventListener("click", openCart);
     $("#cartClose").addEventListener("click", closeCart);
     overlay.addEventListener("click", closeCart);
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape" && cartEl.classList.contains("is-open")) closeCart();
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      if (qvOverlay.classList.contains("is-open")) closeQuickView();
+      else if (cartEl.classList.contains("is-open")) closeCart();
     });
 
-    // Cart item controls (delegated)
-    cartItemsEl.addEventListener("click", (e) => {
-      const inc = e.target.closest("[data-inc]");
-      const dec = e.target.closest("[data-dec]");
-      const rem = e.target.closest("[data-remove]");
-      if (inc) { const l = cart.find((x) => x.id === inc.dataset.inc); if (l) setQty(l.id, l.qty + 1); }
-      else if (dec) { const l = cart.find((x) => x.id === dec.dataset.dec); if (l) setQty(l.id, l.qty - 1); }
-      else if (rem) { const p = byId(rem.dataset.remove); removeFromCart(rem.dataset.remove); showToast((p ? p.name : "Item") + " removed"); }
+    cartItemsEl.addEventListener("click", function (e) {
+      var inc = e.target.closest("[data-inc]"), dec = e.target.closest("[data-dec]"), rem = e.target.closest("[data-remove]");
+      if (inc) { var l = cart.filter(function (x) { return lineKey(x.id, x.size, x.color) === inc.dataset.inc; })[0]; if (l) setQty(inc.dataset.inc, l.qty + 1); }
+      else if (dec) { var l2 = cart.filter(function (x) { return lineKey(x.id, x.size, x.color) === dec.dataset.dec; })[0]; if (l2) setQty(dec.dataset.dec, l2.qty - 1); }
+      else if (rem) { removeFromCart(rem.dataset.remove); showToast("Item removed"); }
     });
 
-    // Mobile nav
-    const navToggle = $("#navToggle");
-    const mainNav = $("#mainNav");
-    navToggle.addEventListener("click", () => {
-      const open = mainNav.classList.toggle("is-open");
-      navToggle.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-    mainNav.addEventListener("click", (e) => {
-      if (e.target.closest("a")) {
-        mainNav.classList.remove("is-open");
-        navToggle.setAttribute("aria-expanded", "false");
-      }
-    });
+    var navToggle = $("#navToggle"), mainNav = $("#mainNav");
+    navToggle.addEventListener("click", function () { var o = mainNav.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", o ? "true" : "false"); });
+    mainNav.addEventListener("click", function (e) { if (e.target.closest("a")) { mainNav.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); } });
 
-    // "Coming soon" placeholder links
-    document.querySelectorAll("[data-soon]").forEach((a) =>
-      a.addEventListener("click", (e) => { e.preventDefault(); showToast("Social links coming soon!"); }));
+    document.querySelectorAll("[data-soon]").forEach(function (a) { a.addEventListener("click", function (e) { e.preventDefault(); showToast("Social links coming soon!"); }); });
 
-    // Header scroll state
-    const header = $(".site-header");
-    const onScroll = () => header.classList.toggle("is-scrolled", window.scrollY > 8);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
-
-    // Footer year
-    const yearEl = $("#year");
-    if (yearEl) yearEl.textContent = new Date().getFullYear();
+    var header = $(".site-header");
+    var onScroll = function () { header.classList.toggle("is-scrolled", window.scrollY > 8); };
+    window.addEventListener("scroll", onScroll, { passive: true }); onScroll();
+    var y = $("#year"); if (y) y.textContent = new Date().getFullYear();
   }
 
-  /* ------------------------------ Init ----------------------------- */
-  renderProducts();
-  wireEvents();
-  observeReveals();
-  updateBadge();
-  renderCart();
+  renderProducts(); wire(); observeReveals(); updateBadge(); renderCart();
 })();

@@ -1,82 +1,98 @@
 <svg viewBox="0 0 480 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A 3D printer building a topographic relief map layer by layer">
   <defs>
     <linearGradient id="hs-frame" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#2E2748"/><stop offset="1" stop-color="#211B36"/>
+      <stop offset="0" stop-color="#2E2748"></stop><stop offset="1" stop-color="#211B36"></stop>
     </linearGradient>
     <linearGradient id="hs-fil" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#FFB24D"/><stop offset="1" stop-color="#FF5E8A"/>
+      <stop offset="0" stop-color="#FFB24D"></stop><stop offset="1" stop-color="#FF5E8A"></stop>
     </linearGradient>
     <radialGradient id="hs-glow" cx="0.5" cy="0.5" r="0.5">
-      <stop offset="0" stop-color="#FFE08A" stop-opacity="0.9"/>
-      <stop offset="1" stop-color="#FFE08A" stop-opacity="0"/>
+      <stop offset="0" stop-color="#FFE08A" stop-opacity="0.9"></stop>
+      <stop offset="1" stop-color="#FFE08A" stop-opacity="0"></stop>
     </radialGradient>
+    <radialGradient id="hs-globe" cx="0.38" cy="0.32" r="0.75">
+      <stop offset="0" stop-color="#9FE7DA"></stop>
+      <stop offset="1" stop-color="#3FB7A6"></stop>
+    </radialGradient>
+    <clipPath id="hs-sphere"><circle cx="240" cy="220" r="52"></circle></clipPath>
   </defs>
 
-  <!-- soft backdrop glow -->
-  <ellipse cx="240" cy="210" rx="210" ry="150" fill="#FFFFFF" opacity="0.10"/>
+  
+  <ellipse cx="240" cy="210" rx="210" ry="150" fill="#FFFFFF" opacity="0.10"></ellipse>
 
-  <!-- base -->
-  <rect x="92" y="300" width="296" height="26" rx="9" fill="url(#hs-frame)"/>
-  <rect x="120" y="326" width="34" height="14" rx="5" fill="#1B162C"/>
-  <rect x="326" y="326" width="34" height="14" rx="5" fill="#1B162C"/>
+  
+  <rect x="92" y="300" width="296" height="26" rx="9" fill="url(#hs-frame)"></rect>
+  <rect x="120" y="326" width="34" height="14" rx="5" fill="#1B162C"></rect>
+  <rect x="326" y="326" width="34" height="14" rx="5" fill="#1B162C"></rect>
 
-  <!-- gantry frame -->
-  <rect x="106" y="60" width="14" height="246" rx="6" fill="url(#hs-frame)"/>
-  <rect x="360" y="60" width="14" height="246" rx="6" fill="url(#hs-frame)"/>
-  <rect x="100" y="54" width="280" height="16" rx="7" fill="url(#hs-frame)"/>
-  <!-- X rail -->
-  <rect x="120" y="92" width="240" height="8" rx="4" fill="#3A335A"/>
+  
+  <rect x="106" y="60" width="14" height="246" rx="6" fill="url(#hs-frame)"></rect>
+  <rect x="360" y="60" width="14" height="246" rx="6" fill="url(#hs-frame)"></rect>
+  <rect x="100" y="54" width="280" height="16" rx="7" fill="url(#hs-frame)"></rect>
+  
+  <rect x="120" y="92" width="240" height="8" rx="4" fill="#3A335A"></rect>
 
-  <!-- filament spool -->
-  <circle cx="150" cy="138" r="30" fill="#FF6A3D"/>
-  <circle cx="150" cy="138" r="30" fill="none" stroke="#221C3A" stroke-width="4"/>
-  <circle cx="150" cy="138" r="9" fill="#FFF7EC" stroke="#221C3A" stroke-width="3"/>
+  
+  <circle cx="150" cy="138" r="30" fill="#FF6A3D"></circle>
+  <circle cx="150" cy="138" r="30" fill="none" stroke="#221C3A" stroke-width="4"></circle>
+  <circle cx="150" cy="138" r="9" fill="#FFF7EC" stroke="#221C3A" stroke-width="3"></circle>
   <g fill="none" stroke="#FFC773" stroke-width="2" opacity="0.8">
-    <circle cx="150" cy="138" r="22"/><circle cx="150" cy="138" r="16"/>
+    <circle cx="150" cy="138" r="22"></circle><circle cx="150" cy="138" r="16"></circle>
   </g>
-  <!-- filament thread to print head -->
-  <path d="M150 108 C150 84 150 80 175 80 C210 80 218 84 230 92" fill="none" stroke="url(#hs-fil)" stroke-width="3" stroke-linecap="round"/>
+  
+  <path d="M150 108 C150 84 150 80 175 80 C210 80 218 84 230 92" fill="none" stroke="url(#hs-fil)" stroke-width="3" stroke-linecap="round"></path>
 
-  <!-- print head carriage -->
-  <rect x="212" y="78" width="56" height="30" rx="6" fill="url(#hs-frame)"/>
-  <rect x="220" y="86" width="14" height="8" rx="2" fill="#12B5A5"/>
-  <circle cx="252" cy="92" r="3" fill="#FF6A3D"/>
-  <!-- nozzle -->
-  <path d="M230 108 L250 108 L242 124 L238 124 Z" fill="#4A4368"/>
-  <path d="M238 124 L242 124 L240 130 Z" fill="#FF6A3D"/>
+  
+  <rect x="212" y="78" width="56" height="30" rx="6" fill="url(#hs-frame)"></rect>
+  <rect x="220" y="86" width="14" height="8" rx="2" fill="#12B5A5"></rect>
+  <circle cx="252" cy="92" r="3" fill="#FF6A3D"></circle>
+  
+  <path d="M230 108 L250 108 L242 124 L238 124 Z" fill="#4A4368"></path>
+  <path d="M238 124 L242 124 L240 130 Z" fill="#FF6A3D"></path>
 
-  <!-- glowing extrusion -->
-  <circle cx="240" cy="150" r="26" fill="url(#hs-glow)"/>
-  <path d="M240 130 L240 196" stroke="url(#hs-fil)" stroke-width="6" stroke-linecap="round" opacity="0.5"/>
-  <path d="M240 130 L240 196" stroke="#FFD24D" stroke-width="2.4" stroke-linecap="round"/>
+  
+  <circle cx="240" cy="150" r="26" fill="url(#hs-glow)"></circle>
+  <path d="M240 130 L240 166" stroke="url(#hs-fil)" stroke-width="6" stroke-linecap="round" opacity="0.5"></path>
+  <path d="M240 130 L240 166" stroke="#FFD24D" stroke-width="2.4" stroke-linecap="round"></path>
 
-  <!-- print bed -->
-  <rect x="158" y="276" width="164" height="12" rx="4" fill="#7FD9CC" stroke="#221C3A" stroke-width="4"/>
-  <rect x="236" y="288" width="8" height="14" fill="#3A335A"/>
+  
+  <rect x="158" y="276" width="164" height="12" rx="4" fill="#7FD9CC" stroke="#221C3A" stroke-width="4"></rect>
+  <rect x="236" y="288" width="8" height="14" fill="#3A335A"></rect>
 
-  <!-- topographic relief model: stacked contour terraces (printed bottom-up) -->
-  <g stroke="#221C3A" stroke-width="3.5" stroke-linejoin="round">
-    <ellipse cx="240" cy="270" rx="74" ry="14" fill="#FFF7EC"/>
-    <ellipse cx="240" cy="256" rx="60" ry="13" fill="#FFF1DD"/>
-    <ellipse cx="240" cy="242" rx="47" ry="12" fill="#FFE9C9"/>
-    <ellipse cx="238" cy="228" rx="34" ry="11" fill="#FFDFAE"/>
+  
+  
+  <ellipse cx="240" cy="276" rx="50" ry="9" fill="#221C3A" opacity="0.12"></ellipse>
+  <circle cx="240" cy="220" r="52" fill="url(#hs-globe)"></circle>
+  <g clip-path="url(#hs-sphere)">
+    
+    <g fill="none" stroke="#1E9B8C" stroke-width="1.6" opacity="0.7">
+      <ellipse cx="240" cy="220" rx="17" ry="52"></ellipse>
+      <ellipse cx="240" cy="220" rx="35" ry="52"></ellipse>
+      <line x1="240" y1="168" x2="240" y2="272"></line>
+      <line x1="188" y1="220" x2="292" y2="220"></line>
+      <line x1="196" y1="196" x2="284" y2="196"></line>
+      <line x1="196" y1="244" x2="284" y2="244"></line>
+      <line x1="208" y1="180" x2="272" y2="180"></line>
+      <line x1="208" y1="260" x2="272" y2="260"></line>
+    </g>
+    
+    <g fill="#FFE0AE" stroke="#221C3A" stroke-width="2.6" stroke-linejoin="round">
+      <path d="M206 188 q-10 12 0 26 q8 14 22 10 q10 -4 6 -18 q-2 -10 6 -16 q-12 -12 -26 -8 q-8 2 -14 6 z"></path>
+      <path d="M256 226 q16 -8 26 4 q8 12 -2 22 q-12 12 -26 4 q-10 -8 -6 -20 q2 -6 8 -10 z"></path>
+      <path d="M232 248 q-12 4 -10 16 q2 8 12 8 q10 -2 10 -14 q0 -8 -12 -10 z"></path>
+    </g>
+    
+    <ellipse cx="218" cy="196" rx="20" ry="13" fill="#FFFFFF" opacity="0.28"></ellipse>
   </g>
-  <!-- top terrace currently printing (dashed) -->
-  <ellipse cx="238" cy="214" rx="22" ry="9" fill="#FFD79A" stroke="#221C3A" stroke-width="3" stroke-dasharray="5 5"/>
-  <!-- layer lines -->
-  <g stroke="#FF8A3D" stroke-width="1.6" opacity="0.55">
-    <path d="M178 270 H302"/><path d="M186 256 H294"/><path d="M195 242 H285"/>
-  </g>
-  <!-- summit marker -->
-  <circle cx="238" cy="210" r="4" fill="#FF3D77"/>
+  <circle cx="240" cy="220" r="52" fill="none" stroke="#221C3A" stroke-width="4"></circle>
 
-  <!-- diode sparks -->
+  
   <g stroke="#FFF7EC" stroke-width="2.6" stroke-linecap="round" opacity="0.95">
-    <path d="M356 150 h12 M362 144 v12"/>
-    <path d="M120 226 h10 M125 221 v10"/>
-    <path d="M330 226 h10 M335 221 v10"/>
+    <path d="M356 150 h12 M362 144 v12"></path>
+    <path d="M120 226 h10 M125 221 v10"></path>
+    <path d="M330 226 h10 M335 221 v10"></path>
   </g>
-  <circle cx="362" cy="150" r="3.4" fill="#FFF7EC"/>
-  <circle cx="86" cy="120" r="4" fill="#FFD24D"/>
-  <circle cx="404" cy="250" r="4" fill="#FFD24D"/>
+  <circle cx="362" cy="150" r="3.4" fill="#FFF7EC"></circle>
+  <circle cx="86" cy="120" r="4" fill="#FFD24D"></circle>
+  <circle cx="404" cy="250" r="4" fill="#FFD24D"></circle>
 </svg>
