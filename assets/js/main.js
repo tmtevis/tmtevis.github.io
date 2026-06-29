@@ -221,6 +221,8 @@
   var TAX_OH_STATE = 0.0575, TAX_CUYAHOGA = 0.0225;   // Ohio state + Cuyahoga County sales tax
   var TAX_RATE = TAX_OH_STATE + TAX_CUYAHOGA;          // 8.00% combined
   var TAX_PCT = +(TAX_RATE * 100).toFixed(2);
+  var TAX_PCT_STATE = +(TAX_OH_STATE * 100).toFixed(2);
+  var TAX_PCT_COUNTY = +(TAX_CUYAHOGA * 100).toFixed(2);
   function round2(n) { return Math.round((n + Number.EPSILON) * 100) / 100; }
   var FULFILL_KEY = "tdd-kit-fulfillment-v1";
   var fulfillment = loadFulfillment();   // null | "pickup" | "ship"
@@ -232,7 +234,7 @@
   function syncFulfillUI() {
     var shipEl = $("#cartShipping"), taxLabelEl = $("#cartTaxLabel"), taxEl = $("#cartTax"), totalEl = $("#cartTotal");
     if (shipEl) shipEl.textContent = fulfillment === "ship" ? money(SHIP_FEE) : (fulfillment === "pickup" ? "Free" : "—");
-    if (taxLabelEl) taxLabelEl.textContent = "Sales tax (" + TAX_PCT + "%)";
+    if (taxLabelEl) taxLabelEl.innerHTML = "Sales tax " + TAX_PCT + "% <span class=\"cart__tax-breakdown\">(" + TAX_PCT_STATE + "% state + " + TAX_PCT_COUNTY + "% county)</span>";
     if (taxEl) taxEl.textContent = money(taxAmount());
     if (totalEl) totalEl.textContent = money(cartTotal());
     [["pickup", "#fulfillPickup"], ["ship", "#fulfillShip"]].forEach(function (pair) {

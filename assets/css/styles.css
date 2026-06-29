@@ -517,6 +517,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height
 .cart__foot { padding: 13px 16px calc(16px + env(safe-area-inset-bottom)); border-top: 1px solid var(--line); background: var(--paper-2); }
 .cart__row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; font-size: 0.84rem; color: var(--ink-soft); }
 .cart__row.total { font-family: var(--font-display); font-size: 1.05rem; color: var(--ink); font-weight: 600; margin: 7px 0 3px; }
+.cart__tax-breakdown { color: var(--muted); font-weight: 400; font-size: 0.9em; }
 .cart__hint { font-size: 0.7rem; color: var(--muted); text-align: center; margin-top: 8px; line-height: 1.45; }
 .cart__hint a { color: var(--tangerine); font-weight: 700; }
 #paypal-button-container { margin-top: 10px; min-height: 44px; }
