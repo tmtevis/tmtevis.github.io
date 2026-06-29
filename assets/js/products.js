@@ -1,5 +1,5 @@
 /* =====================================================================
-   Tyler's Diode Designs — Product catalog (single source of truth)
+   VSITEdesigns — Product catalog (single source of truth)
 
    ADD A PRODUCT: copy a block, give it a unique `id` (SKU), set fields.
    Everything the storefront shows — cards, gallery, color & size

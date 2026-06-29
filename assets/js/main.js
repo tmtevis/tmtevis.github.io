@@ -1,5 +1,5 @@
 /* =====================================================================
-   Tyler's Diode Designs — Storefront UI kit interactions
+   VSITEdesigns — Storefront UI kit interactions
    Vanilla JS, no dependencies. Reads the catalog from data/products.js
    (window.TDD). Cart persists to localStorage and carries the chosen
    size + color per line. Quick-view pop-up handles gallery / color / size.
