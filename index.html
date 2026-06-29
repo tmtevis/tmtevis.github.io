@@ -210,11 +210,29 @@ We'll ship to you anywhere in the U.S. — shipping's calculated at checkout. Or
     </div>
     <div class="cart__items" id="cartItems"></div>
     <div class="cart__foot" id="cartFoot" hidden>
+      <fieldset class="fulfill" id="fulfill">
+        <legend class="fulfill__legend">How would you like to get it?</legend>
+        <label class="fulfill__opt" id="fulfillPickup">
+          <input type="radio" name="fulfillment" value="pickup" />
+          <span class="fulfill__body">
+            <span class="fulfill__title">Local pickup / meet-up <span class="fulfill__price">Free</span></span>
+            <span class="fulfill__note">Pick it up or meet locally — we'll coordinate a spot with you after checkout.</span>
+          </span>
+        </label>
+        <label class="fulfill__opt" id="fulfillShip">
+          <input type="radio" name="fulfillment" value="ship" />
+          <span class="fulfill__body">
+            <span class="fulfill__title">Ship to me <span class="fulfill__price">+$11.95</span></span>
+            <span class="fulfill__note">Packed delicately like the art sculpture it is — the fee covers protective materials and the careful handling each piece needs.</span>
+          </span>
+        </label>
+      </fieldset>
       <div class="cart__row"><span>Subtotal</span><span id="cartSubtotal" class="font-mono">$0.00</span></div>
-      <div class="cart__row" style="font-size:.82rem"><span>Shipping &amp; pickup</span><span style="color:var(--muted)">Arranged after checkout</span></div>
+      <div class="cart__row"><span>Shipping</span><span id="cartShipping" class="font-mono">&mdash;</span></div>
+      <div class="cart__row"><span id="cartTaxLabel">Sales tax</span><span id="cartTax" class="font-mono">$0.00</span></div>
       <div class="cart__row total"><span>Amount due</span><span id="cartTotal">$0.00</span></div>
       <div id="paypal-button-container" style="margin-top:10px"></div>
-      <p class="cart__hint">Checkout securely via <strong>PayPal</strong> or Venmo. After payment we'll reach out to arrange shipping or local pickup.</p>
+      <p class="cart__hint">Checkout securely via <strong>PayPal</strong> or Venmo.</p>
     </div>
   </aside>
 

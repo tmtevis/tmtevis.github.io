@@ -216,6 +216,38 @@
   function lineUnit(e) { return unitPrice(byId(e.id), e.size, e.color); }
   function cartSubtotal() { return cart.reduce(function (s, e) { return s + lineUnit(e) * e.qty; }, 0); }
 
+  /* ------------------------- Fulfillment -------------------------- */
+  var SHIP_FEE = 11.95;
+  var TAX_OH_STATE = 0.0575, TAX_CUYAHOGA = 0.0225;   // Ohio state + Cuyahoga County sales tax
+  var TAX_RATE = TAX_OH_STATE + TAX_CUYAHOGA;          // 8.00% combined
+  var TAX_PCT = +(TAX_RATE * 100).toFixed(2);
+  function round2(n) { return Math.round((n + Number.EPSILON) * 100) / 100; }
+  var FULFILL_KEY = "tdd-kit-fulfillment-v1";
+  var fulfillment = loadFulfillment();   // null | "pickup" | "ship"
+  function loadFulfillment() { try { var v = localStorage.getItem(FULFILL_KEY); return (v === "pickup" || v === "ship") ? v : null; } catch (e) { return null; } }
+  function saveFulfillment() { try { if (fulfillment) localStorage.setItem(FULFILL_KEY, fulfillment); else localStorage.removeItem(FULFILL_KEY); } catch (e) {} }
+  function shippingFee() { return fulfillment === "ship" ? SHIP_FEE : 0; }
+  function taxAmount() { return round2((cartSubtotal() + shippingFee()) * TAX_RATE); }
+  function cartTotal() { return round2(cartSubtotal() + shippingFee() + taxAmount()); }
+  function syncFulfillUI() {
+    var shipEl = $("#cartShipping"), taxLabelEl = $("#cartTaxLabel"), taxEl = $("#cartTax"), totalEl = $("#cartTotal");
+    if (shipEl) shipEl.textContent = fulfillment === "ship" ? money(SHIP_FEE) : (fulfillment === "pickup" ? "Free" : "—");
+    if (taxLabelEl) taxLabelEl.textContent = "Sales tax (" + TAX_PCT + "%)";
+    if (taxEl) taxEl.textContent = money(taxAmount());
+    if (totalEl) totalEl.textContent = money(cartTotal());
+    [["pickup", "#fulfillPickup"], ["ship", "#fulfillShip"]].forEach(function (pair) {
+      var opt = $(pair[1]); if (!opt) return;
+      var input = opt.querySelector("input"); if (input) input.checked = (fulfillment === pair[0]);
+      opt.classList.toggle("is-selected", fulfillment === pair[0]);
+    });
+  }
+  function flashFulfill() {
+    var f = $("#fulfill"); if (!f) return;
+    f.classList.remove("is-flash"); void f.offsetWidth; f.classList.add("is-flash");
+    setTimeout(function () { f.classList.remove("is-flash"); }, 900);
+    if (f.scrollIntoView) f.scrollIntoView({ block: "nearest" });
+  }
+
   function addToCart(id, size, color, bgColor, qty) {
     qty = qty || 1;
     var key = lineKey(id, size, color, bgColor);
@@ -265,8 +297,8 @@
     cartFoot.hidden = false;
     initPayPal();
     if (!paypalReady) setTimeout(function () { initPayPal(); }, 2000);
-    var sub = cartSubtotal();
-    $("#cartSubtotal").textContent = money(sub); $("#cartTotal").textContent = money(sub);
+    $("#cartSubtotal").textContent = money(cartSubtotal());
+    syncFulfillUI();
   }
 
   /* ------------------------ Cart open/close ------------------------ */
@@ -335,6 +367,13 @@
       else if (rem) { removeFromCart(rem.dataset.remove); showToast("Item removed"); }
     });
 
+    var fulfillEl = $("#fulfill");
+    if (fulfillEl) fulfillEl.addEventListener("change", function (e) {
+      var r = e.target.closest('input[name="fulfillment"]');
+      if (!r) return;
+      fulfillment = r.value; saveFulfillment(); syncFulfillUI();
+    });
+
     var navToggle = $("#navToggle"), mainNav = $("#mainNav");
     navToggle.addEventListener("click", function () { var o = mainNav.classList.toggle("is-open"); navToggle.setAttribute("aria-expanded", o ? "true" : "false"); });
     mainNav.addEventListener("click", function (e) { if (e.target.closest("a")) { mainNav.classList.remove("is-open"); navToggle.setAttribute("aria-expanded", "false"); } });
@@ -349,17 +388,29 @@
 
   /* ========================= PAYPAL CHECKOUT ======================== */
   function buildPayPalOrder() {
-    var total = cartSubtotal();
+    var sub = round2(cartSubtotal()), ship = round2(shippingFee()), tax = taxAmount(), total = round2(sub + ship + tax);
+    var method = fulfillment === "ship" ? "Ship" : "Local pickup";
     var summary = cart.map(function (e) {
       var p = byId(e.id), vl = variantLabel(e);
       return p.name + (vl ? " (" + vl + ")" : "") + " x" + e.qty;
     }).join(", ");
     return {
       purchase_units: [{
-        description: summary.substring(0, 127),
-        custom_id: cart.map(function (e) { return e.id + "x" + e.qty; }).join(",").substring(0, 127),
-        amount: { value: total.toFixed(2), currency_code: "USD" }
-      }]
+        description: (method + " — " + summary).substring(0, 127),
+        custom_id: ((fulfillment === "ship" ? "SHIP|" : "PICKUP|") + cart.map(function (e) { return e.id + "x" + e.qty; }).join(",")).substring(0, 127),
+        amount: {
+          value: total.toFixed(2),
+          currency_code: "USD",
+          breakdown: {
+            item_total: { value: sub.toFixed(2), currency_code: "USD" },
+            shipping: { value: ship.toFixed(2), currency_code: "USD" },
+            tax_total: { value: tax.toFixed(2), currency_code: "USD" }
+          }
+        }
+      }],
+      application_context: {
+        shipping_preference: fulfillment === "ship" ? "GET_FROM_FILE" : "NO_SHIPPING"
+      }
     };
   }
 
@@ -372,6 +423,7 @@
       style: { layout: 'vertical', color: 'gold', shape: 'pill', label: 'checkout', height: 48 },
       createOrder: function (data, actions) {
         if (!cart.length) { showToast('Your cart is empty.'); return; }
+        if (!fulfillment) { showToast('Please choose pickup or shipping first.'); flashFulfill(); return; }
         return actions.order.create(buildPayPalOrder());
       },
       onApprove: function (data, actions) {
