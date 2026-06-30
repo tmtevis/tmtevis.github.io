@@ -130,6 +130,16 @@
       ],
       colors: ["bone", "lake", "charcoal"]
     },
+    // NEW — filler copy & pricing (review)
+    {
+      id: "TDD-PIT-14", slug: "pittsburgh", name: "Pittsburgh Skyline Relief",
+      category: "maps", price: 38, badge: "New",
+      blurb: "Three rivers, one skyline — downtown Pittsburgh in layered relief.",
+      desc: "Downtown Pittsburgh printed block by block, from the towers of the Golden Triangle to the Point where the Allegheny and Monongahela meet to form the Ohio. Framed and ready to hang — a sister piece to our Cleveland skyline for anyone with a foot in both cities. Placeholder copy and pricing for now.",
+      gallery: [IMG + "pittsburgh_2.jpg", IMG + "pittsburgh_1.png"],
+      sizes: SIZE_4_6,
+      colors: ["bone", "lake", "charcoal", "marble"]
+    },
     {
       id: "TDD-NBHD-04", slug: "neighborhood", name: "Custom Neighborhood Street Map",
       category: "custom", price: 34,
@@ -152,7 +162,7 @@
       category: "maps", price: 48,
       blurb: "Huntington Bank Field — the lakefront house of the Browns.",
       desc: "A miniature of Huntington Bank Field on the Cleveland lakefront, home of the Browns — bowl, stands, and concourse 3D printed in fine relief on a framed base. Pick your colors for game-day pride that lives on the shelf all season long.",
-      gallery: g("browns-stadium", 1),
+      gallery: [IMG + "browns-stadium_1.jpg", IMG + "browns-stadium_2.png", IMG + "browns-stadium_4.png", IMG + "browns-stadium_6.png"],
       sizes: SIZE_4_6,
       colors: ["bone", "forest", "charcoal"]
     },
@@ -161,9 +171,28 @@
       category: "maps", price: 48,
       blurb: "Progressive Field — home of the Cleveland Guardians.",
       desc: "Progressive Field in 3D-printed relief — the grandstands, the diamond, and the downtown block it sits on, mounted on a framed base. The home-opener gift for the Guardians fan who has everything.",
-      gallery: g("progressive-field", 1),
+      gallery: [IMG + "progressive-field_1.jpg", IMG + "progressive-field_2.png", IMG + "progressive-field_3.png", IMG + "progressive-field_4.png"],
       sizes: SIZE_4_6,
       colors: ["bone", "scarlet", "marble"]
+    },
+    // NEW — filler copy & pricing (review)
+    {
+      id: "TDD-HUNT-15", slug: "huntington", name: "Huntington Park Replica",
+      category: "maps", price: 44,
+      blurb: "The downtown Columbus ballpark, captured in fine relief.",
+      desc: "A framed relief tile of Huntington Park — the diamond, the grandstands, and the surrounding block printed in crisp detail. A pocket-sized tribute for ballpark collectors and Columbus Clippers fans. Placeholder copy and pricing for now.",
+      gallery: [IMG + "huntington.jpg"],
+      sizes: SIZE_4_6,
+      colors: ["bone", "marble", "charcoal", "forest"]
+    },
+    {
+      id: "TDD-ROCK-16", slug: "rocket-arena", name: "Rocket Arena Replica",
+      category: "maps", price: 48, badge: "Game day",
+      blurb: "Cleveland's downtown arena, rendered in 3D relief.",
+      desc: "Rocket Arena — home of the Cavaliers — and its downtown Cleveland block, printed in fine relief on a framed base. Tip-off energy for the shelf or the office. Filler copy and pricing for now.",
+      gallery: [IMG + "rocket-arena_1.png", IMG + "rocket-arena_2.png", IMG + "rocket-arena_3.png"],
+      sizes: SIZE_4_6,
+      colors: ["bone", "marble", "charcoal", "scarlet"]
     },
     {
       id: "TDD-GRD-08", slug: "guardian-bowl", name: "Guardian Catch-All Bowl",
@@ -171,6 +200,15 @@
       blurb: "An Art-Deco guardian holding a tray for your keys.",
       desc: "Inspired by Cleveland's stone Guardians of Traffic, this winged sentinel cradles a little bowl perfect for keys, coins, rings, and the daily pocket dump. Equal parts statue and entryway helper.",
       gallery: g("guardian-bowl", 2),
+      colors: ["marble", "bone", "graphite", "charcoal"]
+    },
+    // NEW — filler copy & pricing (review)
+    {
+      id: "TDD-GBKE-17", slug: "guardian-bookend", name: "Guardian Bookend",
+      category: "statues", price: 34, badge: "New",
+      blurb: "An Art-Deco Guardian standing watch over your books.",
+      desc: "Inspired by Cleveland's stone Guardians of Traffic, this winged sentinel doubles as a hefty bookend — pillar, wings, and all. Pictured solo; order a pair for a matched set bracketing the shelf. Filler copy and pricing for now.",
+      gallery: g("guardian-bookend", 3),
       colors: ["marble", "bone", "graphite", "charcoal"]
     },
     {
@@ -182,6 +220,19 @@
       sizes: [
         { id: "5in", label: '5"', note: "Desk size, ~5 in tall", addPrice: 0 },
         { id: "8in", label: '8"', note: "Mantel size, ~8 in tall", addPrice: 22 }
+      ],
+      colors: ["marble", "bone", "graphite"]
+    },
+    // NEW — filler copy & pricing (review)
+    {
+      id: "TDD-CLAS-18", slug: "classical-statue", name: "Classical Sculpture Group",
+      category: "statues", price: 42, badge: "New",
+      blurb: "A Baroque sculpture group, reimagined at desk scale.",
+      desc: "A dramatic classical sculpture group — flowing drapery and intertwined figures — captured layer by layer in a smooth matte finish. A little gallery moment for the mantel or bookshelf. Placeholder copy and pricing for now.",
+      gallery: g("classical-statue", 3),
+      sizes: [
+        { id: "5in", label: '5"', note: "Desk size, ~5 in tall", addPrice: 0 },
+        { id: "8in", label: '8"', note: "Mantel size, ~8 in tall", addPrice: 24 }
       ],
       colors: ["marble", "bone", "graphite"]
     },
@@ -207,6 +258,31 @@
       desc: "Commemorative awards and recognition pieces in a carved-stone finish — your crest, your dates, your wording. Pictured: a run for a Masonic lodge. Great for clubs, teams, retirements, and any milestone worth keeping on a desk.",
       gallery: [IMG + "custom_award.jpg"],
       madeToOrder: true
+    },
+    // NEW — filler copy & pricing (review). Filed under Custom Work per request;
+    // the two Cleveland signs are purchasable stock, the LED sign is made-to-order.
+    {
+      id: "TDD-CLES-19", slug: "cleveland-sign", name: "Cleveland Script Sign",
+      category: "custom", price: 16, badge: "New",
+      blurb: "Free-standing cursive \"Cleveland\" sign for shelf or desk.",
+      desc: "A free-standing script \"Cleveland\" sign with a clean underline flourish — simple hometown pride in your choice of color. Shown in white, scarlet, and speckled marble. Placeholder copy and pricing for now.",
+      gallery: g("cleveland-sign", 4),
+      colors: ["bone", "scarlet", "marble", "charcoal", "lake"]
+    },
+    {
+      id: "TDD-CLEF-20", slug: "cleveland-football-sign", name: "Cleveland Football Sign",
+      category: "custom", price: 20, badge: "Game day",
+      blurb: "Cursive \"Cleveland\" mounted on a football base.",
+      desc: "The same cursive Cleveland script, this time riding a football — finished in gridiron colors for game day on the mantel. A fun desk piece for the Dawg Pound. Filler copy and pricing for now.",
+      gallery: g("cleveland-football-sign", 2),
+      colors: ["tangerine", "charcoal", "bone", "scarlet"]
+    },
+    {
+      id: "TDD-LED-21", slug: "custom-led-sign", name: "Custom LED Light Sign",
+      category: "custom", price: 30, madeToOrder: true, badge: "Made to order",
+      blurb: "Your name or word, lit up — a custom LED light sign.",
+      desc: "Send us a name, word, or logo and we'll model it as a free-standing sign with built-in LED lighting that glows right through the print. Pick your text and color; we'll reply with a quote and timing. Placeholder copy for now.",
+      gallery: g("custom-led-sign", 2)
     }
   ];
 
